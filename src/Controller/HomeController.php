@@ -8,7 +8,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/home", name="home")
+     * @Route("/")
+     */
+    public function redir()
+    {
+        return $this->redirectToRoute("app_home_index");
+    }
+
+    /**
+     * @Route("/home")
      */
     public function index()
     {
