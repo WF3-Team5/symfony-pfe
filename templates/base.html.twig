@@ -2,11 +2,250 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Projet{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('librairie/css/main_styles.css')}}">
+            <link rel="stylesheet" href="{{ asset('librairie/bootstrap/bootstrap.min.css') }}">
+        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+    <div class="super_container">
+
+        <!-- Header -->
+
+        <header class="header">
+            <div class="header_overlay"></div>
+            <div class="header_content d-flex flex-row align-items-center justify-content-start">
+
+                <!-- Logo -->
+                <div class="logo"><a href="#">Projet<span>Plus</span><span>+</span></a></div>
+
+                <!-- Header Nav -->
+                <div class="header_right d-flex flex-row align-items-center justify-content-start ml-auto">
+                    <nav class="main_nav">
+                        <ul class="d-flex flex-row align-items-center justify-content-start">
+                            <li class="active"><a href="index.html">Accueil</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                    <div class="log_reg">
+                        <ul class="d-flex flex-row align-items-center justify-content-start">
+                            <li><a href="#">Connexion</a></li>
+                            <li><a href="#">Inscription</a></li>
+                        </ul>
+                    </div>
+                    <div class="hamburger">
+                        <i class="fa fa-bars trans_200"></i>
+                    </div>
+                </div>
+
+            </div>
+        </header>
+
+        <div class="super_container_inner">
+            <div class="super_overlay"></div>
+
+            <!-- Home -->
+
+            <div class="home">
+
+                <!-- Home Slider -->
+                <div class="home_slider_container">
+                    <div class="owl-carousel owl-theme home_slider ">
+
+                        <!-- Slide -->
+                        <div class="slide">
+                            <div class="background_image" style="background-image:url({{ asset('librairie/image/agenda.jpg') }})"></div>
+                            <div class="home_container">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-xl-8 offset-xl-2">
+                                            <div class="home_content text-center">
+                                                <div class="home_title"><h1><span>Projet</span></h1></div>
+                                                <div class="search_form_container">
+                                                    <form action="#" class="search_form" id="search_form">
+                                                        <div class="d-flex flex-sm-row flex-column align-items-sm-start align-items-center justify-content-sm-between">
+                                                            <input type="text" class="search_input" placeholder="Spécialisation recherchée" required="required">
+                                                            <button class="search_button">Rechercher</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide -->
+                        <div class="slide">
+                            <div class="background_image" style="background-image:url({{ asset('librairie/image/fotosearch.jpg') }})"></div>
+                            <div class="home_container">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-xl-8 offset-xl-2">
+                                            <div class="home_content text-center">
+                                                <div class="home_title"><h1>The Best City Guide</h1></div>
+                                                <div class="search_form_container">
+                                                    <form action="#" class="search_form" id="search_form">
+                                                        <div class="d-flex flex-sm-row flex-column align-items-sm-start align-items-center justify-content-sm-between">
+                                                            <input type="text" class="search_input" placeholder="What are you looking for?" required="required">
+                                                            <button class="search_button">Search</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide -->
+                        <div class="slide">
+                            <div class="background_image" style="background-image:url({{ asset('librairie/image/fotolia.jpg') }})"></div>
+                            <div class="home_container">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-xl-8 offset-xl-2">
+                                            <div class="home_content text-center">
+                                                <div class="home_title"><h1>The Best City Guide</h1></div>
+                                                <div class="search_form_container">
+                                                    <form action="#" class="search_form" id="search_form">
+                                                        <div class="d-flex flex-sm-row flex-column align-items-sm-start align-items-center justify-content-sm-between">
+                                                            <input type="text" class="search_input" placeholder="What are you looking for?" required="required">
+                                                            <button class="search_button">Search</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Home Slider Dots -->
+
+                    <div class="home_slider_dots">
+                        <ul id="home_slider_custom_dots" class="home_slider_custom_dots">
+                            <li class="home_slider_custom_dot active"></li>
+                            <li class="home_slider_custom_dot"></li>
+                            <li class="home_slider_custom_dot"></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- How it works -->
+
+            <div class="how container_custom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="section_title text-center"><h1>How Directory<span>Plus+</span> works</h1></div>
+                            <div class="icon_box_container d-flex flex-row align-items-start justify-content-sm-center flex-wrap">
+
+                                <!-- Icon Box -->
+                                <div class="icon_box d-flex flex-column align-items-center justify-content-start text-center">
+                                    <div class="icon_box_num">Praticien</div>
+                                    <div class="icon_box_icon"><img src="{{ asset('librairie/image/images2.jpg') }}" alt="https://www.flaticon.com/authors/monkik"></div>
+                                    <div class="icon_box_title">Votre profil</div>
+                                    <div class="icon_box_text">
+                                        <p>Suivi<br></p>
+                                    </div>
+                                </div>
+
+                                <!-- Icon Box -->
+                                <div class="icon_box d-flex flex-column align-items-center justify-content-start text-center">
+                                    <div class="icon_box_num">Patient</div>
+                                    <div class="icon_box_icon"><img src="{{ asset('librairie/image/images.png') }}" alt="https://www.flaticon.com/authors/monkik"></div>
+                                    <div class="icon_box_title">Votre profil</div>
+                                    <div class="icon_box_text">
+                                        <p>suivi</p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA 2 -->
+
+            <div class="cta_2">
+                <div class="container">
+                    <div class="row row-lg-eq-height">
+                        <div class="col-lg-9 cta_2_col">
+                            <div class="cta_2_content">
+                                <div class="cta_2_title"><h1>Recherche<span>Plus+</span></h1></div>
+                                <div class="cta_2_text">
+                                    <p>Trouvez votre médecin</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3 cta_2_col">
+                            <div class="cta_2_image">
+                                <img src="images/cta_2.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Footer -->
+
+            <footer class="footer container_custom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="footer_container d-flex flex-md-row flex-column align-items-center justify-content-md-start justify-content-center">
+                                <div class="copyright order-md-1 order-2"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                </div>
+                                <nav class="footer_nav ml-md-auto order-md-2 order-1">
+                                    <ul class="d-flex flex-row align-items-center justify-content-start">
+                                        <li class="active"><a href="index.html">Home</a></li>
+                                        <li><a href="#">About us</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+    </div>
+
+
+
+
+    {% block body %}{% endblock %}
+
+        {% block javascripts %}
+            <script
+                    src="https://code.jquery.com/jquery-3.3.1.slim.js"
+                    integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
+                    crossorigin="anonymous">
+            </script>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+                    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+                    crossorigin="anonymous">
+            </script>
+            <script src="{{ asset('librairie/bootstrap/bootstrap.min.js') }}"></script>
+        {% endblock %}
     </body>
 </html>
