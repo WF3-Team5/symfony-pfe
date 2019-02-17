@@ -2,11 +2,45 @@
 <html lang="fr">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Metas -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
+
+  <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="Keywords" content="">
+  <meta name="Subject" content="">
+  <meta name="Copyright" content="Jean-Christophe Rangon">
+  <meta name="Author" content="Jean-Christophe Rangon">
+  <meta name="Publisher" content="">
+  <meta name="Reply-To" content="jc.rangon@gmail.com">
+  <meta name="Revisit-After" content="30 days">
+  <meta name="expires" content="never">
+  <meta name="Robots" content="all">
+  <meta name="Rating" content="general">
+  <meta name="Distribution" content="global">
+  <meta name="Geography" content="Puteaux, France, 92800">
+
+  <!-- FB + LinkedIn -->
+  <meta name="og:type" content="website">
+  <meta name="og:title" content="Template bootstrap">
+  <meta name="og:image" content="./image/logo-big.png">
+  <meta name="og:description" content="">
+  <meta name="og:url" content="https://">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:title" content="Template bootstrap">
+  <meta name="twitter:image" content="./image/logo-big.png">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:url" content="https://">
+
   <title>{% block title %}Medi Glob{% endblock %}</title>
+
   {% block stylesheets %}
+    <!--        Bootstrap CSS CDN
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">-->
   <link rel="stylesheet" href="{{ asset('lib/css/bootstrap/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('lib/plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}">
   <link rel="stylesheet" href="{{ asset('lib/css/main_styles.css') }}">
@@ -597,8 +631,10 @@
 
 
   {% block javascripts %}
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <!--     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+       </script>  -->
   <script src="{{ asset('lib/css/bootstrap/bootstrap.min.js') }}"></script>
     <script src="{{ asset('lib/plugins/greensock/TweenMax.min.js') }}"></script>
     <script src="{{ asset('lib/plugins/greensock/TimelineMax.min.js') }}"></script>
