@@ -4,8 +4,11 @@
         <meta charset="UTF-8">
         <title>{% block title %}Projet{% endblock %}</title>
         {% block stylesheets %}
+
+
             <link rel="stylesheet" href="{{ asset('librairie/css/main_styles.css')}}">
             <link rel="stylesheet" href="{{ asset('librairie/bootstrap/bootstrap.min.css') }}">
+
         {% endblock %}
     </head>
     <body>
@@ -13,7 +16,6 @@
     <div class="super_container">
 
         <!-- Header -->
-
         <header class="header">
             <div class="header_overlay"></div>
             <div class="header_content d-flex flex-row align-items-center justify-content-start">
