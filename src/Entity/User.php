@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -17,42 +18,54 @@ class User
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, columnDefinition="ENUM('M','Mme')")
      */
     private $civility;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, columnDefinition="ENUM('H','F')")
      */
     private $gender;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="Le nom est obligatoire")
+     * @Assert\Length(max="50",
+     *     maxMessage="Le nom ne doit pas faire plus de {{ limit }} caractères")
      */
     private $last_name;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="Le prénom est obligatoire")
+     * @Assert\Length(max="50",
+     *     maxMessage="Le prénom ne doit pas faire plus de {{ limit }} caractères")
      */
     private $first_name;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=50)
+     * @Assert\Length(max="50",
+     *     maxMessage="Le nom de naissance ne doit pas faire plus de {{ limit }} caractères")
      */
     private $birth_name;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank(message="La date de naissance est obligatoire")
+     *
      */
     private $birth_date;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Departement")
+     * @ORM\JoinColumn(nullable=false)
+     *
      */
     private $birth_department;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $place_of_birth;
 
@@ -63,31 +76,38 @@ class User
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="L'e-mail est obligatoire")
+     * @Assert\Email(message="L'e-mail n'est pas valide")
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="L'adresse est obligatoire")
      */
     private $address;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Le code postal est obligatoire")
      */
     private $postal_code;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="La ville est obligatoire")
      */
     private $city;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     *
      */
     private $phone_number;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Le Numéro de portable est obligatoire")
      */
     private $mobile_phone_number;
 
@@ -97,9 +117,17 @@ class User
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, columnDefinition="ENUM('patient', 'medic', 'assistant', 'admin')")
+     *
      */
     private $status;
+
+    private $plainPassword;
+
+    /**
+     * @ORM\Column(type="string", length=50, columnDefinition="ENUM('ROLE_USER' , 'ROLE_ADMIN')")
+     */
+    private $role;
 
     public function getId(): ?int
     {
@@ -178,12 +206,12 @@ class User
         return $this;
     }
 
-    public function getBirthDepartment(): ?int
+    public function getBirthDepartment(): ?Departement
     {
         return $this->birth_department;
     }
 
-    public function setBirthDepartment(?int $birth_department): self
+    public function setBirthDepartment(?Departement $birth_department): self
     {
         $this->birth_department = $birth_department;
 
@@ -310,8 +338,41 @@ class User
         return $this;
     }
 
-    public function __toString()
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
     {
-        return $this->first_name." ".$this->last_name;
+        return $this->plainPassword;
     }
+
+    /**
+     * @param mixed $plainPassword
+     * @return User
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param string $role
+     * @return User
+     */
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
+        return $this;
+    }
+
+
 }
