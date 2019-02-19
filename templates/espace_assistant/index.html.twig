@@ -39,7 +39,7 @@
         </div>
 
 
-                    <!-- Topbar Navbar -->
+                    <!-- eventuel tchat ass/patient -->
                     <ul class="navbar-nav ml-auto">
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
@@ -151,20 +151,16 @@
                     </ul>
 
                 </nav>
-                <!-- End of Topbar -->
+                <!-- Fin tchat ass/patient -->
 
 
 
-                        <!-- Begin Page Content -->
+                        <!-- Debut page -->
                         <div class="container-fluid">
-
-                            <!-- Page Heading -->
                             <h1 class="h3 mb-4 text-gray-800">Complements informations</h1>
 
                             <div class="row">
-
                                 <div class="col-lg-6">
-
                                     <!-- Card praticien -->
                                     <div class="card shadow mb-4">
 
@@ -230,41 +226,40 @@
                                             <div class="my-2"></div>
                                             <a href="#" class="btn btn-success btn-icon-split">
                                                 <span class="text">Allergies</span>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <input type="checkbox" aria-label="Checkbox for following text input">
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+                                                </div>
                                             </a>
+                                            {{ form_row(form.myCheckbox, {label_attr: {class: 'checkbox-custom'} }) }}
+                                            {{ form_end() }}
 
-                                            <div class="my-2"></div>
+
+                                            <div class="my-2">
                                             <a href="#" class="btn btn-info btn-icon-split">
                                                 <span class="text">Allergies</span>
+
+
+                                                <div class="input-group mb-3"> </div>
+
+                                                    <input type="text" class="form-control" aria-label="Text input with checkbox">
+
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <input type="checkbox" aria-label="Checkbox for following text input" style="">
+                                                            <input type="checkbox" aria-label="Checkbox for following text input">
+                                                        </div>
+                                                    </div>
                                             </a>
-
-                                            <div class="my-2"></div>
-                                            <a href="#" class="btn btn-warning btn-icon-split">
-                                                <span class="text">Allergies</span>
-                                            </a>
-
-                                            <div class="my-2"></div>
-                                            <a href="#" class="btn btn-danger btn-icon-split">
-                                                <span class="text">Antecedants familiaux</span>
-                                            </a>
-
-                                            <div class="my-2"></div>
-                                            <a href="#" class="btn btn-secondary btn-icon-split">
-                                                <span class="text">Antecedants familiaux</span>
-                                            </a>
-
-                                            <div class="my-2"></div>
-                                            <a href="#" class="btn btn-light btn-icon-split">
-                                                <span class="text">Antecedants familiaux</span>
-                                            </a>
-
-
+                                            </div>
                                         </div>
                                     </div>
-
                                 </div>
-
                             </div>
-
                         </div>
                         <!-- Fin page content -->
 
