@@ -4,4 +4,4 @@
 
 #route de la page deconnexion
 app_admlogin_logout:
-  path: /adm/logout
+  path: /admin/dashboard/logout

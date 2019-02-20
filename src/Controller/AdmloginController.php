@@ -20,26 +20,30 @@ class AdmloginController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/login")
      */
-    public function login(AuthenticationUtils $authenticationUtils)
+    public function login(Request $request, AuthenticationUtils $authenticationUtils)
     {
+        $submittedToken = $request->request->get('hehehe');
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        if(!empty($error)){
-            $this->addFlash("error","Identifiants incorrects");
+        if (!empty($error)) {
+            $this->addFlash("error", "Identifiants incorrects");
+            return $this->render('admlogin/index.html.twig', [
+                'error' => $error,
+                'lastUsername' => $lastUsername,
+            ]);
         }
-        return $this->render('admlogin/index.html.twig', [
-            'error'=>$error,
-            'lastUsername'=>$lastUsername,
-        ]);
+
+        if ($this->isCsrfTokenValid('trouvemoi', $submittedToken)) {
+            return $this->render('admlogin/index.html.twig', [
+            ]);
+        }
+        else{
+            return $this->render('admlogin/index.html.twig', [
+
+            ]);
+        }
     }
 
-    /**
-     * @Route("/adm/logout")
-     */
-    public function logout()
-    {
-        return $this->redirectToRoute("app_admin_dboard_index");
 
-    }
 }

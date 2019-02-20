@@ -4,7 +4,9 @@ security:
             algorithm: plaintext
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     role_hierarchy:
-        ROLE_ADMIN:       [ROLE_USER, ROLE_MEDIC]
+        ROLE_ASST:  ROLE_USER
+        ROLE_MEDIC: [ROLE_ASST, ROLE_USER]
+        ROLE_ADMIN: [ROLE_USER, ROLE_MEDIC, ROLE_ASST]
 
     providers:
         db:
@@ -30,7 +32,8 @@ security:
                 username_parameter: "adminEmail"
                 password_parameter: "adminMdp"
             logout:
-                path: app_admlogin_logout
+                path: app_admin_dboard_logout #app_admlogin_logout
+                target: app_admin_dboard_index
 
         main:
             anonymous: true

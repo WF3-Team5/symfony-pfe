@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\RuntimeException;
 
 /**
  * Class DboardController
@@ -14,34 +15,41 @@ use Symfony\Component\Routing\Annotation\Route;
 class DboardController extends AbstractController
 {
     /**
-     * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/")
      */
     public function index()
     {
+        $user=$this->getUser();
+        if(is_null($user)){
+            return $this->redirectToRoute("app_admlogin_login");
+        }
+
         return $this->render('admin/widgets/index.html.twig', [
 
         ]);
     }
 
     /**
-     * @param $userType
+     * @param string $userType
+     * @param int $page
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/users/{userType}", defaults={"userType":null})
+     * @Route("/users/{userType}/{page}", defaults={"userType":null,"page":null}, requirements={"page"="\d+"})
      */
-    public function list($userType)
+    public function list($userType,$page)
     {
-        $em=$this->getDoctrine()->getManager();
-        $users=null;
-        $admins=null;
-        $praticiens=null;
-        $assistants=null;
 
-        $userCount=0;
+        $em=$this->getDoctrine()->getManager();
+        $patients=array();
+        $admins=array();
+        $praticiens=array();
+        $assistants=array();
+
+        $usersCount=0;
         $patientCount=0;
         $adminsCount=0;
         $praticiensCount=0;
         $assistantsCount=0;
+        $nbUsersParPage=20;
 
         $repoUser=$em->getRepository(User::class);
         //$repoPraticien=$em->getRepository(Praticien::class);
@@ -52,13 +60,22 @@ class DboardController extends AbstractController
         $patientCount=$usersCount-$adminsCount;
         $usersCount+=$praticiensCount+$assistantsCount;
 
-        if(!is_null($userType)){
+
+
+        if(!is_null($userType) && !is_null($page)){
             if(in_array($userType,["patient","praticien","assistant","admin"])){
                 switch($userType){
                     case "patient":
-                        $users=$repoUser->findAllUsersExceptAdmins();
+                        $patients=$repoUser->findAllUsersExceptAdmins($page,$nbUsersParPage);
+                        $pagination = array(
+                            'page' => $page,
+                            'nbPages' => ceil(count($patients) / $nbUsersParPage),
+                            'nomRoute' => '/users/patient/',
+                            'paramsRoute' => array()
+                        );
                         return $this->render('admin/users/list.html.twig', [
-                            'users'=>$users,
+                            'patients'=>$patients,
+                            'pagination'=>$pagination,
 
                             'usersCount'=>$usersCount,
                             'patientCount'=>$patientCount,
@@ -69,10 +86,16 @@ class DboardController extends AbstractController
                     break;
 
                     case "praticien":
-                        //$praticiens=$repoPraticien->findAll();
+                        //$praticiens=$repoPraticien->findAllMedics($page,$nbUserParPage);
+                        $pagination = array(
+                            'page' => $page,
+                            'nbPages' => ceil(count($praticiens) / $nbUsersParPage),
+                            'nomRoute' => '/users/praticien/',
+                            'paramsRoute' => array()
+                        );
                         return $this->render('admin/users/list.html.twig', [
                             'praticiens'=>$praticiens,
-
+                            'pagination'=>$pagination,
                             'usersCount'=>$usersCount,
                             'patientCount'=>$patientCount,
                             'adminsCount'=>$adminsCount,
@@ -82,11 +105,16 @@ class DboardController extends AbstractController
                     break;
 
                     case "assistant":
-                        //$assistants->$repoAssistant->findAll();
-                        //$repo=$em->getRepository(Assistant::class);
+                        //$assistants=$repoAssistant->findAllAsst($page,$nbUserParPage);
+                        $pagination = array(
+                            'page' => $page,
+                            'nbPages' => ceil(count($assistants) / $nbUsersParPage),
+                            'nomRoute' => '/users/assistant/',
+                            'paramsRoute' => array()
+                        );
                         return $this->render('admin/users/list.html.twig', [
-                            'assistantes'=>$assistants,
-
+                            'assistants'=>$assistants,
+                            'pagination'=>$pagination,
                             'patientCount'=>$patientCount,
                             'usersCount'=>$usersCount,
                             'adminsCount'=>$adminsCount,
@@ -124,7 +152,20 @@ class DboardController extends AbstractController
      * @param User $user
      * @param $userType
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("users/user/edit/{id}")
+     * @Route("/users/user/details/{id}",requirements={"id"="\d+"})
+     */
+    public function showUser(User $user)
+    {
+        return $this->render('admin/users/details.html.twig', [
+            'user'=>$user,
+        ]);
+    }
+
+    /**
+     * @param User $user
+     * @param $userType
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("users/user/edit/{id}",requirements={"id"="\d+"})
      */
     public function editUser(User $user)
     {
@@ -194,6 +235,13 @@ class DboardController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/logout")
+     */
+    public function logout()
+    {
 
+        throw new RuntimeException('You must activate the logout in your security firewall configuration.');
+    }
 
 }
