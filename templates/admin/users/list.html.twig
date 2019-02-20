@@ -3,5 +3,143 @@
 {% block title %}Admin | Utilisateurs{% endblock %}
 
 {% block body %}
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Dashboard</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('app_home_index') }}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href="{{ path('app_admin_dboard_index') }}">Dashboard</li>
+                            <li class="breadcrumb-item active" aria-current="page">Utilisateurs</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Sales Cards  -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <!-- Column -->
+            <div class="col-md-6 col-lg-2 col-xlg-3 ">
+                <a href="{{ path('app_admin_dboard_index') }}">
+                    <div class="card card-hover">
+                        <div class="box bg-cyan text-center">
+                            <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
+                            <h6 class="text-white">Dashboard</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6 col-lg-2 col-xlg-3">
+                <div class="card card-hover">
+                    <div class="box bg-danger text-center">
+                        <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
+                        <h6 class="text-white">Tables</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-3 m-auto">
+                <div class="bg-dark text-white text-center">
+                    <i class="fa fa-id-badge m-b-5 font-16"></i>
+                    <h5 class="m-b-0 m-t-5">{{ usersCount }}</h5>
+                    <small class="font-light">Total Utilisateurs</small>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row align-items-stretch">
+            <div class="col-3 mt-2">
+                <a href="{{ path('app_admin_dboard_list', {'userType':'patient'}) }}">
+                    <div class="bg-dark  text-white text-center">
+                        <i class="fa fa-smile m-b-5 font-16"></i>
+                        <h5 class="m-b-0 m-t-5">{{ patientCount }}</h5>
+                        <small class="font-light">Total Patients</small>
+                    </div>
+                </a>
+            </div>
+            <div class="col-3 mt-2">
+                <a href="{{ path('app_admin_dboard_list', {'userType':'praticien'}) }}">
+                    <div class="bg-dark text-white text-center">
+                        <i class="fa fa-briefcase-medical m-b-5 font-16"></i>
+                        <h5 class="m-b-0 m-t-5">{{ praticiensCount }}</h5>
+                        <small class="font-light">Total Praticiens</small>
+                    </div>
+                </a>
+            </div>
+            <div class="col-3 mt-2">
+                <a href="{{ path('app_admin_dboard_list', {'userType':'assistant'}) }}">
+                    <div class="bg-dark text-white text-center">
+                        <i class="fa fa-hands-helping m-b-5 font-16"></i>
+                        <h5 class="m-b-0 m-t-5">{{ assistantsCount }}</h5>
+                        <small class="font-light">Total Assistantes</small>
+                    </div>
+                </a>
+            </div>
+            <div class="col-3 mt-2">
+                <a href="{{ path('app_admin_dboard_list', {'userType':'admin'}) }}">
+                    <div class="bg-dark text-white text-center" style="overflow:hidden!important;">
+                        <i class="fa fa-user m-b-5 font-16"></i>
+                        <h5 class="m-b-0 m-t-5">{{ adminsCount }}</h5>
+                        <small class="font-light">Total Administrateurs</small>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col" style="overflow-x:auto!important;text-align:center;height:50vh;">
+            {% if admins is defined and admins is not null %}
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th nowrap>Date Nais.</th>
+                        <th>Tel.Mobile</th>
+                        <th>Email</th>
+                        <th>Detail</th>
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for admin in admins %}
+                        <td>{{ admin.Id }}</td>
+                        <td>{{ admin.LastName|capitalize }}</td>
+                        <td>{{ admin.FirstName }}</td>
+                        <td>{{ admin.BirthDate.format("d/m/Y") }}</td>
+                        <td>{{ admin.MobilePhoneNumber }}</td>
+                        <td>{{ admin.Email }}</td>
+                        <td><a class="btn btn-outline-info" href="" title="Détails"><i class="fas fa-eye"></i></a></td>
+                        <td><a class="btn btn-outline-warning" href="" title="Modifier"><i class="fas fa-edit"></i></a></td>
+                        <td><a class="btn btn-outline-danger" href="" title="Supprimer"><i class="fas fa-trash"></i></a></td>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+
 
 {% endblock %}

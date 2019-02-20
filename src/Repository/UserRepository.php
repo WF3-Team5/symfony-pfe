@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -47,4 +48,58 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @return mixed
+     */
+    public function findAllUsersExceptAdmins(){
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.role=:role')
+            ->setParameter('role', 'ROLE_USER')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function findAllAdmins(){
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.role=:role')
+            ->setParameter('role', 'ROLE_ADMIN')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function findTotalUserCount(){
+        try {
+            return $this->createQueryBuilder('u')
+                ->select('COUNT(u)')
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NonUniqueResultException $e) {
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function findTotalAdminCount(){
+        try {
+            return $this->createQueryBuilder('u')
+                ->select('COUNT(u)')
+                ->andWhere('u.role=:role')
+                ->setParameter('role', 'ROLE_ADMIN')
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NonUniqueResultException $e) {
+        }
+    }
+
+
+
 }
