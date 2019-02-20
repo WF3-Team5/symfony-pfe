@@ -1,11 +1,39 @@
 security:
+    encoders:
+        App\Entity\User:
+            algorithm: plaintext
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    role_hierarchy:
+        ROLE_ASST:  ROLE_USER
+        ROLE_MEDIC: [ROLE_ASST, ROLE_USER]
+        ROLE_ADMIN: [ROLE_USER, ROLE_MEDIC, ROLE_ASST]
+
     providers:
-        in_memory: { memory: ~ }
+        db:
+            # les utilisateurs sont les entités User
+            entity:
+                class: App\Entity\User
+                # Identifiant de Login : l'email du User
+                property: 'email'
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        admin:
+            anonymous: true
+            pattern: ^/adm
+            provider: db
+            form_login:
+                login_path: app_admlogin_login
+                check_path: app_admlogin_login
+                default_target_path: app_admin_dboard_index
+                username_parameter: "adminEmail"
+                password_parameter: "adminMdp"
+            logout:
+                path: app_admlogin_logout
+
         main:
             anonymous: true
 
@@ -14,11 +42,13 @@ security:
             # http_basic: true
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
 
-            # form_login: true
+            #form_login: true
             # https://symfony.com/doc/current/security/form_login_setup.html
+
+
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
