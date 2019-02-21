@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
  * Class InscriptionPatientController
@@ -37,10 +38,38 @@ class InscriptionPatientController extends AbstractController
 
         $form = $this->createForm(UserType::class, $user);
 
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()){
+            if ($form->isValid()){
+                $password = $passwordEncoder->encodePassword(
+                    $user,
+                    $user->getPlainPassword()
+                );
+
+                $user->setPassword($password);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+
+                $this->addFlash('success', 'Votre compte a bien été créé');
+
+                return $this->redirectToRoute(''); // AJOUTER BONNE REDIRECTION
+            }
+            else{
+                $this->addFlash('error', 'Le formulaire d\'inscription contient des erreurs, veuillez les suivre les indications afin de finaliser votre inscription ');
+            }
+        }
+
         return $this->render(
             'espace_patient/inscription_patient/inscription.html.twig',
             [
                 'form' => $form->createView()
-            ]);
+            ]
+        );
     }
+
+
+
 }
