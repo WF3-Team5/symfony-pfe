@@ -295,7 +295,7 @@
 
 
         {# pagination #}
-        {% if admins is not defined %}
+        {% if patients is defined or praticiens is defined or assistants is defined%}
             {% include 'admin/users/pagination.html.twig' %}
         {% endif %}
 
