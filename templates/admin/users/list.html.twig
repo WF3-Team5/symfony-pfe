@@ -3,5 +3,304 @@
 {% block title %}Admin | Utilisateurs{% endblock %}
 
 {% block body %}
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Dashboard</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ path('app_home_index') }}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href="{{ path('app_admin_dboard_index') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Utilisateurs</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Sales Cards  -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <!-- Column -->
+
+            <div class="col-md-6 col-lg-2 col-xlg-3 ">
+                <a href="{{ path('app_admin_dboard_index') }}">
+                    <div class="card card-hover">
+                        <div class="box bg-cyan text-center">
+                            <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
+                            <h6 class="text-white">Dashboard</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6 col-lg-2 col-xlg-3 ml-auto">
+                <div class="card card-hover">
+                    <div class="box bg-warning text-center">
+                        <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
+                        <h6 class="text-white">Widgets</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        {# Totaux Utilisateurs #}
+        <div class="row mb-2">
+            <div class="col-3 m-auto">
+                <div class="bg-dark text-white text-center">
+                    <i class="fa fa-user m-b-5 font-16"></i>
+                    <h5 class="m-b-0 m-t-5" style="color: #28b779;">{{ usersCount }}</h5>
+                    <small class="font-light">Total Utilisateurs</small>
+                </div>
+            </div>
+        </div>
+
+        {# Recensement des utilisateurs par TYPE #}
+        <div class="row align-items-stretch">
+            <div class="col-3 mt-2" style="min-height: 100%!important;">
+                <a href="{{ path('app_admin_dboard_list', {'userType':'patient', 'page':'1'}) }}">
+                    <div class="bg-dark  text-white text-center h-100">
+                        <i class="fa fa-smile m-b-5 font-16"></i>
+                        <h5 class="m-b-0 m-t-5">{{ patientCount }}</h5>
+                        <small class="font-light">Total Patients</small>
+                    </div>
+                </a>
+            </div>
+            <div class="col-3 mt-2" style="min-height: 100%!important;">
+                <a href="{{ path('app_admin_dboard_list', {'userType':'praticien', 'page':'1'}) }}">
+                    <div class="bg-dark text-white text-center h-100">
+                        <i class="fa fa-briefcase-medical m-b-5 font-16"></i>
+                        <h5 class="m-b-0 m-t-5">{{ praticiensCount }}</h5>
+                        <small class="font-light">Total Praticiens</small>
+                    </div>
+                </a>
+            </div>
+            <div class="col-3 mt-2" style="min-height: 100%!important;">
+                <a href="{{ path('app_admin_dboard_list', {'userType':'assistant', 'page':'1'}) }}">
+                    <div class="bg-dark text-white text-center h-100">
+                        <i class="fa fa-hands-helping m-b-5 font-16"></i>
+                        <h5 class="m-b-0 m-t-5">{{ assistantsCount }}</h5>
+                        <small class="font-light">Total Assistantes</small>
+                    </div>
+                </a>
+            </div>
+            <div class="col-3 mt-2" style="min-height: 100%!important;">
+                <a href="{{ path('app_admin_dboard_list', {'userType':'admin', 'page':'1'}) }}">
+                    <div class="bg-dark text-white text-center h-100" style="overflow:hidden!important;">
+                        <i class="fa fa-user-circle m-b-5 font-16"></i>
+                        <h5 class="m-b-0 m-t-5">{{ adminsCount }}</h5>
+                        <small class="font-light">Total Administrateurs</small>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+        {# Liste des Admins #}
+        <div class="row mt-5">
+            <div class="col" style="overflow-x:auto!important;text-align:center;max-height:30vh;">
+                {% if admins is defined %}
+                    <h4>Liste des <span class="text-white bg-danger shadow rounded pl-2 pr-2">ADMINISTRATEURS</span></h4>
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Id</th>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th nowrap>Date Nais.</th>
+                                <th>Tel.Mobile</th>
+                                <th>Email</th>
+                                <th>Detail</th>
+                                <th>Modifier</th>
+                                <th>Supprimer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% if admins is not empty %}
+                            {% for admin in admins %}
+                                <tr>
+                                    <th scope="row">{{ admin.Id }}</th>
+                                    <td>{{ admin.LastName|capitalize }}</td>
+                                    <td>{{ admin.FirstName|capitalize }}</td>
+                                    <td>{{ admin.BirthDate.format("d/m/Y") }}</td>
+                                    <td>{{ admin.MobilePhoneNumber }}</td>
+                                    <td>{{ admin.Email }}</td>
+                                    <td><a class="btn btn-outline-info" href="{{ path('app_admin_dboard_showuser',{"id": admin.id}) }}" title="Détails"><i class="fas fa-eye"></i></a></td>
+                                    <td><a class="btn btn-outline-warning" href="{{ path('app_admin_dboard_edituser',{"id":admin.id}) }}" title="Modifier"><i class="fas fa-edit"></i></a></td>
+                                    <td><a class="btn btn-outline-danger" onclick="return confirm('Cette action est irréversible. Êtes-vous certain de vouloir poursuivre?')" href="{{ path('app_admin_dboard_deleteuser',{"id":admin.id}) }}" title="Supprimer"><i class="fas fa-trash"></i></a></td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="9" class="text-left">Aucun Patient trouvé...</td>
+                            </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                {% endif %}
+
+                {# Liste des Assistants #}
+                {% if assistants is defined %}
+                    <h4>Liste des <span class="text-white bg-purple shadow rounded pl-2 pr-2">ASSISTANTS</span></h4>
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Tel.Fixe</th>
+                            <th>Tel.Mobile</th>
+                            <th>Service</th>
+                            <th>Spécialité</th>
+                            <th>Email</th>
+                            <th>Detail</th>
+                            <th>Modifier</th>
+                            <th>Supprimer</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if assistants is not empty %}
+                            {% for assistant in assistants %}
+                                <tr>
+                                    <th scope="row">{{ assistant.Id }}</th>
+                                    <td>{{ assistant.LastName|capitalize }}</td>
+                                    <td>{{ assistant.FirstName }}</td>
+                                    <td>{{ assistant.phoneNumber }}</td>
+                                    <td>{{ assistant.MobilePhoneNumber }}</td>
+                                    <td>{{ assistant.service }}</td>
+                                    <td>{{ assistant.specialite }}</td>
+                                    <td>{{ assistant.Email }}</td>
+                                    <td><a class="btn btn-outline-info" href="" title="Détails"><i class="fas fa-eye"></i></a></td>
+                                    <td><a class="btn btn-outline-warning" href="" title="Modifier"><i class="fas fa-edit"></i></a></td>
+                                    <td><a class="btn btn-outline-danger" href="" title="Supprimer"><i class="fas fa-trash"></i></a></td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="11" class="text-left">Aucun Assistant trouvé...</td>
+                            </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                {% endif %}
+
+
+                {# Liste des Praticiens #}
+                {% if praticiens is defined %}
+                    <h4>Liste des <span class="text-white bg-warning shadow rounded pl-2 pr-2">PRATICIENS</span></h4>
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Tel.Fixe</th>
+                            <th>Tel.Mobile</th>
+                            <th>Spécialité</th>
+                            <th>Email</th>
+                            <th>Detail</th>
+                            <th>Modifier</th>
+                            <th>Supprimer</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if praticiens is not empty %}
+                            {% for praticien in praticiens %}
+                                <tr>
+                                    <th scope="row">{{ praticien.Id }}</th>
+                                    <td>{{ praticien.LastName|capitalize }}</td>
+                                    <td>{{ praticien.FirstName }}</td>
+                                    <td>{{ praticien.phoneNumber }}</td>
+                                    <td>{{ praticien.MobilePhoneNumber }}</td>
+                                    <td>{{ praticien.service }}</td>
+                                    <td>{{ praticien.specialite }}</td>
+                                    <td>{{ praticien.Email }}</td>
+                                    <td><a class="btn btn-outline-info" href="" title="Détails"><i class="fas fa-eye"></i></a></td>
+                                    <td><a class="btn btn-outline-warning" href="" title="Modifier"><i class="fas fa-edit"></i></a></td>
+                                    <td><a class="btn btn-outline-danger" href="" title="Supprimer"><i class="fas fa-trash"></i></a></td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="11" class="text-left">Aucun Praticien trouvé...</td>
+                            </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                {% endif %}
+
+                {# Liste des Patients #}
+                {% if patients is defined %}
+                    <h4>Liste des <span class="text-white bg-success shadow rounded pl-2 pr-2">PATIENTS</span></h4>
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Date Nais.</th>
+                            <th>Adresse</th>
+                            <th nowrap>Code Postal</th>
+                            <th>Ville</th>
+                            <th>Tel.Fixe</th>
+                            <th>Tel.Mobile</th>
+                            <th>Email</th>
+                            <th>Detail</th>
+                            <th>Modifier</th>
+                            <th>Supprimer</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if patients is not empty %}
+                            {% for patient in patients %}
+                                <tr>
+                                    <th scope="row">{{ patients.Id }}</th>
+                                    <td>{{ patients.LastName|capitalize }}</td>
+                                    <td>{{ patients.FirstName|capitalize }}</td>
+                                    <td>{{ patients.BirthDate.format("d/m/Y") }}</td>
+                                    <td>{{ patients.address }}</td>
+                                    <td>{{ patients.postal_code }}</td>
+                                    <td>{{ patients.ville }}</td>
+                                    <td>{{ patients.phoneNumber }}</td>
+                                    <td>{{ praticien.MobilePhoneNumber }}</td>
+                                    <td>{{ praticien.Email }}</td>
+                                    <td><a class="btn btn-outline-info" href="" title="Détails"><i class="fas fa-eye"></i></a></td>
+                                    <td><a class="btn btn-outline-warning" href="" title="Modifier"><i class="fas fa-edit"></i></a></td>
+                                    <td><a class="btn btn-outline-danger" href="" title="Supprimer"><i class="fas fa-trash"></i></a></td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="13" class="text-left">Aucun Patient trouvé...</td>
+                            </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+
+
+        {# pagination #}
+        {% if admins is not defined %}
+            {% include 'admin/users/pagination.html.twig' %}
+        {% endif %}
+
+
+    </div>
+
 
 {% endblock %}

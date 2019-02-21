@@ -3,5 +3,5 @@
 #    controller: App\Controller\DefaultController::index
 
 #route de la page deconnexion
-app_security_logout:
-  path: /deconnexion
+app_admlogin_logout:
+  path: /admin/dashboard/logout

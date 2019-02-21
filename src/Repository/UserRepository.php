@@ -4,7 +4,11 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use InvalidArgumentException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,4 +51,164 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @return mixed
+     */
+    public function findAllUsersExceptAdmins($page, $nbMaxParPage)
+    {
+        if (!is_numeric($page)) {
+            throw new InvalidArgumentException(
+                'La valeur de l\'argument $page est incorrecte (valeur : ' . $page . ').'
+            );
+        }
+
+        if ($page < 1) {
+            throw new NotFoundHttpException('La page demandée n\'existe pas');
+        }
+
+        if (!is_numeric($nbMaxParPage)) {
+            throw new InvalidArgumentException(
+                'La valeur de l\'argument $nbMaxParPage est incorrecte (valeur : ' . $nbMaxParPage . ').'
+            );
+        }
+
+        $premierResultat = ($page - 1) * $nbMaxParPage;
+
+        $qb = $this->createQueryBuilder('u')
+            ->andWhere('u.role=:role')
+            ->setParameter('role', 'ROLE_USER')
+            ->orderBy('u.last_name', 'ASC')
+            ->getQuery()
+            ->setFirstResult($premierResultat)
+            ->setMaxResults($nbMaxParPage);
+
+        $paginator = new Paginator($qb);
+
+        if ( ($paginator->count() <= $premierResultat) && $page != 1) {
+            throw new NotFoundHttpException('La page demandée n\'existe pas.'); // page 404
+        }
+
+        return $paginator;
+
+    }
+
+
+    public function findAllMedics($page, $nbMaxParPage)
+    {
+        if (!is_numeric($page)) {
+            throw new InvalidArgumentException(
+                'La valeur de l\'argument $page est incorrecte (valeur : ' . $page . ').'
+            );
+        }
+
+        if ($page < 1) {
+            throw new NotFoundHttpException('La page demandée n\'existe pas');
+        }
+
+        if (!is_numeric($nbMaxParPage)) {
+            throw new InvalidArgumentException(
+                'La valeur de l\'argument $nbMaxParPage est incorrecte (valeur : ' . $nbMaxParPage . ').'
+            );
+        }
+
+        $premierResultat = ($page - 1) * $nbMaxParPage;
+
+        $qb = $this->createQueryBuilder('u')
+            ->andWhere('u.role=:role')
+            ->setParameter('role', 'ROLE_MEDIC')
+            ->orderBy('u.last_name', 'ASC')
+            ->getQuery()
+            ->setFirstResult($premierResultat)
+            ->setMaxResults($nbMaxParPage);
+
+        $paginator = new Paginator($qb);
+
+        if ( ($paginator->count() <= $premierResultat) && $page != 1) {
+            throw new NotFoundHttpException('La page demandée n\'existe pas.'); // page 404
+        }
+
+        return $paginator;
+
+    }
+
+    public function findAllAsst($page, $nbMaxParPage)
+    {
+        if (!is_numeric($page)) {
+            throw new InvalidArgumentException(
+                'La valeur de l\'argument $page est incorrecte (valeur : ' . $page . ').'
+            );
+        }
+
+        if ($page < 1) {
+            throw new NotFoundHttpException('La page demandée n\'existe pas');
+        }
+
+        if (!is_numeric($nbMaxParPage)) {
+            throw new InvalidArgumentException(
+                'La valeur de l\'argument $nbMaxParPage est incorrecte (valeur : ' . $nbMaxParPage . ').'
+            );
+        }
+
+        $premierResultat = ($page - 1) * $nbMaxParPage;
+
+        $qb = $this->createQueryBuilder('u')
+            ->andWhere('u.role=:role')
+            ->setParameter('role', 'ROLE_ASST')
+            ->orderBy('u.last_name', 'ASC')
+            ->getQuery()
+            ->setFirstResult($premierResultat)
+            ->setMaxResults($nbMaxParPage);
+
+        $paginator = new Paginator($qb);
+
+        if ( ($paginator->count() <= $premierResultat) && $page != 1) {
+            throw new NotFoundHttpException('La page demandée n\'existe pas.'); // page 404
+        }
+
+        return $paginator;
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function findAllAdmins(){
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.role=:role')
+            ->setParameter('role', 'ROLE_ADMIN')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function findTotalUserCount(){
+        try {
+            return $this->createQueryBuilder('u')
+                ->select('COUNT(u)')
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NonUniqueResultException $e) {
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function findTotalAdminCount(){
+        try {
+            return $this->createQueryBuilder('u')
+                ->select('COUNT(u)')
+                ->andWhere('u.role=:role')
+                ->setParameter('role', 'ROLE_ADMIN')
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NonUniqueResultException $e) {
+        }
+    }
+
+
+
 }
