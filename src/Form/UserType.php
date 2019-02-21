@@ -32,7 +32,7 @@ class UserType extends AbstractType
                 ]
 
             )
-            ->add(
+            /*->add(
                 'gender',
                 ChoiceType::class,
                 [
@@ -42,7 +42,7 @@ class UserType extends AbstractType
                         'Femme' => 'F'
                     ]
                 ]
-            )
+            )*/
             ->add(
                 'last_name',
                 TextType::class,
@@ -155,6 +155,13 @@ class UserType extends AbstractType
                     ],
                     // message si les 2 champs n'ont pas la même valeur
                     'invalid_message' => 'La confirmation ne correspond pas au mot de passe'
+                ]
+            )
+            ->add(
+                'numeroSecu',
+                TextType::class,
+                [
+                    'label' => 'Numéro de Sécurité sociale :'
                 ]
             )
         ;

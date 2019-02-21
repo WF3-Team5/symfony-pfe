@@ -4,4 +4,4 @@
 
 #route de la page deconnexion
 app_security_logout:
-  path: /deconnexion
+  path: /espace/patient/logged/in/logout

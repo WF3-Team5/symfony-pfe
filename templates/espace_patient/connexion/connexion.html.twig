@@ -1,0 +1,35 @@
+{% extends 'basePatient.html.twig' %}
+
+{% block title %}Espace Patient - Se Connecter{% endblock %}
+
+{% block body %}
+    {% for type, flashes in app.session.flashBag.all %}
+        {% for message in flashes %}
+            {# pour la classe alert-danger du bootstrap #}
+            {% if type == 'error' %}
+                {% set type = 'danger' %}
+            {% endif %}
+            <div class="mt-1 alert alert-{{ type }}">
+                {{ message|raw }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <h1>Connexion</h1>
+
+    <form method="post">
+        <div>
+            <label>Email :</label>
+            <input type="email" name="_username" class="" value="{{ last_username }}">
+        </div>
+        <div>
+            <label>Mot de passe :</label>
+            <input type="password" name="_password" class="" >
+        </div>
+        <div>
+            <button type="submit" class="">
+                Se connecter
+            </button>
+        </div>
+    </form>
+
+{% endblock %}

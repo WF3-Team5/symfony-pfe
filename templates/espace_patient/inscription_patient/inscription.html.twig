@@ -1,8 +1,56 @@
+{% extends 'basePatient.html.twig' %}
+
+{% block title %}Espace Patient - S'inscrire{% endblock %}
 
 {% block body %}
-    <h1>Inscription Patient</h1>
-    {{ form_start(form) }}
-    {{ form_row(form.birth_department) }}
-    {{ form_end(form) }}
+
+    <h1 class="h1-inscription">Nouvelle Inscription Patient</h1>
+    <div class="">
+
+        <form method="post" action="#" class="intro_form" id="intro_form">
+
+            <div class="d-flex flex-row align-items-start justify-content-between flex-wrap">
+
+                {{ form_start(form) }}
+                <div>
+                    {{ form_row(form.numeroSecu) }}
+                    {{ form_row(form.civility) }}
+                    {{ form_row(form.last_name) }}
+                    {{ form_row(form.first_name) }}
+                    {{ form_row(form.birth_name) }}
+                </div>
+                <div>
+                    {{ form_row(form.birth_date) }}
+                    {{ form_row(form.birth_department) }}
+                    {{ form_row(form.place_of_birth) }}
+                    {{ form_row(form.nationality) }}
+                </div>
+                <div>
+                    {{ form_row(form.address) }}
+                    {{ form_row(form.postal_code) }}
+                    {{ form_row(form.city) }}
+                    {{ form_row(form.phone_number) }}
+                    {{ form_row(form.mobile_phone_number) }}
+                </div>
+                <div>
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.plainPassword) }}
+                    {{ form_row(form.plainPassword) }}
+                {{ form_end(form) }} <br>
+                <button type="submit" class="button button_1 intro_button trans_200 button-rdv">S'inscrire</button>
+                </div>
+            </div><hr>
+        </form>
+
+
+
+
+    </div>
+
+
+
+
+
+
 
 {% endblock %}
