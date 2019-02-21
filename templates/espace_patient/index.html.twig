@@ -1,6 +1,21 @@
-{% extends 'base.html.twig' %}
+{% extends 'basePatient.html.twig' %}
+
+
+{% block title %}Espace Patient{% endblock %}
 
 {% block body %}
-<h1>Barre de navigation </h1>
-a recuperer ds la base
+
+    <h1>Espace Patient</h1>
+
+    <div class="">
+        <div class="">
+            <a href="{{ path('app_espacepatient_login') }}">Connectez-vous</a>
+        </div>
+
+        <div>
+            <a href="{{ path('app_inscriptionpatient_inscription') }}">Inscrivez-vous</a>
+        </div>
+    </div>
+
+
 {% endblock %}

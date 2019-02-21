@@ -1,7 +1,11 @@
 security:
+
+    # encryptage du mot de passe pour User
     encoders:
         App\Entity\User:
             algorithm: plaintext
+
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     role_hierarchy:
         ROLE_ASST:  ROLE_USER
@@ -15,6 +19,7 @@ security:
                 class: App\Entity\User
                 # Identifiant de Login : l'email du User
                 property: 'email'
+
 
     firewalls:
         dev:
@@ -37,14 +42,26 @@ security:
 
         main:
             anonymous: true
+            pattern: ^/
+            provider: db
+            form_login:
+                login_path: app_espacepatient_login
+                check_path: app_espacepatient_login
+                default_target_path: app_espacepatientloggedin_index
+                username_parameter: "_username"
+                password_parameter: "_password"
+            logout:
+                # route définie dans config/routes.yaml
+                path: app_espacepatientloggedin_logout
+                target: app_home_index
 
-            # activate different ways to authenticate
+            # provider défini au-dessus dans la rubrique providers
 
-            # http_basic: true
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+            # sur tout le site
 
             #form_login: true
             # https://symfony.com/doc/current/security/form_login_setup.html
+
 
 
 
@@ -52,4 +69,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
+
+        - { path: ^/espace/patient/logged/in, roles: ROLE_USER } # Seul le USER peut y accéder
+
         # - { path: ^/profile, roles: ROLE_USER }

@@ -3,5 +3,9 @@
 #    controller: App\Controller\DefaultController::index
 
 #route de la page deconnexion
+app_espacepatientloggedin_logout:
+  path: /espace/patient/logged/in/logout
+
 app_admlogin_logout:
   path: /admin/dashboard/logout
+git 
