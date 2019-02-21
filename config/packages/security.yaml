@@ -3,26 +3,43 @@ security:
     # encryptage du mot de passe pour User
     encoders:
         App\Entity\User:
+<<<<<<< HEAD
             algorithm:                plaintext
+=======
+            algorithm: plaintext
+>>>>>>> 00f0f68ae1bf3286bd13383a6c477e896f07cc5f
 
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     role_hierarchy:
+<<<<<<< HEAD
         ROLE_ASST:                    ROLE_USER
         ROLE_MEDIC:                   [ROLE_ASST, ROLE_USER]
         ROLE_ADMIN:                   [ROLE_USER, ROLE_MEDIC, ROLE_ASST]
+=======
+        ROLE_ASST:  ROLE_USER
+        ROLE_MEDIC: [ROLE_ASST, ROLE_USER]
+        ROLE_ADMIN: [ROLE_USER, ROLE_MEDIC, ROLE_ASST]
+>>>>>>> 00f0f68ae1bf3286bd13383a6c477e896f07cc5f
 
     providers:
         db:
             # les utilisateurs sont les entités User
             entity:
+<<<<<<< HEAD
                 class:                App\Entity\User
                 # Identifiant de Login : l'email du User
                 property:             'email'
+=======
+                class: App\Entity\User
+                # Identifiant de Login : l'email du User
+                property: 'email'
+>>>>>>> 00f0f68ae1bf3286bd13383a6c477e896f07cc5f
 
 
     firewalls:
         dev:
+<<<<<<< HEAD
             pattern:                  ^/(_(profiler|wdt)|css|images|js)/
             security:                 false
 
@@ -54,12 +71,49 @@ security:
                 # route définie dans config/routes.yaml
                 path:                 app_espacepatientloggedin_logout
                 target:               app_home_index
+=======
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        admin:
+            anonymous: true
+            pattern: ^/adm
+            provider: db
+            form_login:
+                login_path: app_admlogin_login
+                check_path: app_admlogin_login
+                default_target_path: app_admin_dboard_index
+                username_parameter: "adminEmail"
+                password_parameter: "adminMdp"
+            logout:
+                path: app_admin_dboard_logout #app_admlogin_logout
+                target: app_admin_dboard_index
+
+        main:
+            anonymous: true
+            pattern: ^/
+            provider: db
+            form_login:
+                login_path: app_espacepatient_login
+                check_path: app_espacepatient_login
+                default_target_path: app_espacepatientloggedin_index
+                username_parameter: "_username"
+                password_parameter: "_password"
+            logout:
+                # route définie dans config/routes.yaml
+                path: app_espacepatientloggedin_logout
+                target: app_home_index
+>>>>>>> 00f0f68ae1bf3286bd13383a6c477e896f07cc5f
 
             # provider défini au-dessus dans la rubrique providers
 
             # sur tout le site
 
+<<<<<<< HEAD
             #form_login:              true
+=======
+            #form_login: true
+>>>>>>> 00f0f68ae1bf3286bd13383a6c477e896f07cc5f
             # https://symfony.com/doc/current/security/form_login_setup.html
 
 
@@ -68,7 +122,11 @@ security:
     # Easy way to control access for large sections of your site
     # Note:                           Only the *first* access control that matches will be used
     access_control:
+<<<<<<< HEAD
         - { path: ^/admin, roles:     ROLE_ADMIN }
+=======
+        - { path: ^/admin, roles: ROLE_ADMIN }
+>>>>>>> 00f0f68ae1bf3286bd13383a6c477e896f07cc5f
 
         - { path: ^/espace/patient/logged/in, roles: ROLE_USER } # Seul le USER peut y accéder
 
