@@ -5,13 +5,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class EspacePatientController extends AbstractController
+class QuestionnaireMedicalController extends AbstractController
 {
     /**
-     * @Route("/espace/patient")
+     * @Route("/questionnaire/medical")
      */
     public function index()
     {
-        return $this->render('espace_patient/index.html.twig');
+        return $this->render('questionnaire_medical/index.html.twig', []);
     }
 }
