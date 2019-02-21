@@ -1,7 +1,480 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EspaceAssistantController!{% endblock %}
-
 {% block body %}
-<h1>test espace assistant</h1>
+<h1>Portail Assistant</h1>
+
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+
+        <div class="container-fluid overflow-auto ">
+            <table class="table table-striped">
+                <thead class="thead-light">
+                <tr>
+                    <th>N° Dossier</th>
+                    <th>Civilité</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th nowrap>Date de naissance</th>
+                    <th nowrap>Numero de telephone</th>
+                    <th>adresse</th>
+                    <th>postal_code<th>
+                    <th>ville<th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+            <!-- Debut page -->
+            <div class="container-fluid">
+                {{ form_start(form) }}
+                <div class="row">
+                    <!-- 1ère colonne -->
+                    <div class="col-lg-6">
+                        <!-- Card 1 -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-info text-center">Informations Générales</h6>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <tr>
+                                        <td>  <p class="m-0 font-weight-bold text-dark">Médicaments</p>
+                                            {{ form_row(form.medicament) }}
+                                            {{ form_row(form.homeopathie) }}
+                                            {{ form_row(form.traitement_homeopathique) }}
+                                            {{ form_row(form.biphosphonates) }}
+                                            {{ form_row(form.hormones) }}
+                                            {{ form_row(form.pillules_contraceptives) }}
+                                         }
+                                        </td>
+                                        <td>  <p class="m-0 font-weight-bold text-dark">Santé général</p>
+                                            {{ form_row(form.trouble_digestifs) }}
+                                            {{ form_row(form.troubles_digestifs_details) }}
+                                            {{ form_row(form.ulcere_de_l_estomac) }}
+                                            {{ form_row(form.problemes_du_foie) }}
+                                            {{ form_row(form.diabete) }}
+                                            {{ form_row(form.troubles_thyroidiens) }}
+                                            {{ form_row(form.fievre_rhumatismale) }}
+                                            {{ form_row(form.troubles_cardiaques) }}
+                                            {{ form_row(form.etourdissements_evanouissements) }}
+                                            {{ form_row(form.rhume_des_foins) }}
+                                            {{ form_row(form.maux_de_tete_frequents) }}
+                                            {{ form_row(form.maux_d_oreilles) }}
+                                            {{ form_row(form.asthme) }}
+                                        </td>
+                                        <td>  <p class="m-0 font-weight-bold text-dark">Autre</p>
+                                            {{ form_row(form.enceinte) }}
+                                            {{ form_row(form.gain_poids) }}
+                                            {{ form_row(form.perte_poids) }}
+                                            {{ form_row(form.gain_poids) }}
+                                            {{ form_row(form.anemie) }}
+                                            {{ form_row(form.arthrite) }}
+                                            {{ form_row(form.osteoporose) }}
+                                            {{ form_row(form.troubles_du_sommeil) }}
+                                            {{ form_row(form.ronflez_vous) }}
+                                            {{ form_row(form.maladie_de_la_peau) }}
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table class="table table-striped">
+                                    <tr>
+                                        <td>
+                                            {{ form_row(form.hemophiie) }}
+                                            {{ form_row(form.saignements_prolonges) }}
+                                            {{ form_row(form.sang_clair) }}
+                                            {{ form_row(form.sida) }}
+                                            {{ form_row(form.allergie_aliments) }}
+                                            {{ form_row(form.seropositif) }}
+                                            {{ form_row(form.maladies_sexuellement_tansmissibles) }}
+                                        </td>
+                                        <td>
+                                            {{ form_row(form.troubles_nerveux) }}
+                                            {{ form_row(form.maladies_psychiatriques) }}
+                                            {{ form_row(form.epilepsie) }}
+                                        </td>
+                                        <td>
+                                            {{ form_row(form.radiotherapie) }}
+                                            {{ form_row(form.chimiotherapie) }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- 2ème colonne -->
+                    <div class="col-lg-6">
+                        <!-- Card 1 -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-danger text-center">Allergies</h6>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <tr>
+                                        <td>
+                                            {{ form_row(form.allergie_latex) }}
+                                            {{ form_row(form.allergie_penniciline) }}
+                                            {{ form_row(form.allergie_codeine) }}
+                                            {{ form_row(form.allergie_aspirine) }}
+                                            {{ form_row(form.allergie_antibiotique) }}
+                                        </td>
+                                        <td>
+                                            {{ form_row(form.allergie_anesthesiques) }}
+                                            {{ form_row(form.allergie_sulfamides) }}
+                                            {{ form_row(form.allergie_iode) }}
+                                            {{ form_row(form.allergie_aliments) }}
+                                            {{ form_row(form.autres_allergies) }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Card 2-->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-danger text-center">Autres renseignements</h6>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <tr>
+                                        <td>  <p class="m-0 font-weight-bold text-dark">Santé général</p>
+                                            {{ form_row(form.fumez_vous) }}
+                                            {{ form_row(form.nombre_cigrettes_par_jour) }}
+                                            {{ form_row(form.consommation_drogues) }}
+                                            {{ form_row(form.consommation_alcool) }}
+                                            {{ form_row(form.quantite_par_jour_d_alcool) }}
+                                        </td>
+                                        <td>  <p class="m-0 font-weight-bold text-dark">Santé dentaire</p>
+                                            {{ form_row(form.traitements_dentaires) }}
+                                            {{ form_row(form.traitements_gencives) }}
+                                            {{ form_row(form.traitement_implant_dentaire) }}
+                                            {{ form_row(form.autres_problemes_dentaires) }}
+                                        </td>
+                                        <td>  <p class="m-0 font-weight-bold text-dark">Santé des yeux</p>
+                                            {{ form_row(form.lunettes) }}
+                                            {{ form_row(form.lentilles) }}
+                                            {{ form_row(form.problemes_de_vision_de_couleurs) }}
+                                            {{ form_row(form.chirurgies_uculaires) }}
+                                            {{ form_row(form.problemes_oculaires) }}
+                                            {{ form_row(form.autres_problemes_oculaires) }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                            <!-- Card 3 -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-danger text-center">Allergies</h6>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-striped">
+                                        <tr>
+
+                                            <td>
+                                                {{ form_row(form.protheses_articulaires) }}
+                                                {{ form_row(form.hospitalisation) }}
+                                                {{ form_row(form.quand_quel_operations) }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div><!--fin div colonne-->
+                    </div><!--fin div row-->
+                </div><!--fin div contenair fluid-->
+
+                <!-- Donut note praticien -->
+                <div class="col-md-12">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header-->
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-danger text-center">A compléter</h6>
+
+                        </div>
+                        <!-- Card Body -->
+                        <div class="card-body">
+                            {{ form_row(form.eventuels_indications_praticien) }}
+                            {{ form_row(form.eventuels_precautions_a_prendre) }}
+                        </div>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+                        <!-- Fin page content -->
+
+    <!------------------------ eventuel tchat ass/patient ------------------------------------>
+    <ul class="navbar-nav ml-auto">
+
+        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+        <li class="nav-item dropdown no-arrow d-sm-none">
+            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+            </a>
+            <!-- Dropdown - Messages -->
+            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </li>
+
+        <!-- Nav Item - Messages -->
+        <li class="nav-item dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-envelope fa-fw"></i>
+                <!-- Counter - Messages -->
+                <span class="badge badge-danger badge-counter">7</span>
+            </a>
+            <!-- Dropdown - Messages -->
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+                <h6 class="dropdown-header">
+                    Message Center
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
+                        <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div class="font-weight-bold">
+                        <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
+                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                    </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" src="https://source.unsplash.com/AU4VPcFN4LE/60x60" alt="">
+                        <div class="status-indicator"></div>
+                    </div>
+                    <div>
+                        <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
+                        <div class="small text-gray-500">Jae Chun · 1d</div>
+                    </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" src="https://source.unsplash.com/CS2uCrpNzJY/60x60" alt="">
+                        <div class="status-indicator bg-warning"></div>
+                    </div>
+                    <div>
+                        <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
+                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                    </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="">
+                        <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div>
+                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
+                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                    </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+            </div>
+        </li>
+
+        <div class="topbar-divider d-none d-sm-block"></div>
+
+        <!-- Nav Item - User Information -->
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Profile
+                </a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Settings
+                </a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Activity Log
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                </a>
+            </div>
+        </li>
+
+    </ul>
+
+    </nav>
+    <!-- Fin tchat ass/patient ------------------------------------------------------------>
+
+
+
+            <!--debut cardes -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!-- carte 1 -->
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Accordion -->
+                            <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                                <h6 class="m-0 font-weight-bold text-primary">Sécurité sociale</h6>
+                            </a>
+                            <!-- Card Content - Collapse -->
+                            <div class="collapse show" id="collapseCardExample">
+                                <div class="card-body">
+                                  numéro sécu....
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <!-- carte 2 -->
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Accordion -->
+                            <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                                <h6 class="m-0 font-weight-bold text-primary">Mutuelle</h6>
+                            </a>
+                            <!-- Card Content - Collapse -->
+                            <div class="collapse show" id="collapseCardExample">
+                                <div class="card-body">
+                                agence
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <!-- carte 3 -->
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Accordion -->
+                            <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                                <h6 class="m-0 font-weight-bold text-primary">Médecins traitants</h6>
+                            </a>
+                            <!-- Card Content - Collapse -->
+                            <div class="collapse show" id="collapseCardExample">
+                                <div class="card-body">
+                                  Nom
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <!-- carte 4 -->
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Accordion -->
+                            <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                                <h6 class="m-0 font-weight-bold text-primary">autres médecins</h6>
+                            </a>
+                            <!-- Card Content - Collapse -->
+                            <div class="collapse show" id="collapseCardExample">
+                                <div class="card-body">
+                                 Noms
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- fin page situation -->
+
+                <!--début coté finance-->
+                <div class="row">
+                    <!-- En cours -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Montant total du devis</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">400,00€</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- dû-->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Accompte</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">100,00€</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Payé -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-danger shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Reste à payé</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">300€</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- feuilles de soins/honoraires -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">feuilles de soins/honoraires</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- fin coté finance -->
+
 {% endblock %}

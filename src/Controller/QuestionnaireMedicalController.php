@@ -7,19 +7,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-/**
- * Class EspacePatientController
- * @package App\Controller
- * @Route("/espace/patient")
- */
-class EspacePatientController extends AbstractController
+
+class QuestionnaireMedicalController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/questionnaire/medical")
      */
     public function index()
     {
-        return $this->render('espace_patient/index.html.twig');
+        return $this->render('questionnaire_medical/index.html.twig', []);
     }
 
     /**

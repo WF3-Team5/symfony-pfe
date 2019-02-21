@@ -3,11 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Class User
+ * @package App\Entity
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields={"email"}, message="Il existe déjà un utilisateur avec cet email")
  */
 class User implements UserInterface, \Serializable
 {
@@ -123,12 +128,18 @@ class User implements UserInterface, \Serializable
      */
     private $status;
 
+    /**
+     * Mot de passe en clair pour interagir avec le formulaire d'inscription
+     * @var string
+     * @Assert\NotBlank(message="Le mot de passe est obligatoire")
+     */
     private $plainPassword;
 
     /**
+
      * @ORM\Column(type="string", length=50, columnDefinition="ENUM('ROLE_USER' , 'ROLE_MEDIC' , 'ROLE_ASSISTANT' ,'ROLE_ADMIN')")
      */
-    private $role;
+    private $role="ROLE_USER";
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -445,7 +456,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPlainPassword()
     {
@@ -456,7 +467,7 @@ class User implements UserInterface, \Serializable
      * @param mixed $plainPassword
      * @return User
      */
-    public function setPlainPassword($plainPassword)
+    public function setPlainPassword($plainPassword): User
     {
         $this->plainPassword = $plainPassword;
         return $this;
@@ -480,6 +491,10 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    public function __toString(): string
+    {
+        return $this->first_name." ".$this->last_name;
+    }
 
     /**
      * String representation of object
@@ -545,6 +560,8 @@ class User implements UserInterface, \Serializable
             $this->role,
             )= unserialize($serialized);
     }
+
+
 
     /**
      * Returns the roles granted to the user.

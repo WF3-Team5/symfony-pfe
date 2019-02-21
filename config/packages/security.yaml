@@ -1,8 +1,10 @@
 security:
+
     # encryptage du mot de passe pour User
     encoders:
         App\Entity\User:
             algorithm: plaintext
+
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     role_hierarchy:
@@ -15,14 +17,14 @@ security:
             # les utilisateurs sont les entités User
             entity:
                 class: App\Entity\User
-                # l'identifiant est l'email
-                property: email
+                # Identifiant de Login : l'email du User
+                property: 'email'
+
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
 
         admin:
             anonymous: true
@@ -37,7 +39,6 @@ security:
             logout:
                 path: app_admin_dboard_logout #app_admlogin_logout
                 target: app_admin_dboard_index
-
 
         main:
             anonymous: true
@@ -58,11 +59,17 @@ security:
 
             # sur tout le site
 
+            #form_login: true
+            # https://symfony.com/doc/current/security/form_login_setup.html
+
+
 
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
+
         - { path: ^/espace/patient/logged/in, roles: ROLE_USER } # Seul le USER peut y accéder
+
         # - { path: ^/profile, roles: ROLE_USER }
