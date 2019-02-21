@@ -18,24 +18,20 @@ class EspaceAssistantController extends AbstractController
     /**
      * @Route("/assistant")
      */
-    public function index(Request $request, Antecedents $antecedents)
+    public function index(Request $request)
     {
-        $em =$this->getDoctrine()->getManager();
+        $antecedants = new Antecedents();
 
-        //je crée le formulaire relié à antécédants
         $form = $this->createForm(AntecedentsType::class, $antecedants);
-        //analyse et mapping du formulaire
+
         $form->handleRequest($request);
-
-
 
 
         return $this->render(
             'espace_assistant/index.html.twig',
             [
-
-                'antecedants'=>$antecedants,
-                'form' => $form->createView()
+                'form' => $form->createView(),
             ]);
     }
+
 }
