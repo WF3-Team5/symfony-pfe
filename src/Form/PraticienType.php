@@ -87,21 +87,21 @@ class PraticienType extends AbstractType
                 ]
             )
             ->add(
-                'email',
+                'email_pro',
                 TextType::class,
                 [
                     'label' => 'Email :'
                 ]
             )
             ->add(
-                'address',
+                'address_pro',
                 TextType::class,
                 [
                     'label' => 'Adresse :'
                 ]
             )
             ->add(
-                'postal_code',
+                'postal_code_pro',
                 IntegerType::class,
                 [
                     'label' => 'Code postal :'
@@ -116,14 +116,14 @@ class PraticienType extends AbstractType
                 ]
             )
             ->add(
-                'phone_number',
+                'phone_number_pro',
                 TextType::class,
                 [
                     'label' => 'Téléphone:'
                 ]
             )
             ->add(
-                'mobile_phone_number',
+                'mobile_phone_number_pro',
                 TextType::class,
                 [
                     'label' => 'Téléphone mobile :'
@@ -149,10 +149,10 @@ class PraticienType extends AbstractType
                 ]
             )
             ->add(
-                'numeroSecu',
+                'RPPS',
                 TextType::class,
                 [
-                    'label' => 'Numéro de Sécurité sociale :'
+                    'label' => 'RPPS :'
                 ]
             )
         ;
