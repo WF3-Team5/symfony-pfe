@@ -8,3 +8,6 @@ app_espacepatientloggedin_logout:
 
 app_admlogin_logout:
   path:                            /admin/dashboard/logout
+
+app_espacepraticienloggedin_logout:
+  path:                            /espace/praticien/logged/in/logout

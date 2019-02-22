@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <br><br><br><br><br><br><br>
+    <div class="col-lg-6 intro_col offset-2">
+        <div class="intro_form_container">
+            <div class="intro_form_title">Inscription Praticien</div>
+            <form action="" class="intro_form" id="intro_form" method="post">
+                <div class="d-flex flex-row align-items-start justify-content-between flex-wrap">
+                    <input type="text" class="intro_input" placeholder="Votre nom" required="required" name="first_name">
+                    <input type="text" class="intro_input" placeholder="Votre prénom" required="required" name="last_name">
+                    <input type="email" class="intro_input" placeholder="Votre Email professionnel" required="required" name="email_pro">
+                    <input type="tel" class="intro_input" placeholder="Votre télephone professionnel" required="required" name="mobile_phone_number_pro" >
+                    <select class="intro_select intro_input" required="required">
+                        <option disabled="" selected="" value="">Specialités</option>
+                        <option>Specialité 1</option>
+                        <option>Specialité 2</option>
+                        <option>Specialité 3</option>
+                        <option>Specialité 4</option>
+                        <option>Specialité 5</option>
+                    </select>
+                    <input type="number" class="intro_input" placeholder="Votre RPPS" required="required" name="RPPS">
+                    <input type="password" class="intro_input" placeholder="Votre mot de passe" required="required" name="password">
+                </div>
+                <button class="button button_1 intro_button trans_200" type="submit">Envoyer</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

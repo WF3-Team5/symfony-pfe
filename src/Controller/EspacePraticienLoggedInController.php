@@ -5,15 +5,28 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class EspacePraticienLoggedInController
+ * @package App\Controller
+ * @Route("/espace/praticien/logged/in")
+ */
 class EspacePraticienLoggedInController extends AbstractController
 {
     /**
-     * @Route("/espace/praticien/logged/in", name="espace_praticien_logged_in")
+     * @Route("/")
      */
     public function index()
     {
         return $this->render('espace_praticien_logged_in/index.html.twig', [
             'controller_name' => 'EspacePraticienLoggedInController',
         ]);
+    }
+
+    /**
+     * @Route("/logout")
+     */
+    public function logout()
+    {
+        throw new RuntimeException('You must activate the logout in your security firewall configuration.');
     }
 }
