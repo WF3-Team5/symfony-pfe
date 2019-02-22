@@ -98,13 +98,13 @@
                 </div>
                 <div class="row m-t-20">
                     <!-- Form -->
-                    <form class="col-12" action="" method="post">
+                    <form class="col-12" action="{{ url('app_passwordmanager_resetpassword',{"userType":"admin"}) }}" method="post">
                         <!-- email -->
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text bg-danger text-white" id="basic-addon1"><i class="ti-email"></i></span>
                             </div>
-                            <input type="email" class="form-control form-control-lg" placeholder="Votre email" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="email" class="form-control form-control-lg" placeholder="Votre email" aria-label="Username" name="fpemail" aria-describedby="basic-addon1">
                         </div>
                         <!-- pwd -->
                         <div class="row m-t-20 p-t-20 border-top border-secondary">

@@ -169,6 +169,69 @@ class User implements UserInterface, \Serializable
     private $numeroSecu;
 
     /**
+     * @ORM\column(type="string", length=255, nullable=true)
+     */
+    private $hash;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     */
+    private $hashValidity;
+
+    /**
+     * @return mixed
+     */
+    public function getHashValidity()
+    {
+        return $this->hashValidity;
+    }
+
+    /**
+     * @param $hashValidity
+     * @return User|null
+     *
+     */
+    public function setHashValidity($hashValidity): User
+    {
+        $this->hashValidity = $hashValidity;
+        return $this;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getHash()
+    {
+        return $this->hash;
+    }
+
+    /**
+     * @param $hash
+     * @return User|null
+     */
+    public function setHash($hash): ?User
+    {
+        $this->hash = $hash;
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function getNumeroSecu()
