@@ -18,27 +18,5 @@ class QuestionnaireMedicalController extends AbstractController
         return $this->render('questionnaire_medical/index.html.twig', []);
     }
 
-    /**
-     * @Route("/connexion")
-     * @param AuthenticationUtils $authenticationUtils
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function login(Request $request, AuthenticationUtils $authenticationUtils)
-    {
 
-        $error = $authenticationUtils->getLastAuthenticationError();
-        $lastUsername = $authenticationUtils->getLastUsername();
-        dump($request);
-
-        if (!empty($error)){
-            $this->addFlash('error', 'Vos identifiants sont incorrects');
-        }
-
-        return $this->render(
-            'espace_patient/connexion/connexion.html.twig',
-            [
-                'last_username' => $lastUsername
-            ]
-        );
-    }
 }
