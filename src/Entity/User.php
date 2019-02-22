@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -135,9 +136,115 @@ class User implements UserInterface, \Serializable
     private $plainPassword;
 
     /**
-     * @ORM\Column(type="string", length=50, columnDefinition="ENUM('ROLE_USER' , 'ROLE_MEDIC', 'ROLE_ADMIN')")
+
+     * @ORM\Column(type="string", length=50, columnDefinition="ENUM('ROLE_USER' , 'ROLE_MEDIC' , 'ROLE_ASSISTANT' ,'ROLE_ADMIN')")
      */
     private $role="ROLE_USER";
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     *
+     */
+    private $dateInscription;
+
+    /**
+     * 3 etats possibles: active - inactive - attente
+     *  @ORM\Column(type="string", length=20, nullable=false, options={"default":"attente"})
+     *  @Assert\NotBlank(message="Le Numéro de portable est obligatoire")
+     */
+    private $etat;
+
+    /**
+     * @ORM\Column(type="string", length=60, nullable=true)
+     */
+    private $codeActivation;
+
+
+    /**
+     * @ORM\Column(type="string", length=15, nullable=false)
+     * @Assert\NotBlank(message="Le numero de sécurité sociale ne peut pas être vide!")
+     * @Assert\Length(min="15",max="15",
+     *     exactMessage="Le numéro de sécurité sociale doit comporter exactement {{ limit }} caractères.")
+     */
+    private $numeroSecu;
+
+    /**
+     * @return mixed
+     */
+    public function getNumeroSecu()
+    {
+        return $this->numeroSecu;
+    }
+
+    /**
+     * @param mixed $numeroSecu
+     * @return User
+     */
+    public function setNumeroSecu($numeroSecu)
+    {
+        $this->numeroSecu = $numeroSecu;
+        return $this;
+    }
+
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getCodeActivation()
+    {
+        return $this->codeActivation;
+    }
+
+    /**
+     * @param string $codeActivation
+     * @return User
+     */
+    public function setCodeActivation($codeActivation): User
+    {
+        $this->codeActivation = $codeActivation;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * @param mixed $etat
+     * @return User
+     */
+    public function setEtat($etat): User
+    {
+        $this->etat = $etat;
+        return $this;
+    }
+
+
+
+    /**
+     * @return date
+     */
+    public function getDateInscription()
+    {
+        return $this->dateInscription;
+    }
+
+    /**
+     * @param mixed $dateInscription
+     * @return User
+     */
+    public function setDateInscription($dateInscription): User
+    {
+        $this->dateInscription = $dateInscription;
+        return $this;
+    }
+
 
     public function getId(): ?int
     {
@@ -453,6 +560,8 @@ class User implements UserInterface, \Serializable
             $this->role,
             )= unserialize($serialized);
     }
+
+
 
     /**
      * Returns the roles granted to the user.

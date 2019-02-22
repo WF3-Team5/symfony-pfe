@@ -2,4 +2,384 @@
 
 {% block title %}MediGlob - Home{% endblock %}
 
+{% block body %}
+  <div class="home">
 
+    <!-- Home Slider -->
+    <div class="home_slider_container">
+      <div class="rdv-btn home_buttons d-flex flex-row align-items-center justify-content-start">
+        <div class="button button_1 trans_200">
+          <a href="#">Prendre rendez-vous</a>
+        </div>
+      </div>
+      <div class="owl-carousel owl-theme home_slider">
+
+        <!-- Slide -->
+        <div class="owl-item">
+          <div class="background_image"><img src="{{ asset('lib/images/chirurgien-competent.png') }}" alt=""></div>
+          <div class="home_container">
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <div class="home_content">
+                    <div class="home_subtitle">#1 Lorem ipsum</div>
+                    <div class="home_title">Lorem ipsum</div>
+                    <div class="home_text">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+                    </div>
+                    {#<div class="home_buttons d-flex flex-row align-items-center justify-content-start">#}
+                      {#<div class="button button_1 trans_200">#}
+                        {#<a href="#">Prendre rendez-vous</a>#}
+                      {#</div>#}
+                    {#</div>#}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide -->
+        <div class="owl-item">
+          <div class="background_image"><img src="{{ asset('lib/images/infirmiere-souriante.jpg') }}" alt=""></div>
+          <div class="home_container">
+            <div class="container">
+              <div class="row">
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col">
+                  <div class="home_content">
+                    <div class="home_subtitle">#2 Lorem ipsum</div>
+                    <div class="home_title">Lorem ipsum</div>
+                    <div class="home_text">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+                    </div>
+                    {#<div class="home_buttons d-flex flex-row align-items-center justify-content-start">#}
+                      {#<div class="button button_1 trans_200">#}
+                        {#<a href="#">Prendre rendez-vous</a>#}
+                      {#</div>#}
+                    {#</div>#}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide -->
+        <div class="owl-item">
+          <div class="background_image"><img src="{{ asset('lib/images/soins-medical-sante.jpg') }}" alt=""></div>
+          <div class="home_container">
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <div class="home_content">
+                    <div class="home_subtitle">#3 Lorem ipsum</div>
+                    <div class="home_title">Lorem ipsum</div>
+                    <div class="home_text">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+                    </div>
+                    {#<div class="search-form-container home_buttons d-flex flex-row align-items-center justify-content-start">#}
+                      {#<div class="button button_1 trans_200">#}
+                        {#<a href="#">Prendre rendez-vous</a>#}
+                      {#</div>#}
+                    {#</div>#}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Home Slider Dots -->
+
+      <div class="home_slider_dots">
+        <ul id="home_slider_custom_dots" class="home_slider_custom_dots d-flex flex-row align-items-center justify-content-start">
+          <li class="home_slider_custom_dot trans_200 active"></li>
+          <li class="home_slider_custom_dot trans_200"></li>
+          <li class="home_slider_custom_dot trans_200"></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Intro -->
+
+  <div class="intro">
+    <div class="container">
+      <div class="row">
+
+        <!-- Intro Content -->
+        <div class="col-lg-6 intro_col">
+          <div class="intro_content">
+            <div class="section_title_container">
+              <div class="section_subtitle">Medi Glob</div>
+              <div class="section_title">
+                <h2>Bienvenue dans votre clinique médicale</h2>
+              </div>
+            </div>
+            <div class="intro_text">
+              <p>Integer aliquet congue libero, eu gravida odio ultrices ut. Etiam ac erat ut enim maximus accumsan vel ac nisl. Duis feugiat bibendum orci, non elementum urna vestibulum in. Nulla facilisi. Nulla egestas vel lacus sed interdum. Sed mollis, orci
+                elementum eleifend tempor, nunc libero porttitor tellus, vel pharetra metus dolor.</p>
+            </div>
+            <div class="milestones">
+              <div class="row milestones_row">
+
+                <!-- Milestone -->
+                <div class="col-md-4 milestone_col">
+                  <div class="milestone">
+                    <div class="milestone_counter" data-end-value="100" data-sign-before="+ de ">0</div>
+                    <div class="milestone_text">Patients satisfait</div>
+                  </div>
+                </div>
+
+                <!-- Milestone -->
+                <div class="col-md-4 milestone_col">
+                  <div class="milestone">
+                    <div class="milestone_counter" data-end-value="42" data-sign-before="+ de ">0</div>
+                    <div class="milestone_text">Opérations</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Intro Form -->
+        <div class="col-lg-6 intro_col">
+          <div class="intro_form_container">
+            <div class="intro_form_title">Prendre un rendez-vous</div>
+            <form action="#" class="intro_form" id="intro_form">
+              <div class="d-flex flex-row align-items-start justify-content-between flex-wrap">
+                <input type="text" class="intro_input" placeholder="Votre nom" required="required">
+                <input type="email" class="intro_input" placeholder="Votre Email" required="required">
+                <input type="tel" class="intro_input" placeholder="Votre télephone" required="required">
+                <select class="intro_select intro_input" required="required">
+                  <option disabled="" selected="" value="">Specialités</option>
+                  <option>Specialité 1</option>
+                  <option>Specialité 2</option>
+                  <option>Specialité 3</option>
+                  <option>Specialité 4</option>
+                  <option>Specialité 5</option>
+                </select>
+                <select class="intro_select intro_input" required="required">
+                  <option disabled="" selected="" value="">Praticien</option>
+                  <option>Praticien 1</option>
+                  <option>Praticien 2</option>
+                  <option>Praticien 3</option>
+                  <option>Praticien 4</option>
+                  <option>Praticien 5</option>
+                </select>
+                <input type="text" id="datepicker" class="intro_input datepicker" placeholder="Date" required="required">
+              </div>
+              <button class="button button_1 intro_button trans_200">Prendre rendez-vous</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Why Choose Us -->
+
+  <div class="why ">
+    <div class="container">
+      <div class="row row-eq-height">
+
+        <!-- Why Choose Us Image -->
+        <div class="col-lg-6 order-lg-1 order-2">
+          <div class="why_image_container">
+            <div class="why_image"><img src="{{ asset('lib/images/why_1.jpg') }}" alt=""></div>
+          </div>
+        </div>
+
+        <!-- Why Choose Us Content -->
+        <div class="col-lg-6 order-lg-2 order-1">
+          <div class="why_content">
+            <div class="section_title_container">
+              <div class="section_subtitle">Medi Glob</div>
+              <div class="section_title">
+                <h2>Pourquoi nous choisir ?</h2>
+              </div>
+            </div>
+            <div class="why_text">
+              <p>Odio ultrices ut. Etiam ac erat ut enim maximus accumsan vel ac nisl. Duis feugiat bibendum orci, non elementum urna vestibulum in. Nulla facilisi. Nulla egestas vel lacus sed interdum. Sed mollis, orci elementum eleifend tempor, nunc libero
+                porttitor tellus, vel pharetra metus dolor.</p>
+            </div>
+            <div class="why_list">
+              <ul>
+
+                <!-- Why List Item -->
+                <li class="d-flex flex-row align-items-center justify-content-start">
+                  <div class="icon_container d-flex flex-column align-items-center justify-content-center">
+                    <div class="icon"><img src="{{ asset('lib/images/icon_1.svg') }}" alt="https://www.flaticon.com/authors/prosymbols"></div>
+                  </div>
+                  <div class="why_list_content">
+                    <div class="why_list_title">Lorem ipsum</div>
+                    <div class="why_list_text">Etiam ac erat ut enim maximus accumsan vel ac nisl</div>
+                  </div>
+                </li>
+
+                <!-- Why List Item -->
+                <li class="d-flex flex-row align-items-center justify-content-start">
+                  <div class="icon_container d-flex flex-column align-items-center justify-content-center">
+                    <div class="icon"><img src="{{ asset('lib/images/icon_2.svg') }}" alt="https://www.flaticon.com/authors/prosymbols"></div>
+                  </div>
+                  <div class="why_list_content">
+                    <div class="why_list_title">Lorem ipsum</div>
+                    <div class="why_list_text">Ac erat ut enim maximus accumsan vel ac</div>
+                  </div>
+                </li>
+
+                <!-- Why List Item -->
+                <li class="d-flex flex-row align-items-center justify-content-start">
+                  <div class="icon_container d-flex flex-column align-items-center justify-content-center">
+                    <div class="icon"><img src="{{ asset('lib/images/icon_3.svg') }}" alt="https://www.flaticon.com/authors/prosymbols"></div>
+                  </div>
+                  <div class="why_list_content">
+                    <div class="why_list_title">Lorem ipsum</div>
+                    <div class="why_list_text">Etiam ac erat ut enim maximus accumsan vel</div>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Call to action -->
+
+  <div class="cta">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="cta_container d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
+            <div class="cta_content">
+              <div class="cta_title">Prenez votre rendez-vous dès maintenant !</div>
+              <div class="cta_text">Etiam ac erat ut enim maximus accumsan vel ac nisl</div>
+            </div>
+            <div class="cta_phone ml-lg-auto">01555555555</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services -->
+
+  <div class="services">
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <div class="section_title_container">
+            <div class="section_subtitle">Medi Glob</div>
+            <div class="section_title">
+              <h2>Nos Services</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row services_row">
+
+        <!-- Service -->
+        <div class="col-xl-4 col-md-6 service_col">
+          <div class="service text-center">
+            <div class="service">
+              <div class="icon_container d-flex flex-column align-items-center justify-content-center ml-auto mr-auto">
+                <div class="icon"><img src="{{ asset('lib/images/icon_4.svg') }}" alt="https://www.flaticon.com/authors/prosymbols"></div>
+              </div>
+              <div class="service_title">Lorem ipsum</div>
+              <div class="service_text">
+                <p>Odio ultrices ut. Etiam ac erat ut enim maximus accumsan vel ac nisl. Duis feugiat bibendum orci, non elementum urna.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service -->
+        <div class="col-xl-4 col-md-6 service_col">
+          <div class="service text-center">
+            <div class="service">
+              <div class="icon_container d-flex flex-column align-items-center justify-content-center ml-auto mr-auto">
+                <div class="icon"><img src="{{ asset('lib/images/icon_5.svg') }}" alt="https://www.flaticon.com/authors/prosymbols"></div>
+              </div>
+              <div class="service_title">Lorem ipsum</div>
+              <div class="service_text">
+                <p>Odio ultrices ut. Etiam ac erat ut enim maximus accumsan vel ac nisl. Duis feugiat bibendum orci, non elementum urna.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service -->
+        <div class="col-xl-4 col-md-6 service_col">
+          <div class="service text-center">
+            <div class="service">
+              <div class="icon_container d-flex flex-column align-items-center justify-content-center ml-auto mr-auto">
+                <div class="icon"><img src="{{ asset('lib/images/icon_6.svg') }}" alt="https://www.flaticon.com/authors/prosymbols"></div>
+              </div>
+              <div class="service_title">Lorem ipsum</div>
+              <div class="service_text">
+                <p>Odio ultrices ut. Etiam ac erat ut enim maximus accumsan vel ac nisl. Duis feugiat bibendum orci, non elementum urna.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service -->
+        <div class="col-xl-4 col-md-6 service_col">
+          <div class="service text-center">
+            <div class="service">
+              <div class="icon_container d-flex flex-column align-items-center justify-content-center ml-auto mr-auto">
+                <div class="icon"><img src="{{ asset('lib/images/icon_7.svg') }}" alt="https://www.flaticon.com/authors/prosymbols"></div>
+              </div>
+              <div class="service_title">Lorem ipsum</div>
+              <div class="service_text">
+                <p>Odio ultrices ut. Etiam ac erat ut enim maximus accumsan vel ac nisl. Duis feugiat bibendum orci, non elementum urna.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service -->
+        <div class="col-xl-4 col-md-6 service_col">
+          <div class="service text-center">
+            <div class="service">
+              <div class="icon_container d-flex flex-column align-items-center justify-content-center ml-auto mr-auto">
+                <div class="icon"><img src="{{ asset('lib/images/icon_8.svg') }}" alt="https://www.flaticon.com/authors/prosymbols"></div>
+              </div>
+              <div class="service_title">Lorem ipsum</div>
+              <div class="service_text">
+                <p>Odio ultrices ut. Etiam ac erat ut enim maximus accumsan vel ac nisl. Duis feugiat bibendum orci, non elementum urna.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service -->
+        <div class="col-xl-4 col-md-6 service_col">
+          <div class="service text-center">
+            <div class="service">
+              <div class="icon_container d-flex flex-column align-items-center justify-content-center ml-auto mr-auto">
+                <div class="icon"><img src="{{ asset('lib/images/icon_3.svg') }}" alt="https://www.flaticon.com/authors/prosymbols"></div>
+              </div>
+              <div class="service_title">Lorem ipsum</div>
+              <div class="service_text">
+                <p>Odio ultrices ut. Etiam ac erat ut enim maximus accumsan vel ac nisl. Duis feugiat bibendum orci, non elementum urna.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}
