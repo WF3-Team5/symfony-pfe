@@ -1,20 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
     <h2>Recherche de patient</h2>
-    <form method="post">
-
-
+    <form>
         <div class="form-group">
-
-            <label>Nom</label>
-            <input type="text" name="" class="form-control"
-                   value="{{}}">
+            <label>N° sécurité social</label>
+            <input type="text" name="numero_secu" class="form-control" value="">
         </div>
-
         <div class="text-right">
-            <button type="submit" class="btn btn-primary">
-                Se connecter
+            <button type="submit" class="btn btn-secondary">
+               Rechercher
             </button>
         </div>
     </form>
