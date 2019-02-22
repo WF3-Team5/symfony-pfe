@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'basePatient.html.twig' %}
 
 {% block title %}Espace Patient{% endblock %}
 
@@ -6,15 +6,51 @@
     <h1>Espace Patient</h1>
     <h2>Bonjour NOM DU PATIENT</h2>
 
-    <nav>
-        <ul>
-            <li><a href="">Données personnelles</a></li>
-            <li><a href="">Données médicales</a></li>
-            <li><a href="">Prise de Rendez-vous</a></li>
-            <li><a href=""></a></li>
-            <li><a href="">Données personnelles</a></li>
-        </ul>
-    </nav>
 
+    <aside>
+        <nav>
+            <ul>
+                <li><a href="{{ path('') }}">Données personnelles</a></li>
+                <li><a href="{{ path('') }}">Données médicales</a></li>
+                <li><a href="{{ path('') }}">Prise de Rendez-vous</a></li>
+                <li><a href="{{ path('') }}">Contacter Médecin/Assistante</a></li>
+                <li><a href="{{ path('') }}">Documents importants</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <section>
+        <h4>Rechercher votre praticien :</h4>
+        <div>
+            <p>Spécialité :</p>
+            <select>
+                <option>Spécialité 1</option>
+                <option>Spécialité 2</option>
+                <option>Spécialité 3</option>
+                <option>Spécialité 4</option>
+            </select>
+        </div>
+        <div>
+            <p>Secteur géographique :</p>
+            <select>
+                <option>Zone 1</option>
+                <option>Zone 2</option>
+                <option>Zone 3</option>
+                <option>Zone 4</option>
+            </select>
+        </div>
+
+        <div>
+            <div>
+                <a href=""> <!-- Redirige vers la fiche du médecin -->
+                    <p>Nom du médecin</p><br>
+                    <p>Spécialité</p><br>
+                    <p>adresse</p><br>
+                    <p>Ville - CP </p>
+                </a>
+
+            </div>
+        </div>
+    </section>
 
 {% endblock %}

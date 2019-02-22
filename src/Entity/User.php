@@ -562,6 +562,7 @@ class User implements UserInterface, \Serializable
     }
 
 
+    
 
     /**
      * Returns the roles granted to the user.
