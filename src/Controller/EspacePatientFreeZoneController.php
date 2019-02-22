@@ -70,7 +70,7 @@ class EspacePatientFreeZoneController extends AbstractController
         }
 
         return $this->render(
-            'espace_patient_free_zone/inscription/inscription.html.twig/index.html.twig',
+            'espace_patient_free_zone/inscription/inscription.html.twig',
             [
                 'form' => $form->createView()
             ]

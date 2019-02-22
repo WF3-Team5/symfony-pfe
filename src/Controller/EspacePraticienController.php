@@ -5,10 +5,15 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class EspacePraticienController
+ * @package App\Controller
+ * @Route("/espace/praticien")
+ */
 class EspacePraticienController extends AbstractController
 {
     /**
-     * @Route("/espace/praticien")
+     * @Route("/")
      */
     public function index()
     {
