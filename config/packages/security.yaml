@@ -45,8 +45,8 @@ security:
             pattern:                  ^/
             provider:                 db
             form_login:
-                login_path:           app_espacepatient_login
-                check_path:           app_espacepatient_login
+                login_path:           app_espacepatientfreezone_login
+                check_path:           app_espacepatientfreezone_login
                 default_target_path:  app_espacepatientloggedin_index
                 username_parameter:   "_username"
                 password_parameter:   "_password"
@@ -70,6 +70,6 @@ security:
     access_control:
         - { path: ^/admin, roles:     ROLE_ADMIN }
 
-        - { path: ^/espace/patient/logged/in, roles: ROLE_USER } # Seul le USER peut y accéder
+        - { path: ^/espace/patient/logged/in, roles: ROLE_USER } # il faut au minimum le role de ROLE_USER pour y accéder
 
         # - { path: ^/profile, roles: ROLE_USER }
