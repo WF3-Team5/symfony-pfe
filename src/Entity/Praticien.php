@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Praticien
@@ -66,6 +67,8 @@ class Praticien implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="L'email est obligatoire")
+     * @Assert\Email(message="Email non valide")
      */
     private $email_pro;
 
@@ -133,6 +136,47 @@ class Praticien implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=50)
      */
     private $speciality;
+
+    /**
+     * @ORM\column(type="string", length=255, nullable=true)
+     */
+    private $hash;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
+     */
+    private $hashValidity;
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getHashValidity()
+    {
+        return $this->hashValidity;
+    }
+
+    /**
+     * @param $hashValidity
+     * @return User|null
+     *
+     */
+    public function setHashValidity($hashValidity): ?Praticien
+    {
+        $this->hashValidity = $hashValidity;
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getHash()
+    {
+        return $this->hash;
+    }
 
     public function getId(): ?int
     {

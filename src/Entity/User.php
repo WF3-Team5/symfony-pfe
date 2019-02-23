@@ -179,6 +179,9 @@ class User implements UserInterface, \Serializable
      */
     private $hashValidity;
 
+
+
+
     /**
      * @return mixed
      */
@@ -197,20 +200,6 @@ class User implements UserInterface, \Serializable
         $this->hashValidity = $hashValidity;
         return $this;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     /**

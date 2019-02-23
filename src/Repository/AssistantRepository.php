@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Assistant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -17,6 +19,19 @@ class AssistantRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Assistant::class);
+    }
+
+    public function findOneByEmail($email)
+    {
+        try {
+            return $this->createQueryBuilder('u')
+                ->andWhere('u.email=:email')
+                ->setParameter('email', $email)
+                ->getQuery()
+                ->getSingleResult();
+        } catch (NoResultException $e) {
+        } catch (NonUniqueResultException $e) {
+        }
     }
 
     // /**

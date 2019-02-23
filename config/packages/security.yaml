@@ -11,8 +11,8 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     role_hierarchy:
         ROLE_ASST:                    ROLE_USER
-        ROLE_MEDIC:                   [ROLE_ASST, ROLE_USER]
-        ROLE_ADMIN:                   [ROLE_USER, ROLE_MEDIC, ROLE_ASST]
+        ROLE_MEDIC:                   ROLE_ASST
+        ROLE_ADMIN:                   ROLE_MEDIC
 
     providers:
         db:
@@ -56,15 +56,10 @@ security:
                 username_parameter:   "email"
                 password_parameter:   "password"
             logout:
-                # route définie dans config/routes.yaml
                 path:                 app_espacepraticienloggedin_logout
                 target:               app_espacepraticienfreezone_index
-                # provider défini au-dessus dans la rubrique providers
 
-                # sur tout le site
 
-                #form_login:              true
-                # https://symfony.com/doc/current/security/form_login_setup.html
 
         main:
             anonymous:                true
@@ -81,7 +76,7 @@ security:
                 path:                 app_espacepatientloggedin_logout
                 target:               app_home_index
 
-
+            # https://symfony.com/doc/current/security/form_login_setup.html
 
 
 
