@@ -75,7 +75,7 @@ security:
                 # route définie dans config/routes.yaml
                 path:                 app_espacepatientloggedin_logout
                 target:               app_espacepatientfreezone_login
-
+                invalidate_session:   false
             # https://symfony.com/doc/current/security/form_login_setup.html
 
 

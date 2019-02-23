@@ -45,8 +45,12 @@ class EspacePatientLoggedInController extends AbstractController
      public function userIsActivated()
     {
         $user=$this->getUser();
-        if($user->getEtat()!=="active"){
+        $etat=$user->getEtat();
+        if($etat!=="active"){
             return false;
+        }
+        else{
+            return true;
         }
     }
 }
