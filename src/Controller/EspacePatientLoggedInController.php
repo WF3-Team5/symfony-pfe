@@ -94,7 +94,7 @@ class EspacePatientLoggedInController extends AbstractController
      */
     public function resaCreneau()
     {
-
+        
         return $this->render('rdv_patient/resa.html.twig', [
 
         ]);
