@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Assistant;
 use App\Entity\Praticien;
+use App\Form\RestEmailType;
 use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\User;
+
 /**
  * Class PasswordManagerController
  * @package App\Controller
@@ -74,9 +76,9 @@ class PasswordManagerController extends AbstractController
                     ->setSubject('Réinitialisation de votre mot de passe')
                     ->setFrom(['wf3.team5@gmail.com' => 'Mediglob support'])
                     ->setTo([$email])
-                    ->setBody('<html><head></head><body><p>Pour réinitialiser votre mot de passe veuillez cliquer sur le lien suivant:</p><p>http://localhost:8000//forgot/password/reset/'.$userType.'/'.$token.'</p></body></html>','text/html');
+                    ->setBody('<html><head></head><body><p>Pour réinitialiser votre mot de passe veuillez cliquer sur le lien suivant:</p><p>http://localhost:8000/forgot/password/reset/'.$userType.'/'.$token.'</p></body></html>','text/html');
 
-                //$mailer->send($message);
+                $mailer->send($message);
                 $user->setHash($token);
                 $user->setHashValidity($validity);
                 $entityManager->persist($user);
@@ -113,7 +115,7 @@ class PasswordManagerController extends AbstractController
      * @param $token
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
-     * @Route("/reset/{usertype}/{token}")
+     * @Route("/reset/{userType}/{token}")
      */
     public function resetPasswordToken(Request $request, UserPasswordEncoderInterface $encoder, $userType, $token)
     {
@@ -150,7 +152,7 @@ class PasswordManagerController extends AbstractController
             }
 
             if ($user !== null && $validity) {
-                $form = $this->createForm(ResetType::class, $user);
+                $form = $this->createForm(RestEmailType::class, $user);
 
                 $form->handleRequest($request);
                 if ($form->isSubmitted() && $form->isValid()) {
@@ -181,7 +183,7 @@ class PasswordManagerController extends AbstractController
 
                 }
 
-                return $this->render('', array(
+                return $this->render('password_manager/reset_password.html.twig', array(
                     'form' => $form->createView(),
                 ));
             }
