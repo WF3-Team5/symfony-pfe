@@ -104,6 +104,7 @@ class Assistant
     public function setEmail($email): Assistant
     {
         $this->email = $email;
+
         return $this;
     }
 
