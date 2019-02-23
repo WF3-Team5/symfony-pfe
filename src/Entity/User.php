@@ -575,6 +575,7 @@ class User implements UserInterface, \Serializable
             $this->phone_number,
             $this->mobile_phone_number,
             $this->status,
+            $this->etat,
             $this->role,
         ]);
     }
@@ -609,6 +610,7 @@ class User implements UserInterface, \Serializable
             $this->phone_number,
             $this->mobile_phone_number,
             $this->status,
+            $this->etat,
             $this->role,
             )= unserialize($serialized);
     }
