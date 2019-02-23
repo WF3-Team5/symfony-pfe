@@ -29,6 +29,54 @@ class Assistant
      */
     private $prenom;
 
+    /**
+     *
+     * @ORM\Column(type="string", length=20)
+     * @Assert\NotBlank(message="Le mot de passe est obligatoire")
+     */
+    private $mdp;
+    /**
+     * @ORM\Column(type="string", length=200)
+     * @Assert\NotBlank(message="l'adresse mailest obligatoire")
+     */
+  private $email;
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     * @return Assistant
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMdp()
+    {
+        return $this->mdp;
+    }
+
+    /**
+     * @param mixed $mdp
+     * @return Assistant
+     */
+    public function setMdp($mdp)
+    {
+        $this->mdp = $mdp;
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
