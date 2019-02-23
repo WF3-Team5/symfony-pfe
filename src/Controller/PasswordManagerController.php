@@ -2,12 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Assistant;
+use App\Entity\Praticien;
+use App\Form\RestEmailType;
 use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\User;
+
 /**
  * Class PasswordManagerController
  * @package App\Controller
@@ -15,6 +19,20 @@ use App\Entity\User;
  */
 class PasswordManagerController extends AbstractController
 {
+    /**
+     * @param $userType
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/email/form/{userType}")
+     */
+    public function index($userType)
+    {
+
+        return $this->render('password_manager/index.html.twig',[
+                'userType'=>$userType,
+            ]);
+    }
+
+
     /**
      * @Route("/{userType}")
      * @param Request $request
@@ -36,62 +54,68 @@ class PasswordManagerController extends AbstractController
             break;
 
             case "praticien":
-
+                $repo=$entityManager->getRepository(Praticien::class);
             break;
 
             case "assistant":
-
+                $repo=$entityManager->getRepository(Assistant::class);
             break;
             default:
+                return $this->redirectToRoute('home/index.html.twig', array());
         }
 
         $email=$request->request->get("fpemail");
         $verif=filter_var($email, FILTER_VALIDATE_EMAIL);
+        $token= $this->genToken(120);
+        $validity=$this->getTokenValidity("30");
 
         if ($verif) {
             $user = $repo->findOneByEmail($email);
-
             if ($user !== null) {
-                $token= $this->genToken(120);
-                $validity=$this->getTokenValidity("30");
                 $message = (new Swift_Message())
                     ->setSubject('Réinitialisation de votre mot de passe')
                     ->setFrom(['wf3.team5@gmail.com' => 'Mediglob support'])
                     ->setTo([$email])
-                    ->setBody('<html><head></head><body><p>Pour réinitialiser votre mot de passe veuillez cliquer sur le lien suivant:</p><p>http://localhost:8000/fotgot/password/admin/'.$token.'</p></body></html>','text/html');
+                    ->setBody('<html><head></head><body><p>Pour réinitialiser votre mot de passe veuillez cliquer sur le lien suivant:</p><p>http://localhost:8000/forgot/password/reset/'.$userType.'/'.$token.'</p></body></html>','text/html');
 
-                //$mailer->send($message);
+                $mailer->send($message);
+                $user->setHash($token);
+                $user->setHashValidity($validity);
+                $entityManager->persist($user);
+                $entityManager->flush();
+                $this->addFlash("success", "Email envoyé avec succes!");
 
                 if($userType=="admin"){
-                    $this->addFlash("success", "Email envoyé avec succes!");
-                    $user->setHash($token);
-                    $user->setHashValidity($validity);
-                    $entityManager->persist($user);
-                    $entityManager->flush();
+
                     return $this->render('admlogin/index.html.twig');
                 }
-                elseif($userType=="patient"){
-
-                }
-                elseif($userType=="praticien"){
-
-                }
-                elseif($userType=="assistant"){
-
+                else{
+                    return $this->redirectToRoute('app_passwordmanager_index',['userType'=>$userType]);
                 }
             }
         }
+        else{
+            $this->addFlash("error", "Email non valide!");
+            if($userType=="admin"){
 
-        return $this->redirectToRoute('home/index.html.twig', array());
+                return $this->render('admlogin/index.html.twig');
+            }
+            else{
+                return $this->redirectToRoute('app_passwordmanager_index',['userType'=>$userType]);
+            }
+        }
+        return $this->redirectToRoute('app_home_index');
     }
 
 
     /**
      * @param Request $request
      * @param UserPasswordEncoderInterface $encoder
+     * @param $userType
      * @param $token
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @Route("/forgot/password/{userType}/{token}")
+     * @throws \Exception
+     * @Route("/reset/{userType}/{token}")
      */
     public function resetPasswordToken(Request $request, UserPasswordEncoderInterface $encoder, $userType, $token)
     {
@@ -106,20 +130,29 @@ class PasswordManagerController extends AbstractController
                 break;
 
             case "praticien":
-
+                $repo=$entityManager->getRepository(Praticien::class);
                 break;
 
             case "assistant":
-
+                $repo=$entityManager->getRepository(Assistant::class);
                 break;
             default:
         }
         
         if ($token !== null) {
             $entityManager = $this->getDoctrine()->getManager();
-            $user = $entityManager->getRepository(User::class)->findOneByResetPassword($token);
-            if ($user !== null) {
-                $form = $this->createForm(ResetType::class, $user);
+            $user = $repo->findOneByResetPasswordToken($token);
+            $hashValidity=$user->getHashValidity();
+            $datenow=new \DateTime("now");
+            if($hashValidity > $datenow){
+                $validity=true;
+            }
+            else{
+                $validity=false;
+            }
+
+            if ($user !== null && $validity) {
+                $form = $this->createForm(RestEmailType::class, $user);
 
                 $form->handleRequest($request);
                 if ($form->isSubmitted() && $form->isValid()) {
@@ -129,15 +162,36 @@ class PasswordManagerController extends AbstractController
                     $entityManager->persist($user);
                     $entityManager->flush();
 
-                    //add flash
-                    return $this->redirectToRoute('login');
+                    switch($userType){
+                        case "patient":
+                            return $this->redirectToRoute('app_espacepatientfreezone_login');
+                            break;
+
+                        case "admin":
+                            return $this->redirectToRoute('app_admlogin_login');
+                            break;
+
+                        case "praticien":
+                            return $this->redirectToRoute('app_espacepraticienfreezone_index');
+                            break;
+
+                        case "assistant":
+                            return $this->redirectToRoute('app_espaceassistant_index');
+                            break;
+                        default:
+                    }
+
                 }
 
-                return $this->render('authentication/reset-password-token.html.twig', array(
+                return $this->render('password_manager/reset_password.html.twig', array(
                     'form' => $form->createView(),
                 ));
             }
+            else{
+                $this->addFlash("error", "Votre code est expiré. Veuillez cliquer sur 'mot de passe oublié' du formulaire de connexion pour refaire une demande.");
+            }
         }
+
     }
 
     public function genToken($nb_caractere)
