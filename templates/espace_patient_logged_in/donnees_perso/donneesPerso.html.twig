@@ -1,0 +1,26 @@
+{% extends 'espace_patient_logged_in/index.html.twig' %}
+
+{% block title %}Données Personnelles{% endblock %}
+
+{% block body %}
+<br>
+    <h3>Données personnelles</h3>
+
+    <p>Numéro de Sécurité S. : {{ user.NumeroSecu }}</p>
+    <p>Civilité : {{ user.civility }}</p>
+    <p>Nom : {{ user.LastName }}</p>
+    <p>Prénom : {{ user.FirstName }}</p>
+    <p>Nom de naissance : {{ user.BirthName }}</p>
+    <p>Date de naissance:</p>
+    <p>Département de naissance : </p>
+    <p>Lieu de naissance : {{ user.PlaceOfBirth }}</p>
+    <p>Nationalité : {{ user.Nationality }}</p>
+    <p>Adresse : {{ user.Address }} </p>
+    <p>Code Postale : {{ user.PostalCode }}</p>
+    <p>Ville : {{ user.City }}</p>
+    <p>Téléphone : {{ user.PhoneNumber }}</p>
+    <p>Téléphone Mobile : {{ user.MobilePhoneNumber }}</p>
+    <p>E-mail : {{ user.Email }}</p>
+
+
+{% endblock body %}

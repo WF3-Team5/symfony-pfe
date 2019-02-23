@@ -106,13 +106,13 @@ class User implements UserInterface, \Serializable
     private $city;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      *
      */
     private $phone_number;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      * @Assert\NotBlank(message="Le Numéro de portable est obligatoire")
      */
     private $mobile_phone_number;
@@ -150,9 +150,8 @@ class User implements UserInterface, \Serializable
     /**
      * 3 etats possibles: active - inactive - attente
      *  @ORM\Column(type="string", length=20, nullable=false, options={"default":"attente"})
-     *  @Assert\NotBlank(message="Le Numéro de portable est obligatoire")
      */
-    private $etat;
+    private $etat = 'attente';
 
     /**
      * @ORM\Column(type="string", length=60, nullable=true)

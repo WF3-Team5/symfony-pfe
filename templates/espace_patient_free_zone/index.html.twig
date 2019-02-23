@@ -1,0 +1,20 @@
+{% extends 'basePatient.html.twig' %}
+
+
+{% block title %}MediGlog | Espace Patient{% endblock %}
+
+{% block body %}
+
+    <div class="home container-fluid">
+        <h1>Espace Patient</h1>
+        <div class="row">
+            <a href="{{ path('app_espacepatientfreezone_login') }}">Connectez-vous</a>
+        </div>
+
+        <div>
+            <a href="{{ path('app_espacepatientfreezone_inscription') }}">Inscrivez-vous</a>
+        </div>
+    </div>
+
+
+{% endblock %}

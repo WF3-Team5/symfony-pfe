@@ -6,7 +6,6 @@ use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\RuntimeException;
-
 /**
  * Class DboardController
  * @package App\Controller

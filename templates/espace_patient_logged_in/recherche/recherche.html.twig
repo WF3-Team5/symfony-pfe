@@ -1,0 +1,45 @@
+{% extends 'espace_patient_logged_in/index.html.twig' %}
+
+{% block title %}Rechercher praticien{% endblock %}
+
+{% block body %}
+    <br>
+    <h3>Rechercher un praticien</h3>
+
+
+
+    <section class="col-sm-9 col-md-8">
+        <h4>Rechercher votre praticien :</h4>
+        <div>
+            <p>Spécialité :</p>
+            <select>
+                <option>Spécialité 1</option>
+                <option>Spécialité 2</option>
+                <option>Spécialité 3</option>
+                <option>Spécialité 4</option>
+            </select>
+        </div>
+        <div>
+            <p>Secteur géographique :</p>
+            <select>
+                <option>Zone 1</option>
+                <option>Zone 2</option>
+                <option>Zone 3</option>
+                <option>Zone 4</option>
+            </select>
+        </div>
+
+        <div>
+            <div>
+                <a href=""> <!-- Redirige vers la fiche du médecin -->
+                    <p>Nom du médecin</p><br>
+                    <p>Spécialité</p><br>
+                    <p>adresse</p><br>
+                    <p>Ville - CP </p>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock body %}

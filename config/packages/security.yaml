@@ -3,73 +3,73 @@ security:
     # encryptage du mot de passe pour User
     encoders:
         App\Entity\User:
-            algorithm: plaintext
+            algorithm:                plaintext
 
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     role_hierarchy:
-        ROLE_ASST:  ROLE_USER
-        ROLE_MEDIC: [ROLE_ASST, ROLE_USER]
-        ROLE_ADMIN: [ROLE_USER, ROLE_MEDIC, ROLE_ASST]
+        ROLE_ASST:                    ROLE_USER
+        ROLE_MEDIC:                   [ROLE_ASST, ROLE_USER]
+        ROLE_ADMIN:                   [ROLE_USER, ROLE_MEDIC, ROLE_ASST]
 
     providers:
         db:
             # les utilisateurs sont les entités User
             entity:
-                class: App\Entity\User
+                class:                App\Entity\User
                 # Identifiant de Login : l'email du User
-                property: 'email'
+                property:             'email'
 
 
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
+            pattern:                  ^/(_(profiler|wdt)|css|images|js)/
+            security:                 false
 
         admin:
-            anonymous: true
-            pattern: ^/adm
-            provider: db
+            anonymous:                true
+            pattern:                  ^/adm
+            provider:                 db
             form_login:
-                login_path: app_admlogin_login
-                check_path: app_admlogin_login
-                default_target_path: app_admin_dboard_index
-                username_parameter: "adminEmail"
-                password_parameter: "adminMdp"
+                login_path:           app_admlogin_login
+                check_path:           app_admlogin_login
+                default_target_path:  app_admin_dboard_index
+                username_parameter:   "adminEmail"
+                password_parameter:   "adminMdp"
             logout:
-                path: app_admin_dboard_logout #app_admlogin_logout
-                target: app_admin_dboard_index
+                path:                 app_admin_dboard_logout #app_admlogin_logout
+                target:               app_admin_dboard_index
 
         main:
-            anonymous: true
-            pattern: ^/
-            provider: db
+            anonymous:                true
+            pattern:                  ^/
+            provider:                 db
             form_login:
-                login_path: app_espacepatient_login
-                check_path: app_espacepatient_login
-                default_target_path: app_espacepatientloggedin_index
-                username_parameter: "_username"
-                password_parameter: "_password"
+                login_path:           app_espacepatientfreezone_login
+                check_path:           app_espacepatientfreezone_login
+                default_target_path:  app_espacepatientloggedin_index
+                username_parameter:   "_username"
+                password_parameter:   "_password"
             logout:
                 # route définie dans config/routes.yaml
-                path: app_espacepatientloggedin_logout
-                target: app_home_index
+                path:                 app_espacepatientloggedin_logout
+                target:               app_home_index
 
             # provider défini au-dessus dans la rubrique providers
 
             # sur tout le site
 
-            #form_login: true
+            #form_login:              true
             # https://symfony.com/doc/current/security/form_login_setup.html
 
 
 
 
     # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
+    # Note:                           Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles:     ROLE_ADMIN }
 
-        - { path: ^/espace/patient/logged/in, roles: ROLE_USER } # Seul le USER peut y accéder
+        - { path: ^/espace/patient/logged/in, roles: ROLE_USER } # il faut au minimum le role de ROLE_USER pour y accéder
 
         # - { path: ^/profile, roles: ROLE_USER }
