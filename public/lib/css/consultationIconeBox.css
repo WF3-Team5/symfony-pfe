@@ -1,0 +1,49 @@
+
+/*********************************
+consultation /cadran accueil
+*********************************/
+
+.container-fluid
+{
+    margin-top: 10%;
+}
+.card-body
+{
+    width: 80%;
+    height: 50vh;
+    background: #FFFFFF;
+    padding-top: 61px;
+    padding-bottom: 66px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border: solid 2px #FFFFFF;
+    margin: auto;
+    margin-bottom: 53px;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+}
+.card-body:hover
+{
+    border-color: #57ccc3;
+    box-shadow: 0px 35px 43px rgba(63,191,191,0.20);
+}
+
+.icon_box_num
+{
+    position: absolute;
+    top: -5%;
+    left: 50%;
+    width:25%;
+    height: 10%;
+    border-radius: 50%;
+    background: #57ccc3;
+    line-height: 62px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
