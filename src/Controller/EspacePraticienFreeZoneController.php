@@ -7,44 +7,30 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-
-/**
- * Class AdmloginController
- * @package App\Controller
- * @Route("/adm")
- */
-class AdmloginController extends AbstractController
+class EspacePraticienFreeZoneController extends AbstractController
 {
     /**
+     * @Route("/espace/praticien/free/zone")
      * @param Request $request
      * @param AuthenticationUtils $authenticationUtils
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/login")
      */
-    public function login(Request $request, AuthenticationUtils $authenticationUtils)
+    public function index(Request $request, AuthenticationUtils $authenticationUtils)
     {
-        $submittedToken = $request->request->get('hehehe');
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
-
+dump($error);
         if (!empty($error)) {
             $this->addFlash("error", "Identifiants incorrects");
-            return $this->render('admlogin/index.html.twig', [
+            return $this->render('espace_praticien_free_zone/index.html.twig', [
                 'error' => $error,
                 'lastUsername' => $lastUsername,
             ]);
         }
 
-        if ($this->isCsrfTokenValid('trouvemoi', $submittedToken)) {
-            return $this->render('admlogin/index.html.twig', [
-            ]);
-        }
-        else{
-            return $this->render('admlogin/index.html.twig', [
+        return $this->render('espace_praticien_free_zone/index.html.twig', [
 
-            ]);
-        }
+        ]);
     }
-
 
 }

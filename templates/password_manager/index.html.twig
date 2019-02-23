@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MediGlob | Mot de passe oublié{% endblock %}
+
+{% block body %}
+    <div class="intro" style="padding-top: 200px!important;margin-bottom: 100px!important;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 m-auto">
+                {% for label, flashes in app.session.flashbag.all %}
+                    {% for flash in flashes %}
+                        {% if ( label == 'success' ) %}
+                            <div class="alert alert-success alert-dismissible text-center fade show">
+                                {{ flash }}
+                            </div>
+                        {% elseif ( label == 'error' ) %}
+                            <div class="alert alert-danger alert-dismissible text-center fade show">
+                                {{ flash }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 m-auto border border-light rounded shadow-lg p-5">
+                    <div class="text-center"><h1>Réinitialisation du mot de passe</h1></div>
+                    <p>Saisissez votre adresse email ci dessous. Nous enverrons un lien par email afin de réinitailiser votre mot de passe.</p>
+                    <form action="{{ url('app_passwordmanager_resetpassword',{'userType':userType}) }}" class="intro_form" method="post">
+                        <div class="d-flex flex-row align-items-start justify-content-between flex-wrap">
+                            <input type="email" class="intro_input w-100" placeholder="Votre Email" required="required" name="fpemail">
+                        </div>
+                        <button type="submit" class="button button_1 intro_button trans_200" >Envoyer</button>
+                        <br><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

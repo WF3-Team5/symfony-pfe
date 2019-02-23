@@ -3,35 +3,44 @@
 {% block title %}Espace Patient - Se Connecter{% endblock %}
 
 {% block body %}
-    <div class="home container-fluid">
-        {% for type, flashes in app.session.flashBag.all %}
-            {% for message in flashes %}
-                {# pour la classe alert-danger du bootstrap #}
-                {% if type == 'error' %}
-                    {% set type = 'danger' %}
-                {% endif %}
-                <div class="mt-1 alert alert-{{ type }}">
-                    {{ message|raw }}
+    <div class="intro" style="padding-top: 200px!important;margin-bottom: 100px!important;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 m-auto">
+                    {% for label, flashes in app.session.flashbag.all %}
+                        {% for flash in flashes %}
+                            {% if ( label == 'success' ) %}
+                                <div class="alert alert-success alert-dismissible text-center fade show">
+                                    {{ flash }}
+                                </div>
+                            {% elseif ( label == 'error' ) %}
+                                <div class="alert alert-danger alert-dismissible text-center fade show">
+                                    {{ flash }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
                 </div>
-            {% endfor %}
-        {% endfor %}
-
-        <h1>Connexion</h1>
-
-        <form method="post">
-            <div>
-                <label>Email :</label>
-                <input type="email" name="_username" class="" value="{{ last_username }}">
             </div>
-            <div>
-                <label>Mot de passe :</label>
-                <input type="password" name="_password" class="" >
+            <div class="row">
+                <div class="col-lg-8 m-auto border border-light rounded shadow-lg p-5">
+                    <div class="text-center"><h1>Connexion</h1><small>Espace Patient</small></div>
+                    <form class="intro_form" method="post">
+                        <div class="d-flex flex-row align-items-start justify-content-between flex-wrap">
+                            <label>Email :</label>
+                            <input type="email" class="intro_input w-100" placeholder="Votre Email" name="_username" class="" value="{{ last_username }}" required>
+                        </div>
+                        <div class="d-flex flex-row align-items-start justify-content-between flex-wrap">
+                            <label>Email :</label>
+                            <input type="password" name="_password" class="intro_input w-100" placeholder="Votre mot de passe" required>
+                        </div>
+                        <button type="submit" class="button button_1 intro_button trans_200" >Se connecter</button>
+                        <a class="text-primary mt-2" href="{{ path('app_passwordmanager_resetpassword', {'userType':'patient'}) }}"><small>Mot de passe oublié</small></a>
+                        <br><br>
+                    </form>
+                </div>
             </div>
-            <div>
-                <button type="submit" class="">
-                    Se connecter
-                </button>
-            </div>
-        </form>
         </div>
+    </div>
+
 {% endblock %}
