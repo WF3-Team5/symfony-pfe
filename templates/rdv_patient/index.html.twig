@@ -3,103 +3,111 @@
 {% block title %}Prendre un Rendez-vous{% endblock %}
 
 {% block body %}
-<div class="patient_container">
-    <h1>Prendre un Rendez-Vous</h1>
+<div class="intro" style="padding-top: 200px!important;margin-bottom: 100px!important;">
+    <div class="container">
+        <div class="row">
+            <div class="patient_container">
+                <h1>Prendre un Rendez-Vous</h1>
 
-    <form method="post">
-        <div >
-            <div class="etiquette-etape">
-                <div>1</div>
-            </div>
-            <div class="etape">
-                <h3>Rechercher une spécialisation :</h3>
-                <select>
-                    <option>Spé 1</option>
-                    <option>Spé 2</option>
-                    <option>Spé 3</option>
-                </select>
-            </div>
-        </div><hr>
+                <form method="post">
+                    <div >
+                        <div class="etiquette-etape">
+                            <div>1</div>
+                        </div>
+                        {#{{ dump(specialites) }}#}
+                        <div class="etape">
+                            <h3>Rechercher une spécialisation :</h3>
+                            {% if specialites is empty %}
+                            <p>Acune spécialité trouvée...</p>
+                            {% else %}
+                            <select id="spec" name="choixspecialite">
+                                <option value="aucun">-- Choisissez --</option>
+                                {% for spe in specialites %}
+                                    <option value="{{ spe.libelle}}">{{ spe.libelle }}</option>
+                                {% endfor %}
+                            </select>
+                            {% endif %}
+                        </div>
+                        <hr>
+                    </div>
 
-        <div>
-            <div class="etiquette-etape">
-                <div>2</div>
-            </div>
-            <div class="etape">
-                <h3>Sélectionner un médecin :</h3>
-                <select>
-                    <option>Médecin 1</option>
-                    <option>Médecin 2</option>
-                    <option>Médecin 3</option>
-                </select>
-            </div>
-        </div><hr>
+                    <div class="display-none choix-medecin">
+                        <div class="etiquette-etape">
+                            <div>2</div>
+                        </div>
+                        <div class="etape select-medic">
+                        </div>
+                        <hr>
+                    </div>
 
-        <div>
-            <div class="etiquette-etape">
-                <div>3</div>
-            </div>
-            <div class="etape">
-                <h3>Choisir un créneau :</h3>
-
-                <div class="month">
-                    <ul>
-                        <li class="prev">&#10094;</li>
-                        <li class="next">&#10095;</li>
-                        <li>Mars<br><span style="font-size:18px">2017</span></li>
-                    </ul>
-                </div>
-
-                <ul class="weekdays">
-                    <li>Mo</li>
-                    <li>Tu</li>
-                    <li>We</li>
-                    <li>Th</li>
-                    <li>Fr</li>
-                    <li>Sa</li>
-                    <li>Su</li>
-                </ul>
-
-                <ul class="days">
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li>5</li>
-                    <li>6</li>
-                    <li>7</li>
-                    <li>8</li>
-                    <li>9</li>
-                    <li><span class="active">10</span></li>
-                    <li>11</li>
-                    <li>12</li>
-                    <li>13</li>
-                    <li>14</li>
-                    <li>15</li>
-                    <li>16</li>
-                    <li>17</li>
-                    <li>18</li>
-                    <li>19</li>
-                    <li>20</li>
-                    <li>21</li>
-                    <li>22</li>
-                    <li>23</li>
-                    <li>24</li>
-                    <li>25</li>
-                    <li>26</li>
-                    <li>27</li>
-                    <li>28</li>
-                    <li>29</li>
-                    <li>30</li>
-                    <li>31</li>
-
-                </ul>
-
+                    <div class="display-none check-dispo">
+                        <div class="etiquette-etape">
+                            <div>3</div>
+                        </div>
+                        <a class="btn btn-outline-danger ml-5 text-orange" href="{{ path('app_espacepatientloggedin_resacreneau') }}">Vérifier les disponibilités</a>
+                        <hr>
+                    </div>
+                </form>
             </div>
         </div>
-        <button class="button button_1 intro_button trans_200 button-rdv">Prendre rendez-vous</button>
-    </form><hr>
-<div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
 
+        $(document).ready(function(){
+            $("#spec").on("change",function(e){
+                if($("#spec").val()==="aucun"){
+                    $(".choix-medecin").fadeOut(800);
+                    $(".check-dispo").fadeOut(800);
+                }
+                else{
+                    var specialite=$("#spec").val();
+                    $.ajax({
+                        url : '{{ path('app_espacepatientloggedin_servicelistmedicpourunespecialite') }}',
+                        type : 'POST',
+                        data: {
+                            specialite:specialite,
+                        },
+                        dataType : "json",
+
+                        success : function(response, statut){
+                            console.log(statut);
+                            console.log(response);
+                            let resp=JSON.parse(response);
+                            switch (resp['status']){
+                                case "ok":
+                                    $(".select-medic").html(resp['payload']);
+                                    $(".choix-medecin").fadeIn(800);
+                                    $(".check-dispo").fadeIn(800);
+                                break;
+
+                                case "empty":
+                                    $(".select-medic").html(resp['payload']);
+                                    $(".choix-medecin").fadeIn(800);
+                                    $(".check-dispo").fadeIn(800);
+                                break;
+                            }
+                        },
+
+                        error : function(resultat, statut, erreur){
+                            alert(statut);
+                            alert(erreur);
+                            alert(resultat);
+                        },
+
+                        complete : function(resultat, statut){
+
+                        }
+
+                    });
+
+                }
+
+            });
+        });
+    </script>
 
 {% endblock %}

@@ -133,6 +133,7 @@ class Praticien implements UserInterface, \Serializable
     private $RPPS;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Specialite", mappedBy="praticien")
      * @ORM\Column(type="string", length=50)
      */
     private $speciality;
