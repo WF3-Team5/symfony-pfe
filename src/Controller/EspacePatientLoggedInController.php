@@ -19,8 +19,14 @@ class EspacePatientLoggedInController extends AbstractController
      */
     public function index()
     {
+        if(!$this->userIsActivated())
+        {
+            $this->addFlash("error", "Vous n'avez pas encore activé votre compte. Un email contenant un lien d'activation vous a été envoyé lors de votre inscription.");
+            return $this->redirectToRoute('app_espacepatientloggedin_logout');
+        }
+
         return $this->render('espace_patient_logged_in/index.html.twig', [
-            'controller_name' => 'EspacePatientLoggedInController',
+
         ]);
     }
 
@@ -30,5 +36,17 @@ class EspacePatientLoggedInController extends AbstractController
     public function logout()
     {
         throw new RuntimeException('activez le firewall MAIN');
+    }
+
+
+    /**
+     * @return bool
+     */
+     public function userIsActivated()
+    {
+        $user=$this->getUser();
+        if($user->getEtat()!=="active"){
+            return false;
+        }
     }
 }
