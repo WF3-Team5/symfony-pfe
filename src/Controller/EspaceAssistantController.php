@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class EspaceAssistantController
  * @package App\Controller
- * @Route("/espace")
+ * @Route("/espace_assistant")
  */
 class EspaceAssistantController extends AbstractController
 {
@@ -45,7 +45,7 @@ class EspaceAssistantController extends AbstractController
 
 
     /**
-     * @Route("/assistant/{id}")
+     * @Route("/questionnaire_medical/{id}")
      */
     public function index(Request $request, User $user)
     {

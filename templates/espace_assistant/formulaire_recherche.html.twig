@@ -1,24 +1,45 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
 
-    <h2>Recherche de patient</h2>
-    <form>
-        <div class="form-group">
-            <label>N° sécurité social</label>
-            <input type="text" name="numero_secu" class="form-control" value="">
-        </div>
-        <div class="text-right">
-            <button type="submit" class="btn btn-secondary">
-               Rechercher
-            </button>
-        </div>
-    </form>
+
+
+    <div class="container-fluid">
+        <h2 class="font-weight-bold text-dark text-center">Recherche de patient</h2>
+    <div class="row">
+
+    <!-- 1ère colonne -->
+    <div class="col-lg-6">
+    <!-- Card 1 -->
+    <div class="card-body card-perso">
+
+        <img src="{{ asset('lib/images/consultation/carteVitale2.jpg') }}" alt="" style="margin-left:8%">
+        <p class="m-0 font-weight-bold text-dark text-center">Veuilez insérer le numéro de Sécurité Sociale du Patient</p>
+        <form>
+            <div class="form-group">
+                <input type="text" name="numero_secu" class="form-control" value="">
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-secondary" style="background: #57ccc3; ">
+                    Rechercher
+                </button>
+            </div>
+        </form>
+
+    </div>
+    </div>
+    <!-- 2ème colonne -->
+    <div class="col-lg-6">
+    <!-- Card 1 -->
+    <div class="card-body card-perso">
+        <p class="m-0 font-weight-bold text-dark text-center"><a href="{{ path('app_home_index') }}">Retour à l'accueil</a> </p>
+        <img src="{{ asset('lib/images/home_overlay.png') }}" alt="" style="width: 100%">
+        <p class="m-0 font-weight-bold text-dark text-center"><a href="{{ path('app_espacepatientfreezone_inscription') }}">Retour à Inscription Patient</a> </p>
+        <img src="{{ asset('lib/images/home_overlay.png') }}" alt="" style="width: 100%">
+    </div>
+    </div>
+    </div>
+    </div>
+
 
 {% endblock %}
