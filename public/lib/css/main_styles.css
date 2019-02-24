@@ -158,6 +158,10 @@ section
 	position: relative;
 	box-sizing: border-box;
 }
+
+.display-none{
+	display:none;
+}
 .clear
 {
 	clear: both;
