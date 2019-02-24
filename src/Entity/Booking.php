@@ -31,6 +31,68 @@ class Booking
      */
     private $title;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Praticien", inversedBy="booking")
+     */
+    private $praticien;
+
+    /**
+     * @return mixed
+     */
+    public function getPraticien()
+    {
+        return $this->praticien;
+    }
+
+    /**
+     * @param mixed $praticien
+     * @return Booking
+     */
+    public function setPraticien($praticien)
+    {
+        $this->praticien = $praticien;
+        return $this;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="booking")
+     */
+    private $user;
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     * @return Booking
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function getId(): ?int
     {
         return $this->id;
