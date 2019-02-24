@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -178,6 +180,63 @@ class User implements UserInterface, \Serializable
      *
      */
     private $hashValidity;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="id")
+     */
+    private $booking;
+
+
+
+
+    public function __construct()
+    {
+        $this->booking=new ArrayCollection();
+    }
+
+
+    /**
+     * @return Collection
+     */
+    public function getBooking(): Collection
+    {
+        return $this->booking;
+    }
+
+
+    /**
+     * @param Booking $booking
+     * @return User
+     */
+    public function addBooking(Booking $booking): self
+    {
+        if (!$this->booking->contains($booking)) {
+            $this->booking[] = $booking;
+            $booking->setUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Booking $booking
+     * @return User
+     */
+    public function removeBooking(Booking $booking): self
+    {
+        if ($this->booking->contains($booking)) {
+            $this->booking->removeElement($booking);
+            if ($booking->getUser() === $this) {
+                $booking->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
 
 
 
@@ -631,6 +690,7 @@ class User implements UserInterface, \Serializable
      *
      * @return (Role|string)[] The user roles
      */
+
     public function getRoles()
     {
         return [$this->role];

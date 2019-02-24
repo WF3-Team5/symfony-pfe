@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -149,8 +151,58 @@ class Praticien implements UserInterface, \Serializable
      */
     private $hashValidity;
 
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="id")
+     */
+    private $booking;
 
+    public function __construct()
+    {
+        $this->speciality=new ArrayCollection();
+        $this->booking=new ArrayCollection();
+    }
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getBooking(): Collection
+    {
+        return $this->booking;
+    }
+
+    /**
+     * @param Booking $booking
+     * @return Praticien
+     */
+    public function addBooking(Booking $booking): self
+    {
+        if (!$this->booking->contains($booking)) {
+            $this->booking[] = $booking;
+            $booking->setPraticien($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Booking $booking
+     * @return Praticien
+     */
+    public function removeBooking(Booking $booking): self
+    {
+        if ($this->booking->contains($booking)) {
+            $this->booking->removeElement($booking);
+            if ($booking->getPraticien() === $this) {
+                $booking->setPraticien(null);
+            }
+        }
+
+        return $this;
+    }
+    
+    
+    
     /**
      * @return mixed
      */
@@ -448,14 +500,32 @@ class Praticien implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getSpeciality(): ?string
+    /**
+     * @return Collection
+     */
+    public function getSpeciality(): Collection
     {
         return $this->speciality;
     }
 
-    public function setSpeciality(string $speciality): self
+    public function addSpecialite(Specialite $specialite): self
     {
-        $this->speciality = $speciality;
+        if (!$this->speciality->contains($specialite)) {
+            $this->speciality[] = $specialite;
+            $specialite->setPraticien($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpecialite(Specialite $specialite): self
+    {
+        if ($this->speciality->contains($specialite)) {
+            $this->speciality->removeElement($specialite);
+            if ($specialite->getPraticien() === $this) {
+                $specialite->setPraticien(null);
+            }
+        }
 
         return $this;
     }
@@ -576,4 +646,11 @@ class Praticien implements UserInterface, \Serializable
     {
         // TODO: Implement getSalt() method.
     }
+
+    public function __toString()
+    {
+        return $this->first_name." ".$this->last_name;
+    }
+
+
 }

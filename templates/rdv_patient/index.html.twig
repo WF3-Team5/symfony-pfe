@@ -36,6 +36,10 @@
                             <div>2</div>
                         </div>
                         <div class="etape select-medic">
+                            <h3>Rechercher une spécialisation :</h3>
+                            <select id='medic' name='toubib'>
+
+                            </select>
                         </div>
                         <hr>
                     </div>
@@ -44,7 +48,7 @@
                         <div class="etiquette-etape">
                             <div>3</div>
                         </div>
-                        <a class="btn btn-outline-danger ml-5 text-orange" href="{{ path('app_espacepatientloggedin_resacreneau') }}">Vérifier les disponibilités</a>
+
                         <hr>
                     </div>
                 </form>
@@ -79,15 +83,15 @@
                             let resp=JSON.parse(response);
                             switch (resp['status']){
                                 case "ok":
-                                    $(".select-medic").html(resp['payload']);
+                                    $("#medic").html(resp['payload']);
                                     $(".choix-medecin").fadeIn(800);
-                                    $(".check-dispo").fadeIn(800);
+                                    $(".check-dispo").fadeOut(800);
                                 break;
 
                                 case "empty":
                                     $(".select-medic").html(resp['payload']);
                                     $(".choix-medecin").fadeIn(800);
-                                    $(".check-dispo").fadeIn(800);
+                                    $(".check-dispo").fadeOut(800);
                                 break;
                             }
                         },
@@ -107,6 +111,54 @@
                 }
 
             });
+
+
+            $("#medic").on("change",function(){
+                if($("#medic").val()==="aucun") {
+                    $(".check-dispo").fadeOut(800);
+                }
+                else{
+                    //ajax qui va reafficher le bouton de validation avec la bonne route cible
+                    var praticienId=$("#medic").val();
+                    $.ajax({
+                        url : '{{ path('app_espacepatientloggedin_servicesetresabtnroute') }}',
+                        type : 'POST',
+                        data: {
+                            praticienId:praticienId,
+                        },
+                        dataType : "json",
+
+                        success : function(response, statut){
+                            console.log(statut);
+                            console.log(response);
+                            let resp=JSON.parse(response);
+                            switch (resp['status']){
+                                case "ok":
+                                    $(".check-dispo").append(resp['payload']);
+                                    $(".check-dispo").fadeIn(800);
+                                    break;
+
+                                case "empty":
+                                    $(".check-dispo").fadeOut(800);
+                                    break;
+                            }
+                        },
+
+                        error : function(resultat, statut, erreur){
+                            alert(statut);
+                            alert(erreur);
+                            alert(resultat);
+                        },
+
+                        complete : function(resultat, statut){
+
+                        }
+
+                    });
+                }
+            });
+
+
         });
     </script>
 

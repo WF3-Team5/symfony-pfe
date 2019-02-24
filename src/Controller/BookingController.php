@@ -81,16 +81,16 @@ class BookingController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="booking_delete", methods={"DELETE"})
+     * @param Booking $booking
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/{id}", name="booking_delete")
      */
-    public function delete(Request $request, Booking $booking): Response
+    public function delete(Booking $booking)
     {
-        if ($this->isCsrfTokenValid('delete'.$booking->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($booking);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('booking_index');
+        $praticienId=$booking->getPraticien()->getId();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($booking);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_espacepatientloggedin_resacreneau',['id'=>$praticienId]);
     }
 }
