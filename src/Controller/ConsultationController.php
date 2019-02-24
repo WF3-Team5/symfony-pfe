@@ -14,10 +14,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class ConsultationController extends AbstractController
 {
     /**
-     * @Route("/accueil")
+     * @Route("/accueil/{id}, defaults={"id": null}, requirements={"id" : "\d+"}")
      */
     public function index()
     {
         return $this->render('consultation/index.html.twig', []);
     }
+
+
 }

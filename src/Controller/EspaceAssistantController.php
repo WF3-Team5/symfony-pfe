@@ -64,7 +64,7 @@ class EspaceAssistantController extends AbstractController
 
             $this->addFlash('succes','Les données ont bien été enregistrées !');
 
-            return $this->redirectToRoute('app_home_index');
+            return $this->redirectToRoute('app_consultation_index');
         }
 
         return $this->render(
