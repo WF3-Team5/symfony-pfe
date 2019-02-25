@@ -5,6 +5,27 @@
 
 {% block body %}
 
+    <div>
+        <div class="intro" style="padding-top: 200px!important;margin-bottom: 100px!important;">
+            <div class="container">
+                <div class="row">
+                    <div class="col col-lg-11 m-auto">
+                        <div class="d-flex flex-row align-items-start justify-content-between flex-wrap">
+                            <div class="col-lg-5 m-auto border border-light rounded shadow-lg p-5">
+                                <a href="{{ path('app_espacepatientfreezone_login') }}"><h3>Connectez-vous</h3></a>
+                            </div>
+                            <div class="col-lg-5 m-auto border border-light rounded shadow-lg p-5">
+                                <a href="{{ path('app_espacepatientfreezone_inscription') }}"><h3>Inscrivez-vous</h3></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--
     <div class="home container-fluid">
         <h1>Espace Patient</h1>
         <div class="row">
@@ -14,7 +35,7 @@
         <div>
             <a href="{{ path('app_espacepatientfreezone_inscription') }}">Inscrivez-vous</a>
         </div>
-    </div>
+    </div> -->
 
 
 {% endblock %}
