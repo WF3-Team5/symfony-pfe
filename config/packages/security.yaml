@@ -59,8 +59,6 @@ security:
                 path:                 app_espacepraticienloggedin_logout
                 target:               app_espacepraticienfreezone_index
 
-
-
         main:
             anonymous:                true
             pattern:                  ^/

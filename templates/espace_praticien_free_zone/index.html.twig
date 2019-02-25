@@ -2,38 +2,22 @@
 
 
 {% block body %}
-    <br><br><br><br><br><br><br>
-    {% for label, flashes in app.session.flashbag.all %}
-        {% for flash in flashes %}
-            {% if ( label == 'success' ) %}
-                <div class="alert alert-success alert-dismissible text-center fade show">
-                    {{ flash }}
-                </div>
-            {% elseif ( label == 'error' ) %}
-                <div class="alert alert-danger alert-dismissible text-center fade show">
-                    {{ flash }}
-                </div>
-            {% endif %}
-        {% endfor %}
-    {% endfor %}
+<div class="container-fluid p-4" style="padding-top: 200px!important;margin-bottom: 100px!important;">
+    <div class="row">
+        <div class="col-sm-5 m-auto">
+            <h1>Vous voulez nous rejoindre?</h1>
+            <img src="{{ asset('lib/images/chirurgie.jpg') }}" width="400px" class="rounded float-left mr-1" alt="Responsive image">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero volutpat neque semper tempor. Vivamus ipsum ex, maximus ut urna id, sollicitudin aliquam urna. Duis lacinia tortor sed finibus laoreet. In nec elementum lacus, vitae elementum augue. In magna enim, maximus ac suscipit a, placerat in massa. Sed eget consectetur purus. Sed sapien magna, feugiat a gravida sit amet, imperdiet at ante. Nam erat ligula, volutpat id maximus et, dapibus in dolor. Nulla pretium, velit vel molestie volutpat, augue urna suscipit odio, ac placerat ipsum nunc ut erat.Fusce ultricies dui eu tempor porta. Mauris et massa laoreet, tincidunt odio id, bibendum arcu. Maecenas eget mi maximus, hendrerit lacus sed, aliquet urna. Nunc accumsan egestas ornare. Vestibulum posuere nisi ac enim molestie, sed tincidunt leo iaculis. Praesent vitae ipsum nec ligula blandit varius nec luctus felis. Cras blandit sit amet lectus in placerat. Aliquam ut lorem ipsum. Nulla a scelerisque ipsum. Etiam suscipit lacus eu mollis egestas. Ut augue velit, posuere vitae nisi interdum, cursus varius lacus.</p>
 
-    <div class="col-lg-6 intro_col offset-2">
-        <div class="intro_form_container">
-            <div class="intro_form_title">Connexion Praticien</div>
-            <form class="intro_form" method="post">
-                <div class="d-flex flex-row align-items-start justify-content-between flex-wrap">
-                    <input type="email" class="intro_input" placeholder="Votre Email" required="required" name="email">
-                    <input type="password" class="intro_input" placeholder="Votre mot de passe" required="required" name="password">
-                </div>
-                <button type="submit" class="button button_1 intro_button trans_200" >Connexion</button>
-                <br><br>
-            </form>
-            <a class="button button_3 intro_button trans_200" href="{{ path('app_praticieninscription_index') }}">Inscrivez-vous</a>
-            <a class="button button_1 intro_button trans_200 offset-4" href="{{ path('app_passwordmanager_resetpassword',{'userType':'praticien'}) }}">mot de passe oublié?</a>
+            <h2>Des équipements a la pointe de la technologie!</h2>
+            <img src="{{ asset('lib/images/chirurgie2.jpg') }}" class="img-fluid" alt="Responsive image">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean semper libero volutpat neque semper tempor. Vivamus ipsum ex, maximus ut urna id, sollicitudin aliquam urna. Duis lacinia tortor sed finibus laoreet. In nec elementum lacus, vitae elementum augue. In magna enim, maximus ac suscipit a, placerat in massa. Sed eget consectetur purus. Sed sapien magna, feugiat a gravida sit amet, imperdiet at ante. Nam erat ligula, volutpat id maximus et, dapibus in dolor. Nulla pretium, velit vel molestie volutpat, augue urna suscipit odio, ac placerat ipsum nunc ut erat.Fusce ultricies dui eu tempor porta. Mauris et massa laoreet, tincidunt odio id, bibendum arcu. Maecenas eget mi maximus, hendrerit lacus sed, aliquet urna. Nunc accumsan egestas ornare. Vestibulum posuere nisi ac enim molestie, sed tincidunt leo iaculis. Praesent vitae ipsum nec ligula blandit varius nec luctus felis. Cras blandit sit amet lectus in placerat. Aliquam ut lorem ipsum. Nulla a scelerisque ipsum. Etiam suscipit lacus eu mollis egestas. Ut augue velit, posuere vitae nisi interdum, cursus varius lacus.</p>
+
+        </div>
+        <div class="col-sm-2">
+            <div class="button button_3 header_button mb-4"><a href="{{ path('app_espacepraticienfreezone_inscription') }}">Inscription</a></div>
+            <div class="button button_1 header_button"><a href="{{ path('app_espacepraticienfreezone_index') }}">Connexion</a></div>
         </div>
     </div>
-
-
-
-    <br><br><br>
+</div>
 {% endblock %}

@@ -23,14 +23,9 @@ class Praticien implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, columnDefinition="ENUM('M','Mme')")
      */
     private $civility;
-
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $gender;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -41,11 +36,6 @@ class Praticien implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=50)
      */
     private $first_name;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $birth_name;
 
     /**
      * @ORM\Column(type="date")
@@ -73,6 +63,13 @@ class Praticien implements UserInterface, \Serializable
      * @Assert\Email(message="Email non valide")
      */
     private $email_pro;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="L'email est obligatoire")
+     * @Assert\Email(message="Email non valide")
+     */
+    private $email_secretariat;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -105,11 +102,6 @@ class Praticien implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $status;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $plainPassword;
@@ -135,6 +127,7 @@ class Praticien implements UserInterface, \Serializable
     private $RPPS;
 
     /**
+     * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="App\Entity\Specialite", mappedBy="praticien")
      * @ORM\Column(type="string", length=50)
      */
@@ -162,6 +155,26 @@ class Praticien implements UserInterface, \Serializable
         $this->speciality=new ArrayCollection();
         $this->booking=new ArrayCollection();
     }
+
+
+    /**
+     * @return mixed
+     */
+    public function getEmailSecretariat()
+    {
+        return $this->email_secretariat;
+    }
+
+    /**
+     * @param mixed $email_secretariat
+     * @return Praticien
+     */
+    public function setEmailSecretariat($email_secretariat)
+    {
+        $this->email_secretariat = $email_secretariat;
+        return $this;
+    }
+
 
     /**
      * @return ArrayCollection
@@ -248,17 +261,6 @@ class Praticien implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getGender(): ?string
-    {
-        return $this->gender;
-    }
-
-    public function setGender(string $gender): self
-    {
-        $this->gender = $gender;
-
-        return $this;
-    }
 
     public function getLastName(): ?string
     {
@@ -284,17 +286,6 @@ class Praticien implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getBirthName(): ?string
-    {
-        return $this->birth_name;
-    }
-
-    public function setBirthName(string $birth_name): self
-    {
-        $this->birth_name = $birth_name;
-
-        return $this;
-    }
 
     public function getBirthDate(): ?\DateTimeInterface
     {
@@ -428,18 +419,6 @@ class Praticien implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
     public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
@@ -501,7 +480,7 @@ class Praticien implements UserInterface, \Serializable
     }
 
     /**
-     * @return Collection
+     * @return Collection|Specialite[]
      */
     public function getSpeciality(): Collection
     {
@@ -543,8 +522,6 @@ class Praticien implements UserInterface, \Serializable
             $this->last_name,
             $this->first_name,
             $this->civility,
-            $this->gender,
-            $this->birth_name,
             $this->birth_date,
             $this->birth_department,
             $this->place_of_birth,
@@ -556,7 +533,6 @@ class Praticien implements UserInterface, \Serializable
             $this->city_pro,
             $this->phone_number_pro,
             $this->mobile_phone_number_pro,
-            $this->status,
             $this->role,
         ]);
     }
@@ -577,8 +553,6 @@ class Praticien implements UserInterface, \Serializable
             $this->last_name,
             $this->first_name,
             $this->civility,
-            $this->gender,
-            $this->birth_name,
             $this->birth_date,
             $this->birth_department,
             $this->place_of_birth,
@@ -590,7 +564,6 @@ class Praticien implements UserInterface, \Serializable
             $this->city_pro,
             $this->phone_number_pro,
             $this->mobile_phone_number_pro,
-            $this->status,
             $this->role,
             )= unserialize($serialized);
     }

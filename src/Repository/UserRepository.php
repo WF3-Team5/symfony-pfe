@@ -95,81 +95,9 @@ class UserRepository extends ServiceEntityRepository
     }
 
 
-    public function findAllMedics($page, $nbMaxParPage)
-    {
-        if (!is_numeric($page)) {
-            throw new InvalidArgumentException(
-                'La valeur de l\'argument $page est incorrecte (valeur : ' . $page . ').'
-            );
-        }
 
-        if ($page < 1) {
-            throw new NotFoundHttpException('La page demandée n\'existe pas');
-        }
 
-        if (!is_numeric($nbMaxParPage)) {
-            throw new InvalidArgumentException(
-                'La valeur de l\'argument $nbMaxParPage est incorrecte (valeur : ' . $nbMaxParPage . ').'
-            );
-        }
 
-        $premierResultat = ($page - 1) * $nbMaxParPage;
-
-        $qb = $this->createQueryBuilder('u')
-            ->andWhere('u.role=:role')
-            ->setParameter('role', 'ROLE_MEDIC')
-            ->orderBy('u.last_name', 'ASC')
-            ->getQuery()
-            ->setFirstResult($premierResultat)
-            ->setMaxResults($nbMaxParPage);
-
-        $paginator = new Paginator($qb);
-
-        if ( ($paginator->count() <= $premierResultat) && $page != 1) {
-            throw new NotFoundHttpException('La page demandée n\'existe pas.'); // page 404
-        }
-
-        return $paginator;
-
-    }
-
-    public function findAllAsst($page, $nbMaxParPage)
-    {
-        if (!is_numeric($page)) {
-            throw new InvalidArgumentException(
-                'La valeur de l\'argument $page est incorrecte (valeur : ' . $page . ').'
-            );
-        }
-
-        if ($page < 1) {
-            throw new NotFoundHttpException('La page demandée n\'existe pas');
-        }
-
-        if (!is_numeric($nbMaxParPage)) {
-            throw new InvalidArgumentException(
-                'La valeur de l\'argument $nbMaxParPage est incorrecte (valeur : ' . $nbMaxParPage . ').'
-            );
-        }
-
-        $premierResultat = ($page - 1) * $nbMaxParPage;
-
-        $qb = $this->createQueryBuilder('u')
-            ->andWhere('u.role=:role')
-            ->setParameter('role', 'ROLE_ASST')
-            ->orderBy('u.last_name', 'ASC')
-            ->getQuery()
-            ->setFirstResult($premierResultat)
-            ->setMaxResults($nbMaxParPage);
-
-        $paginator = new Paginator($qb);
-
-        if ( ($paginator->count() <= $premierResultat) && $page != 1) {
-            throw new NotFoundHttpException('La page demandée n\'existe pas.'); // page 404
-        }
-
-        return $paginator;
-
-    }
 
     /**
      * @return mixed

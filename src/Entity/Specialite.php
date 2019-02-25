@@ -18,7 +18,7 @@ class Specialite
 
     /**
      * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="App\Entity\Praticien", inversedBy="id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Praticien", inversedBy="speciality")
      * @ORM\JoinColumn(nullable=false)
      */
     private $praticien;

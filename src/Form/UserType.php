@@ -32,17 +32,6 @@ class UserType extends AbstractType
                 ]
 
             )
-            /*->add(
-                'gender',
-                ChoiceType::class,
-                [
-                    'label' => 'Sexe :',
-                    'choices' => [
-                        'Homme' => 'H',
-                        'Femme' => 'F'
-                    ]
-                ]
-            )*/
             ->add(
                 'last_name',
                 TextType::class,
