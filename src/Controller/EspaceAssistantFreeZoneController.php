@@ -7,38 +7,42 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-
-class QuestionnaireMedicalController extends AbstractController
+/**
+ * Class EspaceAssistantFreeZoneController
+ * @package App\Controller
+ * @Route("/espace/assistant/free/zone")
+ */
+class EspaceAssistantFreeZoneController extends AbstractController
 {
     /**
-     * @Route("/questionnaire/medical")
+     * @Route("/")
      */
     public function index()
     {
-        return $this->render('questionnaire_medical/index.html.twig', []);
+        return $this->render('espace_assistant_free_zone/index.html.twig', []);
     }
 
     /**
-     * @Route("/connexion")
+     * @param Request $request
      * @param AuthenticationUtils $authenticationUtils
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/connexion")
      */
-    public function login(Request $request, AuthenticationUtils $authenticationUtils)
+    public function connexion(Request $request, AuthenticationUtils $authenticationUtils )
     {
-
         $error = $authenticationUtils->getLastAuthenticationError();
+
         $lastUsername = $authenticationUtils->getLastUsername();
-        dump($request);
 
         if (!empty($error)){
             $this->addFlash('error', 'Vos identifiants sont incorrects');
         }
 
-        return $this->render(
-            'espace_patient/connexion/connexion.html.twig',
+        return $this->render('espace_assistant_free_zone/connexion.html.twig',
             [
-                'last_username' => $lastUsername
-            ]
-        );
+                'last_username'=>$lastUsername
+
+            ]);
     }
 }

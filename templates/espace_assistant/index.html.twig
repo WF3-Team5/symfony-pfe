@@ -1,7 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1>Portail Assistant</h1>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <br>
+
+    <h1>Portail Assistant</h1>
 
 
         <!-- Sidebar -->
@@ -13,20 +22,35 @@
                 <thead class="thead-light">
                 <tr>
                     <th>N° Dossier</th>
+                    <th>N° Sécurité Sociale</th>
                     <th>Civilité</th>
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th nowrap>Date de naissance</th>
                     <th nowrap>Numero de telephone</th>
-                    <th>adresse</th>
-                    <th>postal_code<th>
-                    <th>ville<th>
+                    <th>Adresse Mail</th>
+                    <th>Adresse</th>
+                    <th>Postal_code<th>
+                    <th>Ville<th>
                 </tr>
                 </thead>
                 <tbody>
+                {% if user is defined %}
                 <tr>
-                    <td></td>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.numeroSecu }}</td>
+                    <td>{{ user.civility }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.birthDate|date('d/m/Y')}}</td>
+                    <td>{{ user.mobilePhoneNumber }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.address }}</td>
+                    <td>{{ user.postalCode }}</td>
+                    <td>{{ user.city }}</td>
+
                 </tr>
+                {% endif %}
                 </tbody>
             </table>
         </div>
@@ -53,7 +77,6 @@
                                             {{ form_row(form.biphosphonates) }}
                                             {{ form_row(form.hormones) }}
                                             {{ form_row(form.pillules_contraceptives) }}
-                                         }
                                         </td>
                                         <td>  <p class="m-0 font-weight-bold text-dark">Santé général</p>
                                             {{ form_row(form.trouble_digestifs) }}
@@ -92,7 +115,6 @@
                                             {{ form_row(form.saignements_prolonges) }}
                                             {{ form_row(form.sang_clair) }}
                                             {{ form_row(form.sida) }}
-                                            {{ form_row(form.allergie_aliments) }}
                                             {{ form_row(form.seropositif) }}
                                             {{ form_row(form.maladies_sexuellement_tansmissibles) }}
                                         </td>
@@ -176,7 +198,7 @@
                             <!-- Card 3 -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-danger text-center">Allergies</h6>
+                                    <h6 class="m-0 font-weight-bold text-danger text-center">Autres</h6>
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-striped">
@@ -211,6 +233,13 @@
                         </div>
                     </div>
                 </div>
+
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-danger">
+            Enregistrer les données patients
+        </button>
+    </div>
                 {{ form_end(form) }}
             </div>
                         <!-- Fin page content -->

@@ -20,13 +20,17 @@ class EspacePatientLoggedInController extends AbstractController
      */
     public function index()
     {
-        $user=$this->getUser();
+        if(!$this->userIsActivated())
+        {
+            $this->addFlash("error", "Vous n'avez pas encore activé votre compte. Un email contenant un lien d'activation vous a été envoyé lors de votre inscription.");
+            return $this->redirectToRoute('app_espacepatientloggedin_logout');
+        }
 
+        $user=$this->getUser();
         return $this->render('espace_patient_logged_in/index.html.twig',
-            [
-                "user"=>$user,
-            ]
-        );
+        [
+            "user"=>$user,
+        ]);
     }
 
     /**
@@ -36,6 +40,7 @@ class EspacePatientLoggedInController extends AbstractController
     {
         throw new RuntimeException('activez le firewall MAIN');
     }
+
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
@@ -127,11 +132,28 @@ class EspacePatientLoggedInController extends AbstractController
      */
     public function rdv()
     {
-        $user=$this->getUser();
+        $user = $this->getUser();
         return $this->render('espace_patient_logged_in/rdv_patient/index.html.twig',
             [
                 "user" => $user,
             ]
         );
+    }
+
+
+    /**
+     * @return bool
+     */
+     public function userIsActivated()
+    {
+        $user=$this->getUser();
+        $etat=$user->getEtat();
+        if($etat!=="active"){
+            return false;
+        }
+        else{
+            return true;
+        }
+
     }
 }

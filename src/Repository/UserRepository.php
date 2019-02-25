@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use InvalidArgumentException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -179,6 +180,37 @@ class UserRepository extends ServiceEntityRepository
             ->setParameter('role', 'ROLE_ADMIN')
             ->getQuery()
             ->getResult();
+    }
+
+
+    public function findOneByEmail($email)
+    {
+        try {
+            return $this->createQueryBuilder('u')
+                ->andWhere('u.email=:email')
+                ->setParameter('email', $email)
+                ->getQuery()
+                ->getSingleResult();
+        } catch (NoResultException $e) {
+        } catch (NonUniqueResultException $e) {
+        }
+    }
+
+    /**
+     * @param $token
+     * @return mixed
+     */
+    public function findOneByResetPasswordToken($token)
+    {
+        try {
+            return $this->createQueryBuilder('u')
+                ->andWhere('u.hash=:token')
+                ->setParameter('token', $token)
+                ->getQuery()
+                ->getSingleResult();
+        } catch (NoResultException $e) {
+        } catch (NonUniqueResultException $e) {
+        }
     }
 
     /**

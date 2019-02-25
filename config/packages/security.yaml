@@ -4,13 +4,15 @@ security:
     encoders:
         App\Entity\User:
             algorithm:                plaintext
+        App\Entity\Praticien:
+            algorithm:                plaintext
 
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     role_hierarchy:
         ROLE_ASST:                    ROLE_USER
-        ROLE_MEDIC:                   [ROLE_ASST, ROLE_USER]
-        ROLE_ADMIN:                   [ROLE_USER, ROLE_MEDIC, ROLE_ASST]
+        ROLE_MEDIC:                   ROLE_ASST
+        ROLE_ADMIN:                   ROLE_MEDIC
 
     providers:
         db:
@@ -19,7 +21,10 @@ security:
                 class:                App\Entity\User
                 # Identifiant de Login : l'email du User
                 property:             'email'
-
+        ph:
+            entity:
+                class:     App\Entity\Praticien
+                property: 'email_pro'
 
     firewalls:
         dev:
@@ -40,6 +45,22 @@ security:
                 path:                 app_admin_dboard_logout #app_admlogin_logout
                 target:               app_admin_dboard_index
 
+        praticien:
+            anonymous:                true
+            pattern:                  ^/espace/pr
+            provider:                 ph
+            form_login:
+                login_path:           app_espacepraticienfreezone_index
+                check_path:           app_espacepraticienfreezone_index
+                default_target_path:  app_espacepraticienloggedin_index
+                username_parameter:   "email"
+                password_parameter:   "password"
+            logout:
+                path:                 app_espacepraticienloggedin_logout
+                target:               app_espacepraticienfreezone_index
+
+
+
         main:
             anonymous:                true
             pattern:                  ^/
@@ -53,15 +74,9 @@ security:
             logout:
                 # route définie dans config/routes.yaml
                 path:                 app_espacepatientloggedin_logout
-                target:               app_home_index
-
-            # provider défini au-dessus dans la rubrique providers
-
-            # sur tout le site
-
-            #form_login:              true
+                target:               app_espacepatientfreezone_login
+                invalidate_session:   false
             # https://symfony.com/doc/current/security/form_login_setup.html
-
 
 
 
@@ -72,4 +87,4 @@ security:
 
         - { path: ^/espace/patient/logged/in, roles: ROLE_USER } # il faut au minimum le role de ROLE_USER pour y accéder
 
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/espace/praticien/logged/in, roles: ROLE_MEDIC }

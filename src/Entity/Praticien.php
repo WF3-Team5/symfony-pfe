@@ -3,18 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class User
+ * Class Praticien
  * @package App\Entity
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields={"email"}, message="Il existe déjà un utilisateur avec cet email")
+ * @ORM\Entity(repositoryClass="App\Repository\PraticienRepository")
  */
-class User implements UserInterface, \Serializable
+class Praticien implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -24,54 +21,42 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100, columnDefinition="ENUM('M','Mme')")
+     * @ORM\Column(type="string", length=100)
      */
     private $civility;
 
     /**
-     * @ORM\Column(type="string", length=50, columnDefinition="ENUM('H','F')")
+     * @ORM\Column(type="string", length=50)
      */
     private $gender;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank(message="Le nom est obligatoire")
-     * @Assert\Length(max="50",
-     *     maxMessage="Le nom ne doit pas faire plus de {{ limit }} caractères")
      */
     private $last_name;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank(message="Le prénom est obligatoire")
-     * @Assert\Length(max="50",
-     *     maxMessage="Le prénom ne doit pas faire plus de {{ limit }} caractères")
      */
     private $first_name;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     * @Assert\Length(max="50",
-     *     maxMessage="Le nom de naissance ne doit pas faire plus de {{ limit }} caractères")
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $birth_name;
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotBlank(message="La date de naissance est obligatoire")
-     *
      */
     private $birth_date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Departement")
-     * @ORM\JoinColumn(nullable=false)
-     *
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $birth_department;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $place_of_birth;
 
@@ -82,40 +67,35 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank(message="L'e-mail est obligatoire")
-     * @Assert\Email(message="L'e-mail n'est pas valide")
+     * @Assert\NotBlank(message="L'email est obligatoire")
+     * @Assert\Email(message="Email non valide")
      */
-    private $email;
+    private $email_pro;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="L'adresse est obligatoire")
      */
-    private $address;
+    private $address_pro;
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="Le code postal est obligatoire")
      */
-    private $postal_code;
+    private $postal_code_pro;
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank(message="La ville est obligatoire")
      */
-    private $city;
+    private $city_pro;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     *
+     * @ORM\Column(type="integer", nullable=true)
      */
-    private $phone_number;
+    private $phone_number_pro;
 
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Le Numéro de portable est obligatoire")
+     * @ORM\Column(type="integer")
      */
-    private $mobile_phone_number;
+    private $mobile_phone_number_pro;
 
     /**
      * @ORM\Column(type="string", length=20)
@@ -123,49 +103,39 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=50, columnDefinition="ENUM('patient', 'medic', 'assistant', 'admin')")
-     *
+     * @ORM\Column(type="string", length=50)
      */
     private $status;
 
     /**
-     * Mot de passe en clair pour interagir avec le formulaire d'inscription
-     * @var string
-     * @Assert\NotBlank(message="Le mot de passe est obligatoire")
+     * @ORM\Column(type="string", length=255)
      */
     private $plainPassword;
 
     /**
-
-     * @ORM\Column(type="string", length=50, columnDefinition="ENUM('ROLE_USER' , 'ROLE_MEDIC' , 'ROLE_ASSISTANT' ,'ROLE_ADMIN')")
+     * @ORM\Column(type="string", length=50)
      */
-    private $role="ROLE_USER";
+    private $role="ROLE_MEDIC";
 
     /**
-     * @ORM\Column(type="date", nullable=true)
-     *
+     * @ORM\Column(type="date")
      */
     private $dateInscription;
 
     /**
-     * 3 etats possibles: active - inactive - attente
-     *  @ORM\Column(type="string", length=20, nullable=false, options={"default":"attente"})
+     * @ORM\Column(type="string", length=20)
      */
-    private $etat = 'attente';
+    private $etat;
 
     /**
-     * @ORM\Column(type="string", length=60, nullable=true)
+     * @ORM\Column(type="integer")
      */
-    private $codeActivation;
-
+    private $RPPS;
 
     /**
-     * @ORM\Column(type="string", length=15, nullable=false)
-     * @Assert\NotBlank(message="Le numero de sécurité sociale ne peut pas être vide!")
-     * @Assert\Length(min="15",max="15",
-     *     exactMessage="Le numéro de sécurité sociale doit comporter exactement {{ limit }} caractères.")
+     * @ORM\Column(type="string", length=50)
      */
-    private $numeroSecu;
+    private $speciality;
 
     /**
      * @ORM\column(type="string", length=255, nullable=true)
@@ -177,7 +147,6 @@ class User implements UserInterface, \Serializable
      *
      */
     private $hashValidity;
-
 
 
 
@@ -194,7 +163,7 @@ class User implements UserInterface, \Serializable
      * @return User|null
      *
      */
-    public function setHashValidity($hashValidity): User
+    public function setHashValidity($hashValidity): ?Praticien
     {
         $this->hashValidity = $hashValidity;
         return $this;
@@ -208,94 +177,6 @@ class User implements UserInterface, \Serializable
     {
         return $this->hash;
     }
-
-    /**
-     * @param $hash
-     * @return User|null
-     */
-    public function setHash($hash): ?User
-    {
-        $this->hash = $hash;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNumeroSecu()
-    {
-        return $this->numeroSecu;
-    }
-
-    /**
-     * @param mixed $numeroSecu
-     * @return User
-     */
-    public function setNumeroSecu($numeroSecu)
-    {
-        $this->numeroSecu = $numeroSecu;
-        return $this;
-    }
-
-
-
-
-    /**
-     * @return mixed
-     */
-    public function getCodeActivation()
-    {
-        return $this->codeActivation;
-    }
-
-    /**
-     * @param string $codeActivation
-     * @return User
-     */
-    public function setCodeActivation($codeActivation): User
-    {
-        $this->codeActivation = $codeActivation;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEtat()
-    {
-        return $this->etat;
-    }
-
-    /**
-     * @param mixed $etat
-     * @return User
-     */
-    public function setEtat($etat): User
-    {
-        $this->etat = $etat;
-        return $this;
-    }
-
-
-
-    /**
-     * @return date
-     */
-    public function getDateInscription()
-    {
-        return $this->dateInscription;
-    }
-
-    /**
-     * @param mixed $dateInscription
-     * @return User
-     */
-    public function setDateInscription($dateInscription): User
-    {
-        $this->dateInscription = $dateInscription;
-        return $this;
-    }
-
 
     public function getId(): ?int
     {
@@ -374,12 +255,12 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getBirthDepartment(): ?Departement
+    public function getBirthDepartment(): ?string
     {
         return $this->birth_department;
     }
 
-    public function setBirthDepartment(?Departement $birth_department): self
+    public function setBirthDepartment(?string $birth_department): self
     {
         $this->birth_department = $birth_department;
 
@@ -410,74 +291,74 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getEmailPro(): ?string
     {
-        return $this->email;
+        return $this->email_pro;
     }
 
-    public function setEmail(string $email): self
+    public function setEmailPro(string $email_pro): self
     {
-        $this->email = $email;
+        $this->email_pro = $email_pro;
 
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getAddressPro(): ?string
     {
-        return $this->address;
+        return $this->address_pro;
     }
 
-    public function setAddress(string $address): self
+    public function setAddressPro(string $address_pro): self
     {
-        $this->address = $address;
+        $this->address_pro = $address_pro;
 
         return $this;
     }
 
-    public function getPostalCode(): ?int
+    public function getPostalCodePro(): ?int
     {
-        return $this->postal_code;
+        return $this->postal_code_pro;
     }
 
-    public function setPostalCode(int $postal_code): self
+    public function setPostalCodePro(int $postal_code_pro): self
     {
-        $this->postal_code = $postal_code;
+        $this->postal_code_pro = $postal_code_pro;
 
         return $this;
     }
 
-    public function getCity(): ?string
+    public function getCityPro(): ?string
     {
-        return $this->city;
+        return $this->city_pro;
     }
 
-    public function setCity(string $city): self
+    public function setCityPro(string $city_pro): self
     {
-        $this->city = $city;
+        $this->city_pro = $city_pro;
 
         return $this;
     }
 
-    public function getPhoneNumber(): ?int
+    public function getPhoneNumberPro(): ?int
     {
-        return $this->phone_number;
+        return $this->phone_number_pro;
     }
 
-    public function setPhoneNumber(?int $phone_number): self
+    public function setPhoneNumberPro(?int $phone_number_pro): self
     {
-        $this->phone_number = $phone_number;
+        $this->phone_number_pro = $phone_number_pro;
 
         return $this;
     }
 
-    public function getMobilePhoneNumber(): ?int
+    public function getMobilePhoneNumberPro(): ?int
     {
-        return $this->mobile_phone_number;
+        return $this->mobile_phone_number_pro;
     }
 
-    public function setMobilePhoneNumber(int $mobile_phone_number): self
+    public function setMobilePhoneNumberPro(int $mobile_phone_number_pro): self
     {
-        $this->mobile_phone_number = $mobile_phone_number;
+        $this->mobile_phone_number_pro = $mobile_phone_number_pro;
 
         return $this;
     }
@@ -506,45 +387,76 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getPlainPassword()
+    public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
     }
 
-    /**
-     * @param mixed $plainPassword
-     * @return User
-     */
-    public function setPlainPassword($plainPassword): User
+    public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
+
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getRole()
+    public function getRole(): ?string
     {
         return $this->role;
     }
 
-    /**
-     * @param string $role
-     * @return User
-     */
     public function setRole(string $role): self
     {
         $this->role = $role;
+
         return $this;
     }
 
-    public function __toString(): string
+    public function getDateInscription(): ?\DateTimeInterface
     {
-        return $this->first_name." ".$this->last_name;
+        return $this->dateInscription;
+    }
+
+    public function setDateInscription(\DateTimeInterface $dateInscription): self
+    {
+        $this->dateInscription = $dateInscription;
+
+        return $this;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(string $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getRPPS(): ?int
+    {
+        return $this->RPPS;
+    }
+
+    public function setRPPS(int $RPPS): self
+    {
+        $this->RPPS = $RPPS;
+
+        return $this;
+    }
+
+    public function getSpeciality(): ?string
+    {
+        return $this->speciality;
+    }
+
+    public function setSpeciality(string $speciality): self
+    {
+        $this->speciality = $speciality;
+
+        return $this;
     }
 
     /**
@@ -566,15 +478,14 @@ class User implements UserInterface, \Serializable
             $this->birth_department,
             $this->place_of_birth,
             $this->nationality,
-            $this->email,
+            $this->email_pro,
             $this->password,
-            $this->address,
-            $this->postal_code,
-            $this->city,
-            $this->phone_number,
-            $this->mobile_phone_number,
+            $this->address_pro,
+            $this->postal_code_pro,
+            $this->city_pro,
+            $this->phone_number_pro,
+            $this->mobile_phone_number_pro,
             $this->status,
-            $this->etat,
             $this->role,
         ]);
     }
@@ -601,21 +512,17 @@ class User implements UserInterface, \Serializable
             $this->birth_department,
             $this->place_of_birth,
             $this->nationality,
-            $this->email,
+            $this->email_pro,
             $this->password,
-            $this->address,
-            $this->postal_code,
-            $this->city,
-            $this->phone_number,
-            $this->mobile_phone_number,
+            $this->address_pro,
+            $this->postal_code_pro,
+            $this->city_pro,
+            $this->phone_number_pro,
+            $this->mobile_phone_number_pro,
             $this->status,
-            $this->etat,
             $this->role,
             )= unserialize($serialized);
     }
-
-
-    
 
     /**
      * Returns the roles granted to the user.
@@ -637,15 +544,14 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Returns the salt that was originally used to encode the password.
+     * Removes sensitive data from the user.
      *
-     * This can return null if the password was not encoded using a salt.
-     *
-     * @return string|null The salt
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
      */
-    public function getSalt()
+    public function eraseCredentials()
     {
-        // TODO: Implement getSalt() method.
+        // TODO: Implement eraseCredentials() method.
     }
 
     /**
@@ -655,17 +561,18 @@ class User implements UserInterface, \Serializable
      */
     public function getUsername()
     {
-        return $this->getEmail();
+        return $this->getEmailPro();
     }
 
     /**
-     * Removes sensitive data from the user.
+     * Returns the salt that was originally used to encode the password.
      *
-     * This is important if, at any given point, sensitive information like
-     * the plain-text password is stored on this object.
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
      */
-    public function eraseCredentials()
+    public function getSalt()
     {
-        // TODO: Implement eraseCredentials() method.
+        // TODO: Implement getSalt() method.
     }
 }

@@ -239,7 +239,7 @@ section
 }
 .parallax_background
 {
-	position: absolute;
+    position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -1576,6 +1576,7 @@ body {font-family: Verdana, sans-serif;}
 		display:block;
 		max-width: 550px;
 	}
+
 }
 
 /**********           ESPACE PERSONNEL             *************/
@@ -1585,7 +1586,6 @@ body {font-family: Verdana, sans-serif;}
 }
 .sidebar-ep{
 	background: #57ccc3;
-	height: 100%;
 
 	font-size: 20px;
 
@@ -1597,4 +1597,15 @@ body {font-family: Verdana, sans-serif;}
 
 .sidebar-ep li{
 	padding: 25px;
+}
+
+.infos-dp{
+	color: grey;
+	margin: 10px;
+	font-size: 20px;
+}
+
+.label-dp{
+	color: black;
+
 }

@@ -22,7 +22,7 @@ class Antecedents
     private $medicament;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $homeopathie;
 
@@ -32,67 +32,67 @@ class Antecedents
     private $traitement_homeopathique;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $pillules_contraceptives;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $hormones;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $enceinte;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $perte_poids;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $gain_poids;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $troubles_cardiaques;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $fievre_rhumatismale;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $hemophiie;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3,nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $saignements_prolonges;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3,nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $sang_clair;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, nullable=true, columnDefinition="ENUM('oui','non')")
      */
     private $anemie;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $problemes_du_foie;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $trouble_digestifs;
 
@@ -102,7 +102,7 @@ class Antecedents
     private $troubles_digestifs_details;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $ulcere_de_l_estomac;
 
@@ -112,82 +112,82 @@ class Antecedents
     private $maladies_sexuellement_tansmissibles;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $diabete;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $troubles_thyroidiens;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $maladie_de_la_peau;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"},nullable=true, columnDefinition="ENUM('oui','non')")
      */
     private $problemes_oculaires;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $arthrite;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3,nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $osteoporose;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $epilepsie;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3,nullable=false, options={"default":"non"},columnDefinition="ENUM('oui','non')")
      */
     private $troubles_nerveux;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $biphosphonates;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $maladies_psychiatriques;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $maux_de_tete_frequents;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $etourdissements_evanouissements;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $maux_d_oreilles;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $rhume_des_foins;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"},columnDefinition="ENUM('oui','non')")
      */
     private $asthme;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"},columnDefinition="ENUM('oui','non')")
      */
     private $fumez_vous;
 
@@ -197,47 +197,47 @@ class Antecedents
     private $nombre_cigrettes_par_jour;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"},columnDefinition="ENUM('oui','non')")
      */
     private $radiotherapie;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"},columnDefinition="ENUM('oui','non')")
      */
     private $chimiotherapie;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $sida;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $seropositif;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $protheses_articulaires;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $troubles_du_sommeil;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3,nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $ronflez_vous;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $allergie_latex;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $allergie_penniciline;
 
@@ -247,32 +247,32 @@ class Antecedents
     private $allergie_codeine;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $allergie_aspirine;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3,nullable=false, options={"default":"non"},columnDefinition="ENUM('oui','non')")
      */
     private $allergie_antibiotique;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"},columnDefinition="ENUM('oui','non')")
      */
     private $allergie_anesthesiques;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"},columnDefinition="ENUM('oui','non')")
      */
     private $allergie_sulfamides;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"},columnDefinition="ENUM('oui','non')")
      */
     private $allergie_iode;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $allergie_aliments;
 
@@ -282,12 +282,12 @@ class Antecedents
     private $autres_allergies;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3,nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $consommation_drogues;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $consommation_alcool;
 
@@ -297,7 +297,7 @@ class Antecedents
     private $quantite_par_jour_d_alcool;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $hospitalisation;
 
@@ -307,37 +307,37 @@ class Antecedents
     private $quand_quel_operations;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3,nullable=false, options={"default":"non"},columnDefinition="ENUM('oui','non')")
      */
     private $traitements_gencives;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"},columnDefinition="ENUM('oui','non')")
      */
     private $traitements_dentaires;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"},columnDefinition="ENUM('oui','non')")
      */
     private $traitement_implant_dentaire;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $lunettes;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $lentilles;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3,nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $problemes_de_vision_de_couleurs;
 
     /**
-     * @ORM\Column(type="string", length=3, nullable=true, columnDefinition="ENUM('oui','non')")
+     * @ORM\Column(type="string", length=3, nullable=false, options={"default":"non"}, columnDefinition="ENUM('oui','non')")
      */
     private $chirurgies_uculaires;
 

@@ -4,15 +4,15 @@
 
 {% block body %}
     <br>
-    <h3>Rechercher un praticien</h3>
+    <h3>Rechercher un praticien</h3><br><br>
 
 
 
     <section class="col-sm-9 col-md-8">
-        <h4>Rechercher votre praticien :</h4>
+        <h4>Rechercher votre praticien par spécialisation et zone géographique :</h4><br>
         <div>
-            <p>Spécialité :</p>
-            <select>
+            <label>Spécialité :</label>
+            <select class="intro_input w-100">
                 <option>Spécialité 1</option>
                 <option>Spécialité 2</option>
                 <option>Spécialité 3</option>
@@ -20,24 +20,35 @@
             </select>
         </div>
         <div>
-            <p>Secteur géographique :</p>
-            <select>
+            <label>Secteur géographique :</label>
+            <select class="intro_input w-100">
                 <option>Zone 1</option>
                 <option>Zone 2</option>
                 <option>Zone 3</option>
                 <option>Zone 4</option>
             </select>
-        </div>
+        </div><br><br>
 
+        <h4>Résultat(s) de votre recherche :</h4><br>
         <div>
             <div>
-                <a href=""> <!-- Redirige vers la fiche du médecin -->
-                    <p>Nom du médecin</p><br>
-                    <p>Spécialité</p><br>
-                    <p>adresse</p><br>
-                    <p>Ville - CP </p>
-                </a>
-
+                    <div class="d-flex flex-row align-items-start">
+                        <p><div class="col-lg-5 label-dp infos-dp">Nom du médecin : </div><div class="col-lg-5 infos-dp"> Dr Durand</div></p>
+                    </div>
+                    <div class="d-flex flex-row align-items-start">
+                        <p><div class="col-lg-5 label-dp infos-dp">Spécialisation : </div><div class="col-lg-5 infos-dp"> Dermatologue</div></p>
+                    </div>
+                    <div class="d-flex flex-row align-items-start">
+                        <p><div class="col-lg-5 label-dp infos-dp">Adresse : </div><div class="col-lg-5 infos-dp"> 75 rue de Paname</div></p>
+                    </div>
+                    <div class="d-flex flex-row align-items-start">
+                        <p><div class="col-lg-5 label-dp infos-dp">Ville - CP : </div><div class="col-lg-5 infos-dp"> Paris - 75016</div></p>
+                    </div>
+                    <div class="d-flex flex-row align-items-start">
+                        <p><div class="col-lg-5 label-dp infos-dp">N° Téléphone : </div><div class="col-lg-5 infos-dp"> 01 02 03 04 05</div></p>
+                    </div><br><br>
+                    <a href=""><button type="" class="button button_1 intro_button trans_200" >Prendre RDV avec ce praticien</button></a>
+                    <br><br>
             </div>
         </div>
     </section>

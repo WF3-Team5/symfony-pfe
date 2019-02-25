@@ -2,20 +2,11 @@
 
 namespace App\Form;
 
-use App\Entity\Departement;
-use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserType extends AbstractType
+class PraticienType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -28,9 +19,6 @@ class UserType extends AbstractType
                     'choices' => [
                         'M' => 'M',
                         'Mme' => 'Mme',
-                    ],
-                    'attr' => [
-                        'class' => 'intro_input w-100'
                     ]
                 ]
 
@@ -50,41 +38,28 @@ class UserType extends AbstractType
                 'last_name',
                 TextType::class,
                 [
-                    'label' => 'Nom :',
-                    'attr' => [
-                        'class' => 'intro_input w-100'
-                    ]
+                    'label' => 'Nom :'
                 ]
             )
             ->add(
                 'first_name',
                 TextType::class,
                 [
-                    'label' => 'Prénom :',
-                    'attr' => [
-                        'class' => 'intro_input w-100'
-                    ]
+                    'label' => 'Prénom :'
                 ]
             )
-            ->add(
+            /*->add(
                 'birth_name',
                 TextType::class,
                 [
-                    'label' => 'Nom de naissance :',
-                    'attr' => [
-                        'class' => 'intro_input w-100'
-                    ]
+                    'label' => 'Nom de naissance :'
                 ]
-            )
+            )*/
             ->add(
                 'birth_date',
                 DateType::class,
                 [
-                    'label' => 'Date de naissance :',
-                    'years' => range(1900, date('Y')),
-                    'attr' => [
-                        'class' => 'intro_input w-100'
-                    ]
+                    'label' => 'Date de naissance :'
                 ]
             )
             ->add(
@@ -94,60 +69,42 @@ class UserType extends AbstractType
                     'label' => 'Département de naissance :',
                     'class' => Departement::class,
                     'choice_label' => 'nom',
-                    'placeholder' => 'Département',
-                    'attr' => [
-                        'class' => 'intro_input w-100'
-                    ]
+                    'placeholder' => 'Département'
                 ]
             )
             ->add(
                 'place_of_birth',
                 TextType::class,
                 [
-                    'label' => 'Lieu de naissance :',
-                    'attr' => [
-                        'class' => 'intro_input w-100'
-                    ]
+                    'label' => 'Lieu de naissance :'
                 ]
             )
             ->add(
                 'nationality',
                 TextType::class,
                 [
-                    'label' => 'Nationalité :',
-                    'attr' => [
-                        'class' => 'intro_input w-100'
-                    ]
+                    'label' => 'Nationalité :'
                 ]
             )
             ->add(
-                'email',
+                'email_pro',
                 TextType::class,
                 [
-                    'label' => 'Email :',
-                    'attr' => [
-                        'class' => 'intro_input w-100'
-                    ]
+                    'label' => 'Email :'
                 ]
             )
             ->add(
-                'address',
+                'address_pro',
                 TextType::class,
                 [
-                    'label' => 'Adresse :',
-                    'attr' => [
-                        'class' => 'intro_input w-100'
-                    ]
+                    'label' => 'Adresse :'
                 ]
             )
             ->add(
-                'postal_code',
+                'postal_code_pro',
                 IntegerType::class,
                 [
-                    'label' => 'Code postal :',
-                    'attr' => [
-                        'class' => 'intro_input w-100'
-                    ]
+                    'label' => 'Code postal :'
                 ]
 
             )
@@ -155,30 +112,21 @@ class UserType extends AbstractType
                 'city',
                 TextType::class,
                 [
-                    'label' => 'Ville :',
-                    'attr' => [
-                        'class' => 'intro_input w-100'
-                    ]
+                    'label' => 'Ville :'
                 ]
             )
             ->add(
-                'phone_number',
+                'phone_number_pro',
                 TextType::class,
                 [
-                    'label' => 'Téléphone:',
-                    'attr' => [
-                        'class' => 'intro_input w-100'
-                    ]
+                    'label' => 'Téléphone:'
                 ]
             )
             ->add(
-                'mobile_phone_number',
+                'mobile_phone_number_pro',
                 TextType::class,
                 [
-                    'label' => 'Téléphone mobile :',
-                    'attr' => [
-                        'class' => 'intro_input w-100'
-                    ]
+                    'label' => 'Téléphone mobile :'
                 ]
             )
             ->add(
@@ -190,30 +138,21 @@ class UserType extends AbstractType
                     'type' => PasswordType::class,
                     // options du 1er des 2 champs
                     'first_options' => [
-                        'label' => 'Mot de passe :',
-                        'attr' => [
-                            'class' => 'intro_input w-100'
-                        ]
+                        'label' => 'Mot de passe :'
                     ],
                     // options du 2e champ
                     'second_options' => [
-                        'label' => 'Confirmation du mot de passe',
-                        'attr' => [
-                            'class' => 'intro_input w-100'
-                        ]
+                        'label' => 'Confirmation du mot de passe'
                     ],
                     // message si les 2 champs n'ont pas la même valeur
                     'invalid_message' => 'La confirmation ne correspond pas au mot de passe'
                 ]
             )
             ->add(
-                'numeroSecu',
+                'RPPS',
                 TextType::class,
                 [
-                    'label' => 'Numéro de Sécurité sociale :',
-                    'attr' => [
-                        'class' => 'intro_input w-100'
-                    ]
+                    'label' => 'RPPS :'
                 ]
             )
         ;

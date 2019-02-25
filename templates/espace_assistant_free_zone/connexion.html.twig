@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <br><br><br><br><br>
+    <br><br><br><br><br>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card shadow mb-4 text-center ml-md-4">
+        <div class="card-header py-3" style="background:#e4e4e4;">
+            <h4 class="m-0 font-weight-bold text-danger text-center">Connexion</h4>
+        </div>
+        <div class="card-body">
+    <form method="post">
+        <div class="m-0 font-weight-bold text-secondary font-italic">
+            <label>Nom</label>
+            <input type="text" name="last_name" class="form-control" value="{{last_username}}">
+        </div>
+        <div class="m-0 font-weight-bold text-secondary font-italic">
+            <label>Mail</label>
+            <input type="email" name="mail" class="form-control" value="">
+        </div>
+        <div class="m-0 font-weight-bold text-secondary font-italic">
+            <label>Mot de passe</label>
+            <input type="password" name="password" class="form-control">
+        </div>
+        <div class="text-center m-5">
+
+            <button type="submit" class="btn btn-secondary text-danger font-weight-bold">
+                Se connecter
+            </button>
+        </div>
+    </form>
+        </div>
+    </div>
+    </div>
+{% endblock %}
