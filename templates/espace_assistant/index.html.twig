@@ -1,23 +1,10 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
-    <br>
-
-    <h1>Portail Assistant</h1>
-
-
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
+    <div class="container-fluid">
 
         <div class="container-fluid overflow-auto ">
+            <h1 class="text-center">Portail Assistant</h1>
             <table class="table table-striped">
                 <thead class="thead-light">
                 <tr>
@@ -30,8 +17,8 @@
                     <th nowrap>Numero de telephone</th>
                     <th>Adresse Mail</th>
                     <th>Adresse</th>
-                    <th>Postal_code<th>
-                    <th>Ville<th>
+                    <th>Postal_code</th>
+                    <th>Ville</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -54,185 +41,204 @@
                 </tbody>
             </table>
         </div>
-
+    </div>
 
             <!-- Debut page -->
-            <div class="container-fluid">
-                {{ form_start(form) }}
-                <div class="row">
+    <div>
+            <div class="row">
+                <div class="col-md-6">
+                    {% for label, flashes in app.session.flashbag.all %}
+                        {% for flash in flashes %}
+                            {% if ( label == 'success' ) %}
+                                <div class="alert alert-success alert-dismissible text-center fade show">
+                                    {{ flash }}
+                                </div>
+                            {% elseif ( label == 'error' ) %}
+                                <div class="alert alert-danger alert-dismissible text-center fade show">
+                                    {{ flash }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                 </div>
+            </div>
+    </div>
+
+    <div class="containerFluid">
+        {{ form_start(form) }}
+        <div class="row">
                     <!-- 1ère colonne -->
-                    <div class="col-lg-6">
+            <div class="col-lg-6">
                         <!-- Card 1 -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-info text-center">Informations Générales</h6>
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-striped">
-                                    <tr>
-                                        <td>  <p class="m-0 font-weight-bold text-dark">Médicaments</p>
-                                            {{ form_row(form.medicament) }}
-                                            {{ form_row(form.homeopathie) }}
-                                            {{ form_row(form.traitement_homeopathique) }}
-                                            {{ form_row(form.biphosphonates) }}
-                                            {{ form_row(form.hormones) }}
-                                            {{ form_row(form.pillules_contraceptives) }}
-                                        </td>
-                                        <td>  <p class="m-0 font-weight-bold text-dark">Santé général</p>
-                                            {{ form_row(form.trouble_digestifs) }}
-                                            {{ form_row(form.troubles_digestifs_details) }}
-                                            {{ form_row(form.ulcere_de_l_estomac) }}
-                                            {{ form_row(form.problemes_du_foie) }}
-                                            {{ form_row(form.diabete) }}
-                                            {{ form_row(form.troubles_thyroidiens) }}
-                                            {{ form_row(form.fievre_rhumatismale) }}
-                                            {{ form_row(form.troubles_cardiaques) }}
-                                            {{ form_row(form.etourdissements_evanouissements) }}
-                                            {{ form_row(form.rhume_des_foins) }}
-                                            {{ form_row(form.maux_de_tete_frequents) }}
-                                            {{ form_row(form.maux_d_oreilles) }}
-                                            {{ form_row(form.asthme) }}
-                                        </td>
-                                        <td>  <p class="m-0 font-weight-bold text-dark">Autre</p>
-                                            {{ form_row(form.enceinte) }}
-                                            {{ form_row(form.gain_poids) }}
-                                            {{ form_row(form.perte_poids) }}
-                                            {{ form_row(form.gain_poids) }}
-                                            {{ form_row(form.anemie) }}
-                                            {{ form_row(form.arthrite) }}
-                                            {{ form_row(form.osteoporose) }}
-                                            {{ form_row(form.troubles_du_sommeil) }}
-                                            {{ form_row(form.ronflez_vous) }}
-                                            {{ form_row(form.maladie_de_la_peau) }}
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <table class="table table-striped">
-                                    <tr>
-                                        <td>
-                                            {{ form_row(form.hemophiie) }}
-                                            {{ form_row(form.saignements_prolonges) }}
-                                            {{ form_row(form.sang_clair) }}
-                                            {{ form_row(form.sida) }}
-                                            {{ form_row(form.seropositif) }}
-                                            {{ form_row(form.maladies_sexuellement_tansmissibles) }}
-                                        </td>
-                                        <td>
-                                            {{ form_row(form.troubles_nerveux) }}
-                                            {{ form_row(form.maladies_psychiatriques) }}
-                                            {{ form_row(form.epilepsie) }}
-                                        </td>
-                                        <td>
-                                            {{ form_row(form.radiotherapie) }}
-                                            {{ form_row(form.chimiotherapie) }}
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-info text-center">Informations Générales</h6>
                     </div>
+                    <div class="card-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <td>  <p class="m-0 font-weight-bold text-dark">Médicaments</p>
+                                {{ form_row(form.medicament) }}
+                                {{ form_row(form.homeopathie) }}
+                                {{ form_row(form.traitement_homeopathique) }}
+                                {{ form_row(form.biphosphonates) }}
+                                {{ form_row(form.hormones) }}
+                                {{ form_row(form.pillules_contraceptives) }}
+                            </td>
+                            <td>  <p class="m-0 font-weight-bold text-dark">Santé général</p>
+                                {{ form_row(form.trouble_digestifs) }}
+                                {{ form_row(form.troubles_digestifs_details) }}
+                                {{ form_row(form.ulcere_de_l_estomac) }}
+                                {{ form_row(form.problemes_du_foie) }}
+                                {{ form_row(form.diabete) }}
+                                {{ form_row(form.troubles_thyroidiens) }}
+                                {{ form_row(form.fievre_rhumatismale) }}
+                                {{ form_row(form.troubles_cardiaques) }}
+                                {{ form_row(form.etourdissements_evanouissements) }}
+                                {{ form_row(form.rhume_des_foins) }}
+                                {{ form_row(form.maux_de_tete_frequents) }}
+                                {{ form_row(form.maux_d_oreilles) }}
+                                {{ form_row(form.asthme) }}
+                            </td>
+                            <td>  <p class="m-0 font-weight-bold text-dark">Autre</p>
+                                {{ form_row(form.enceinte) }}
+                                {{ form_row(form.gain_poids) }}
+                                {{ form_row(form.perte_poids) }}
+                                {{ form_row(form.gain_poids) }}
+                                {{ form_row(form.anemie) }}
+                                {{ form_row(form.arthrite) }}
+                                {{ form_row(form.osteoporose) }}
+                                {{ form_row(form.troubles_du_sommeil) }}
+                                {{ form_row(form.ronflez_vous) }}
+                                {{ form_row(form.maladie_de_la_peau) }}
+                            </td>
+                        </tr>
+                    </table>
 
-                    <!-- 2ème colonne -->
-                    <div class="col-lg-6">
-                        <!-- Card 1 -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-danger text-center">Allergies</h6>
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-striped">
-                                    <tr>
-                                        <td>
-                                            {{ form_row(form.allergie_latex) }}
-                                            {{ form_row(form.allergie_penniciline) }}
-                                            {{ form_row(form.allergie_codeine) }}
-                                            {{ form_row(form.allergie_aspirine) }}
-                                            {{ form_row(form.allergie_antibiotique) }}
-                                        </td>
-                                        <td>
-                                            {{ form_row(form.allergie_anesthesiques) }}
-                                            {{ form_row(form.allergie_sulfamides) }}
-                                            {{ form_row(form.allergie_iode) }}
-                                            {{ form_row(form.allergie_aliments) }}
-                                            {{ form_row(form.autres_allergies) }}
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- Card 2-->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-danger text-center">Autres renseignements</h6>
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-striped">
-                                    <tr>
-                                        <td>  <p class="m-0 font-weight-bold text-dark">Santé général</p>
-                                            {{ form_row(form.fumez_vous) }}
-                                            {{ form_row(form.nombre_cigrettes_par_jour) }}
-                                            {{ form_row(form.consommation_drogues) }}
-                                            {{ form_row(form.consommation_alcool) }}
-                                            {{ form_row(form.quantite_par_jour_d_alcool) }}
-                                        </td>
-                                        <td>  <p class="m-0 font-weight-bold text-dark">Santé dentaire</p>
-                                            {{ form_row(form.traitements_dentaires) }}
-                                            {{ form_row(form.traitements_gencives) }}
-                                            {{ form_row(form.traitement_implant_dentaire) }}
-                                            {{ form_row(form.autres_problemes_dentaires) }}
-                                        </td>
-                                        <td>  <p class="m-0 font-weight-bold text-dark">Santé des yeux</p>
-                                            {{ form_row(form.lunettes) }}
-                                            {{ form_row(form.lentilles) }}
-                                            {{ form_row(form.problemes_de_vision_de_couleurs) }}
-                                            {{ form_row(form.chirurgies_uculaires) }}
-                                            {{ form_row(form.problemes_oculaires) }}
-                                            {{ form_row(form.autres_problemes_oculaires) }}
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                            <!-- Card 3 -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-danger text-center">Autres</h6>
-                                </div>
-                                <div class="card-body">
-                                    <table class="table table-striped">
-                                        <tr>
+                    <table class="table table-striped">
+                        <tr>
+                            <td>
+                                {{ form_row(form.hemophiie) }}
+                                {{ form_row(form.saignements_prolonges) }}
+                                {{ form_row(form.sang_clair) }}
+                                {{ form_row(form.sida) }}
+                                {{ form_row(form.seropositif) }}
+                                {{ form_row(form.maladies_sexuellement_tansmissibles) }}
+                            </td>
+                            <td>
+                                {{ form_row(form.troubles_nerveux) }}
+                                {{ form_row(form.maladies_psychiatriques) }}
+                                {{ form_row(form.epilepsie) }}
+                            </td>
+                            <td>
+                                {{ form_row(form.radiotherapie) }}
+                                {{ form_row(form.chimiotherapie) }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-                                            <td>
-                                                {{ form_row(form.protheses_articulaires) }}
-                                                {{ form_row(form.hospitalisation) }}
-                                                {{ form_row(form.quand_quel_operations) }}
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-
-                        </div><!--fin div colonne-->
-                    </div><!--fin div row-->
-                </div><!--fin div contenair fluid-->
-
-                <!-- Donut note praticien -->
-                <div class="col-md-12">
-                    <div class="card shadow mb-4">
-                        <!-- Card Header-->
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-danger text-center">A compléter</h6>
-
-                        </div>
-                        <!-- Card Body -->
-                        <div class="card-body">
-                            {{ form_row(form.eventuels_indications_praticien) }}
-                            {{ form_row(form.eventuels_precautions_a_prendre) }}
-                        </div>
+            <!-- 2ème colonne -->
+            <div class="col-lg-6">
+                <!-- Card 1 -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-danger text-center">Allergies</h6>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <tr>
+                                <td>
+                                    {{ form_row(form.allergie_latex) }}
+                                    {{ form_row(form.allergie_penniciline) }}
+                                    {{ form_row(form.allergie_codeine) }}
+                                    {{ form_row(form.allergie_aspirine) }}
+                                    {{ form_row(form.allergie_antibiotique) }}
+                                </td>
+                                <td>
+                                    {{ form_row(form.allergie_anesthesiques) }}
+                                    {{ form_row(form.allergie_sulfamides) }}
+                                    {{ form_row(form.allergie_iode) }}
+                                    {{ form_row(form.allergie_aliments) }}
+                                    {{ form_row(form.autres_allergies) }}
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
+                <!-- Card 2-->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-danger text-center">Autres renseignements</h6>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <tr>
+                                <td>  <p class="m-0 font-weight-bold text-dark">Santé général</p>
+                                    {{ form_row(form.fumez_vous) }}
+                                    {{ form_row(form.nombre_cigrettes_par_jour) }}
+                                    {{ form_row(form.consommation_drogues) }}
+                                    {{ form_row(form.consommation_alcool) }}
+                                    {{ form_row(form.quantite_par_jour_d_alcool) }}
+                                </td>
+                                <td>  <p class="m-0 font-weight-bold text-dark">Santé dentaire</p>
+                                    {{ form_row(form.traitements_dentaires) }}
+                                    {{ form_row(form.traitements_gencives) }}
+                                    {{ form_row(form.traitement_implant_dentaire) }}
+                                    {{ form_row(form.autres_problemes_dentaires) }}
+                                </td>
+                                <td>  <p class="m-0 font-weight-bold text-dark">Santé des yeux</p>
+                                    {{ form_row(form.lunettes) }}
+                                    {{ form_row(form.lentilles) }}
+                                    {{ form_row(form.problemes_de_vision_de_couleurs) }}
+                                    {{ form_row(form.chirurgies_uculaires) }}
+                                    {{ form_row(form.problemes_oculaires) }}
+                                    {{ form_row(form.autres_problemes_oculaires) }}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                    <!-- Card 3 -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-danger text-center">Autres</h6>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <tr>
+
+                                    <td>
+                                        {{ form_row(form.protheses_articulaires) }}
+                                        {{ form_row(form.hospitalisation) }}
+                                        {{ form_row(form.quand_quel_operations) }}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                </div><!--fin div colonne-->
+            </div><!--fin div row-->
+
+
+        <!-- Donut note praticien -->
+        <div class="col-md-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header-->
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-danger text-center">A compléter</h6>
+
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    {{ form_row(form.eventuels_indications_praticien) }}
+                    {{ form_row(form.eventuels_precautions_a_prendre) }}
+                </div>
+            </div>
+        </div>
 
 
     <div class="text-center">
@@ -241,7 +247,7 @@
         </button>
     </div>
                 {{ form_end(form) }}
-            </div>
+    </div>
                         <!-- Fin page content -->
 
     <!------------------------ eventuel tchat ass/patient ------------------------------------>

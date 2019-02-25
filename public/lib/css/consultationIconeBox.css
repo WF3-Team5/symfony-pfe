@@ -46,4 +46,26 @@ consultation /cadran accueil
     font-weight: 600;
     color: #FFFFFF;
 }
-
+.card-perso-footer
+{
+    width: 80%;
+    height: 5vh;
+    background: #FFFFFF;
+    padding-top: 31px;
+    padding-bottom: 66px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border: solid 2px #FFFFFF;
+    margin: auto;
+    margin-bottom: 53px;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+}
+.card-perso-footer:hover
+{
+    border-color: #57ccc3;
+    box-shadow: 0px 35px 43px rgba(63,191,191,0.40);
+}
