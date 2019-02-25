@@ -220,6 +220,7 @@ class EspacePatientLoggedInController extends AbstractController
      */
     public function contacter(){
         $user=$this->getUser();
+
         return $this->render('/espace_patient_logged_in/contacter/contacter.html.twig',
             [
                 "user" => $user,
