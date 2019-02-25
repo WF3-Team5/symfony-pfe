@@ -2,6 +2,57 @@
 
 
 {% block body %}
-    <br><br><br><br><br>
-test ok
+<div class="container-fluid">
+    <div class="row">
+        <!-- 1ère colonne -->
+        <div class="col-lg-6">
+            <!-- Card 1 -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-info text-center">Mes Patients</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead class="thead-light text-dark">
+                        <tr>
+                            <th>Numéro dossier</th>
+                            <th>Civilité</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {%  %}
+                        <tr>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <!-- 2ème colonne -->
+        <div class="col-lg-6">
+            <!-- Card 1 -->
+            <div class="card shadow mb-4 display-none">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-info text-center">Historique des Consultations</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        <!--fin card-->
+        </div>
+    </div>
+</div>
+
+
+
+
 {% endblock %}

@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class EspaceAssistantController
  * @package App\Controller
- * @Route("/espace")
+ * @Route("/espace/assistant/logged/in")
  */
 class EspaceAssistantController extends AbstractController
 {
@@ -45,7 +45,7 @@ class EspaceAssistantController extends AbstractController
 
 
     /**
-     * @Route("/assistant/{id}")
+     * @Route("/questionnaire_medical/{id}")
      */
     public function index(Request $request, User $user)
     {
@@ -64,7 +64,7 @@ class EspaceAssistantController extends AbstractController
 
             $this->addFlash('succes','Les données ont bien été enregistrées !');
 
-            return $this->redirectToRoute('app_home_index');
+            return $this->redirectToRoute('app_consultation_index');
         }
 
         return $this->render(
