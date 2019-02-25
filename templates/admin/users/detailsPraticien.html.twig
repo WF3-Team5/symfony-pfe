@@ -1,0 +1,145 @@
+{% extends 'base.backoffice.html.twig' %}
+
+{% block title %}Admin | Details{% endblock %}
+
+{% block body %}
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Dashboard</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page"><a href="{{ path('app_admin_dboard_index') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href="{{ path('app_admin_dboard_list') }}">Utilisateurs</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Détails</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Sales Cards  -->
+        <!-- ============================================================== -->
+        <section class="container">
+            <h2>Détail du compte Praticien Numéro <span class="text-primary" style="text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);">{{ praticien.id }}</span></h2>
+        </section>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3  toppad  pull-right col-md-offset-3 ">
+                    <A href="" >Editer</A>
+
+                    <A href="{{ path('app_admin_dboard_logout') }}" >Déconnexion</A>
+                    <br>
+                    <p class=" text-info"><?=$today?></p>
+                </div>
+
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ praticien.firstName|capitalize }} <span style='color:orange;font-size:2.5rem; '>{{ praticien.lastName|capitalize }}</span></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2 " align="center"><img alt="User Pic" src="<?=$profil_photo?>" width="150" class="rounded-circle img-responsive"></div>
+                                <div class=" col-md-9 col-lg-9 offset-md-1 pl-5 ">
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                        <tr>
+                                            <td>Id Bdd:</td>
+                                            <td>{{ praticien.id }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Civilité:</td>
+                                            <td>{{ praticien.civility }}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Nom:</td>
+                                            <td>{{ praticien.lastName|capitalize }}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Prénom</td>
+                                            <td>{{ praticien.firstName|capitalize }}</td>
+                                        </tr>
+
+                                        <tr>
+                                        <tr>
+                                            <td>Date de naissance</td>
+                                            <td>{{ praticien.birthDate|date("d/m/Y") }}</td>
+                                        </tr>
+                                        {% if specialites is not null %}
+                                        {% for spe in specialites %}
+                                        <tr>
+                                            <td>Specialité</td>
+                                            <td>{{ spe.libelle|capitalize }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                        {% endif %}
+                                        <tr>
+                                            <td>Adresse Pro</td>
+                                            <td>{{ praticien.addressPro ~ ' ' ~ praticien.postalCodePro ~ ' ' ~ praticien.cityPro }}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Tel Fixe</td>
+                                            <td>{{ praticien.phoneNumberPro }}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Tel Mobile</td>
+                                            <td>{{ praticien.mobilePhoneNumberPro }}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Email Pro</td>
+                                            <td><a href="">{{ praticien.emailPro }}</a></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Email Secretariat</td>
+                                            <td><a href="">{{ praticien.emailSecretariat }}</a></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Role</td>
+                                            <td>{{ praticien.role }}</td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer d-flex flex-row justify-content-end mt-2" style="">
+                            <a data-original-title="SendMail" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary" href="{{ path('app_admin_dboard_sendmail',{"userType":"praticien","id":praticien.Id}) }}"><i class="far fa-envelope"></i></a>
+
+                            <a href="#" data-original-title="Editer ce profil" data-toggle="modal" data-target="#editpfil" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning ml-1"><i class="far fa-edit"></i></a>
+                            <a href="{{ path('app_admin_dboard_deleteuser',{"id":praticien.id}) }}" data-original-title="Desactiver ce compte" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger ml-1 acc-trash" onclick="return confirm('Cette action est ireéversible. Êtes-vous certain de vouloir continuer?')"><i class="fas fa-trash"></i></a>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

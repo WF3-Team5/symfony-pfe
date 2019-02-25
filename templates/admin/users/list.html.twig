@@ -207,10 +207,11 @@
                             <th>Id</th>
                             <th>Nom</th>
                             <th>Prénom</th>
+                            <th>Spécialité</th>
                             <th>Tel.Fixe</th>
                             <th>Tel.Mobile</th>
-                            <th>Spécialité</th>
-                            <th>Email</th>
+                            <th>Email Secretariat</th>
+                            <th>Email Pro</th>
                             <th>Detail</th>
                             <th>Modifier</th>
                             <th>Supprimer</th>
@@ -223,14 +224,21 @@
                                     <th scope="row">{{ praticien.Id }}</th>
                                     <td>{{ praticien.LastName|capitalize }}</td>
                                     <td>{{ praticien.FirstName }}</td>
-                                    <td>{{ praticien.phoneNumber }}</td>
-                                    <td>{{ praticien.MobilePhoneNumber }}</td>
-                                    <td>{{ praticien.service }}</td>
-                                    <td>{{ praticien.specialite }}</td>
-                                    <td>{{ praticien.Email }}</td>
-                                    <td><a class="btn btn-outline-info" href="" title="Détails"><i class="fas fa-eye"></i></a></td>
+                                    <td>
+                                        {% for spe in specialites %}
+                                            {% if spe.praticien == praticien.Id %}
+                                                {{ spe.libelle ~ ' - ' }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+
+                                    <td>{{ praticien.phoneNumberPro }}</td>
+                                    <td>{{ praticien.MobilePhoneNumberPro }}</td>
+                                    <td>{{ praticien.EmailSecretariat }}</td>
+                                    <td>{{ praticien.EmailPro }}</td>
+                                    <td><a class="btn btn-outline-info" href="{{ path('app_admin_dboard_detailpraticien',{"id":praticien.Id}) }}" title="Détails"><i class="fas fa-eye"></i></a></td>
                                     <td><a class="btn btn-outline-warning" href="" title="Modifier"><i class="fas fa-edit"></i></a></td>
-                                    <td><a class="btn btn-outline-danger" href="" title="Supprimer"><i class="fas fa-trash"></i></a></td>
+                                    <td><a class="btn btn-outline-danger" href="" onclick="return confirm('Cette action est irréversible. Êtes-vous certain de vouloir poursuivre?')"title="Supprimer"><i class="fas fa-trash"></i></a></td>
                                 </tr>
                             {% endfor %}
                         {% else %}
@@ -277,9 +285,9 @@
                                     <td>{{ patients.phoneNumber }}</td>
                                     <td>{{ praticien.MobilePhoneNumber }}</td>
                                     <td>{{ praticien.Email }}</td>
-                                    <td><a class="btn btn-outline-info" href="" title="Détails"><i class="fas fa-eye"></i></a></td>
-                                    <td><a class="btn btn-outline-warning" href="" title="Modifier"><i class="fas fa-edit"></i></a></td>
-                                    <td><a class="btn btn-outline-danger" href="" title="Supprimer"><i class="fas fa-trash"></i></a></td>
+                                    <td><a class="btn btn-outline-info" href="{{ path('app_admin_dboard_showuser',{"id": admin.id}) }}" title="Détails"><i class="fas fa-eye"></i></a></td>
+                                    <td><a class="btn btn-outline-warning" href="{{ path('app_admin_dboard_edituser',{"id":admin.id}) }}" title="Modifier"><i class="fas fa-edit"></i></a></td>
+                                    <td><a class="btn btn-outline-danger" onclick="return confirm('Cette action est irréversible. Êtes-vous certain de vouloir poursuivre?')" href="{{ path('app_admin_dboard_deleteuser',{"id":admin.id}) }}" title="Supprimer"><i class="fas fa-trash"></i></a></td>
                                 </tr>
                             {% endfor %}
                         {% else %}
