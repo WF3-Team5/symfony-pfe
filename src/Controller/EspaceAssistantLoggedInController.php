@@ -32,17 +32,12 @@ class EspaceAssistantLoggedInController extends AbstractController
             ]);
 
             if (!is_null($search)) {
-                return $this->redirectToRoute('app_espaceassistant_index', ['id' => $search->getId()]);
+                return $this->redirectToRoute('app_espaceassistantloggedin_index', ['id' => $search->getId()]);
             }
         }
 
 
-
-        return $this->render('espace_assistant/formulaire_recherche.html.twig', [
-
-
-        ]) ;
-
+        return $this->render('espace_assistant/formulaire_recherche.html.twig', []) ;
     }
 
 
@@ -76,7 +71,7 @@ class EspaceAssistantLoggedInController extends AbstractController
 
             $this->addFlash('success','Les données ont bien été enregistrées !');
 
-            return $this->redirectToRoute('app_consultation_index');
+            return $this->redirectToRoute('app_espaceassistantloggedin_dashboard');
         }
 
         return $this->render(
@@ -92,14 +87,80 @@ class EspaceAssistantLoggedInController extends AbstractController
      * @Route("/dashboard/{id}", defaults={"id":null})
      */
 
-    public function dashboard()
+    public function dashboard(User $user)
     {
 
         return $this->render('consultation/cadran 1/sommaire.html.twig',
             [
+                'user'=>$user
             ]);
     }
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/donnees/{id}", defaults={"id":null})
+     */
+    public function donneesPatient(User $user)
+    {
+        return $this->render('consultation/cadran 1/donnees.html.twig',
+            [
+                'user'=>$user,
+
+            ]);
+    }
+
+    /**
+     * @param User $user
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/devis/{id}", defaults={"id":null})
+     */
+    public function devisPatient(User $user)
+    {
+       return $this->render('consultation/cadran 1/devis.html.twig',
+           [
+               'user'=>$user
+           ]);
+    }
+
+    /**
+     * @param User $user
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/mail/{id}", defaults={"id":null})
+     */
+    public function courrierPatient(User $user)
+    {
+        return $this->render('consultation/cadran 1/courrier.html.twig',
+            [
+                'user'=>$user
+            ]);
+    }
+
+    /**
+     * @param User $user
+     * @return \Symfony\Component\HttpFoundation\Response
+     * 0@Route("/rdvPatient/{id}", defaults={"id":null})
+     */
+    public function rdvPatient(User $user)
+    {
+        return $this->render('consultation/cadran 1/rdv.html.twig',
+            [
+                'user'=>$user
+            ]);
+    }
+
+    /**
+     * @param User $user
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/rdvExternePatient/{id}", defaults={"id":null})
+     */
+    public function rdvExternePatient(User $user)
+    {
+        return $this->render('consultation/cadran 1/rdvExterne.html.twig',
+            [
+                'user'=>$user
+            ]);
+    }
+    
 
 }
 
