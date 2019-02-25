@@ -28,7 +28,8 @@ class PraticienType extends AbstractType
                     'choices' => [
                         'M' => 'M',
                         'Mme' => 'Mme',
-                    ]
+                    ],
+                    'attr' => array('class'=>'intro_input')
                 ]
 
             )
@@ -36,73 +37,60 @@ class PraticienType extends AbstractType
                 'last_name',
                 TextType::class,
                 [
-                    'label' => 'Nom :'
+                    'label' => 'Nom :',
+                    'attr' => array('class'=>'intro_input')
                 ]
+
             )
             ->add(
                 'first_name',
                 TextType::class,
                 [
-                    'label' => 'Prénom :'
+                    'label' => 'Prénom :',
+                    'attr' => array('class'=>'intro_input')
                 ]
             )
             ->add(
                 'birth_date',
                 DateType::class,
                 [
-                    'label' => 'Date de naissance :'
+                    'label' => 'Date de naissance :',
+                    'years' => range(1920, date('Y')),
+                    'format'=>'dd MM yyyy',
                 ]
             )
-            ->add(
-                'birth_department',
-                EntityType::class,
-                [
-                    'label' => 'Département de naissance :',
-                    'class' => Departement::class,
-                    'choice_label' => 'nom',
-                    'placeholder' => 'Département'
-                ]
-            )
-            ->add(
-                'place_of_birth',
-                TextType::class,
-                [
-                    'label' => 'Lieu de naissance :'
-                ]
-            )
-            ->add(
-                'nationality',
-                TextType::class,
-                [
-                    'label' => 'Nationalité :'
-                ]
-            )
+
+
             ->add(
                 'email_pro',
                 TextType::class,
                 [
-                    'label' => 'Email :'
+                    'label' => 'Email :',
+                    'attr' => array('class'=>'intro_input')
                 ]
             )
             ->add(
                 'email_secretariat',
                 TextType::class,
                 [
-                    'label' => 'Email Secrétariat :'
+                    'label' => 'Email Secrétariat :',
+                    'attr' => array('class'=>'intro_input')
                 ]
             )
             ->add(
                 'address_pro',
                 TextType::class,
                 [
-                    'label' => 'Adresse :'
+                    'label' => 'Adresse :',
+                    'attr' => array('class'=>'intro_input')
                 ]
             )
             ->add(
                 'postal_code_pro',
                 IntegerType::class,
                 [
-                    'label' => 'Code postal :'
+                    'label' => 'Code postal :',
+                    'attr' => array('class'=>'intro_input')
                 ]
 
             )
@@ -110,21 +98,24 @@ class PraticienType extends AbstractType
                 'city_pro',
                 TextType::class,
                 [
-                    'label' => 'Ville :'
+                    'label' => 'Ville :',
+                    'attr' => array('class'=>'intro_input')
                 ]
             )
             ->add(
                 'phone_number_pro',
                 TextType::class,
                 [
-                    'label' => 'Téléphone:'
+                    'label' => 'Téléphone:',
+                    'attr' => array('class'=>'intro_input')
                 ]
             )
             ->add(
                 'mobile_phone_number_pro',
                 TextType::class,
                 [
-                    'label' => 'Téléphone mobile :'
+                    'label' => 'Téléphone mobile :',
+                    'attr' => array('class'=>'intro_input')
                 ]
             )
             ->add(
@@ -136,21 +127,24 @@ class PraticienType extends AbstractType
                     'type' => PasswordType::class,
                     // options du 1er des 2 champs
                     'first_options' => [
-                        'label' => 'Mot de passe :'
+                        'label' => 'Mot de passe :',
+                        'attr' => array('class'=>'intro_input')
                     ],
                     // options du 2e champ
                     'second_options' => [
-                        'label' => 'Confirmation du mot de passe'
+                        'label' => 'Confirmation du mot de passe',
+                        'attr' => array('class'=>'intro_input')
                     ],
                     // message si les 2 champs n'ont pas la même valeur
-                    'invalid_message' => 'La confirmation ne correspond pas au mot de passe'
+                    'invalid_message' => 'La confirmation ne correspond pas au mot de passe',
                 ]
             )
             ->add(
                 'RPPS',
                 TextType::class,
                 [
-                    'label' => 'RPPS :'
+                    'label' => 'RPPS :',
+                    'attr' => array('class'=>'intro_input')
                 ]
             )
         ;

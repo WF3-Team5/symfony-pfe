@@ -16,54 +16,37 @@
         {% endfor %}
     {% endfor %}
 
-    <div class="col-lg-6 intro_col offset-2">
+    <div class="col-lg-10 intro_col offset-1">
         <div class="intro_form_container">
             <div class="intro_form_title">Inscription Praticien</div>
             <form action="" class="intro_form" id="intro_form" method="post">
                 {{ form_start(form) }}
-                <div>
-                    {{ form_row(form.civility) }}
-                    {{ form_row(form.last_name) }}
-                    {{ form_row(form.first_name) }}
 
-
-                    {{ form_row(form.birth_date) }}
-                    {{ form_row(form.place_of_birth) }}
-                    {{ form_row(form.birth_department) }}
-                    {{ form_row(form.nationality) }}
-
-                    {{ form_row(form.address_pro) }}
-                    {{ form_row(form.postal_code_pro) }}
-                    {{ form_row(form.city_pro) }}
-                    {{ form_row(form.mobile_phone_number_pro) }}
-
-
-                    {{ form_row(form.email_pro) }}
-                    {{ form_row(form.email_secretariat) }}
-                    {{ form_row(form.plainPassword) }}
-                    {{ form_row(form.plainPassword) }}
-                    {{ form_end(form) }}
-                </div>
                 <div class="d-flex flex-row align-items-start justify-content-between flex-wrap">
-                    <input type="text" class="intro_input" placeholder="Votre nom" required="required" name="first_name">
-                    <input type="text" class="intro_input" placeholder="Votre prénom" required="required" name="last_name">
-                    <input type="email" class="intro_input" placeholder="Votre Email professionnel" required="required" name="email_pro">
-                    <input type="tel" class="intro_input" placeholder="Votre télephone professionnel" required="required" name="mobile_phone_number_pro" >
-                    <select class="intro_select intro_input" required="required">
-                        <option disabled="" selected="" value="">Specialités</option>
-                        <option>Specialité 1</option>
-                        <option>Specialité 2</option>
-                        <option>Specialité 3</option>
-                        <option>Specialité 4</option>
-                        <option>Specialité 5</option>
-                    </select>
-                    <input type="tel" class="intro_input" placeholder="Votre RPPS" required="required" name="RPPS">
-                    <input type="password" class="intro_input" placeholder="Votre mot de passe" required="required" name="password">
-                    <input type="password" class="intro_input" placeholder="Confirmer votre mot de passe" required="required" name="password">
-                </div>
-                <a class="button button_3 intro_button trans_200"">Envoyer</a>
+                    <div class="col-lg-6">
+                        {{ form_row(form.civility) }}
+                        {{ form_row(form.last_name) }}
+                        {{ form_row(form.first_name) }}
+                        {{ form_row(form.birth_date) }}
+                        {{ form_row(form.address_pro) }}
+                        {{ form_row(form.postal_code_pro) }}
+                        {{ form_row(form.city_pro) }}
+                    </div>
+                    <div class="col-lg-6">
+                        {{ form_row(form.email_pro) }}
+                        {{ form_row(form.email_secretariat) }}
+                        {{ form_row(form.phone_number_pro) }}
+                        {{ form_row(form.mobile_phone_number_pro) }}
+                        {{ form_row(form.RPPS) }}
+                        {{ form_row(form.plainPassword) }}
+                        {{ form_row(form.plainPassword) }}
 
+                    </div>
+                </div>
+                {{ form_end(form) }}<br>
             </form>
+            <button type="submit" class="button button_1 intro_button trans_200 button-rdv" href="{{ path('app_espacepraticienloggedin_logout') }}">S'inscrire</button>
+            {{ form_end(form) }}<br>
         </div>
-    </div>
+    </div><br><br>
 {% endblock %}
