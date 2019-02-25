@@ -3,7 +3,14 @@
 namespace App\Controller;
 
 
+use App\Entity\Booking;
+use App\Entity\Praticien;
+use App\Entity\Specialite;
+use App\Form\BookingType;
+use App\Form\SimpleUserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\RuntimeException;
 
