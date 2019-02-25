@@ -1,14 +1,17 @@
 {% extends 'base.html.twig' %}
-{% block body %}
+    {% block body %}
+
 <div class="container-fluid">
+
+
     <div class="row">
         <!-- 1ère colonne -->
         <div class="col-lg-6">
             <!-- Card 1 -->
             <div class="card-body card-perso">
-                <div class="icon_box_num">Consultation</div>
+                <div class="icon_box_num">Consultation</div><a href="{{ path('app_consultation_sommaire') }}">
                 <img src="{{ asset('lib/images/consultation/image1.jpg') }}" alt="" style="width:85%;margin-left:8%">
-                <p class="m-0 font-weight-bold text-dark text-center">Informations patient, ordonnances, courriers,devis...</p>
+                <p class="m-0 font-weight-bold text-dark text-center">Informations patient,<br> ordonnances,<br> courriers,<br>devis...</p></a>
             </div>
             <!-- Card 2 -->
             <div class="card-body card-perso">
@@ -34,4 +37,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
+    {% endblock %}

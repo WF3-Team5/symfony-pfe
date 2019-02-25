@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -14,11 +16,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class ConsultationController extends AbstractController
 {
     /**
-     * @Route("/accueil/{id}, defaults={"id": null}, requirements={"id" : "\d+"}")
+     * @Route("/accueil")
      */
     public function index()
     {
         return $this->render('consultation/index.html.twig', []);
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/sommaire")
+     */
+    public function sommaire()
+    {
+        
+        return $this->render('consultation/cadran 1/sommaire.html.twig',
+            [
+            ]);
     }
 
 
