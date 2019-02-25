@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package App\Controller
  * @Route("/espace/assistant/logged/in")
  */
-class EspaceAssistantController extends AbstractController
+class EspaceAssistantLoggedInController extends AbstractController
 {
 
     /**
@@ -30,17 +30,12 @@ class EspaceAssistantController extends AbstractController
             ]);
 
             if (!is_null($search)) {
-                return $this->redirectToRoute('app_espaceassistant_index', ['id' => $search->getId()]);
+                return $this->redirectToRoute('app_espaceassistantloggedin_index', ['id' => $search->getId()]);
             }
         }
 
 
-
-        return $this->render('espace_assistant/formulaire_recherche.html.twig', [
-
-
-        ]) ;
-
+        return $this->render('espace_assistant/formulaire_recherche.html.twig', []) ;
     }
 
 
