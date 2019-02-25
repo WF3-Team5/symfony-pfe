@@ -119,7 +119,7 @@ class Praticien implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=20)
      */
-    private $etat;
+    private $etat = 'actif';
 
     /**
      * @ORM\Column(type="integer")
