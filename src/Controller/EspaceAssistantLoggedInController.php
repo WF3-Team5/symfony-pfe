@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Antecedents;
+use App\Entity\DossierPatient;
 use App\Entity\User;
 use App\Form\AntecedentsType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 /**
  * Class EspaceAssistantController
@@ -44,8 +46,14 @@ class EspaceAssistantLoggedInController extends AbstractController
      */
     public function index(Request $request, User $user)
     {
-        dump($user);
+        $praticien=$this->getUser()->getId();
+        $mgr=$this->getDoctrine()->getManager();
+        $repo=$mgr->getRepository(DossierPatient::class);
+        $exist=$repo->findOneBy(["praticien"=>$praticien]);
 
+        if(!empty($exist)){
+            return $this->redirectToRoute('app_espaceassistantloggedin_dashboard',['id'=>$user->getId()]);
+        }
         $antecedants = new Antecedents();
 
         $form = $this->createForm(AntecedentsType::class, $antecedants);
@@ -54,10 +62,14 @@ class EspaceAssistantLoggedInController extends AbstractController
 
         if ($form->isSubmitted()){
             $em = $this->getDoctrine()->getManager();
+            $ds= new DossierPatient();
+            $ds->setPatient($user->getId());
+            $ds->setAntecedents($antecedants->getId());
+            $ds->setPraticien($praticien);
             $em->persist($antecedants);
             $em->flush();
 
-            $this->addFlash('succes','Les données ont bien été enregistrées !');
+            $this->addFlash('success','Les données ont bien été enregistrées !');
 
             return $this->redirectToRoute('app_consultation_index');
         }
@@ -70,7 +82,18 @@ class EspaceAssistantLoggedInController extends AbstractController
             ]);
     }
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/dashboard/{id}", defaults={"id":null})
+     */
 
+    public function dashboard()
+    {
+
+        return $this->render('consultation/cadran 1/sommaire.html.twig',
+            [
+            ]);
+    }
 
 
 }
