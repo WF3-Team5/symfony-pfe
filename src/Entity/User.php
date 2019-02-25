@@ -131,7 +131,7 @@ class User implements UserInterface, \Serializable
     /**
      * Mot de passe en clair pour interagir avec le formulaire d'inscription
      * @var string
-     * @Assert\NotBlank(message="Le mot de passe est obligatoire")
+     * @Assert\NotBlank(message="Le mot de passe est obligatoire", groups={"inscription"})
      */
     private $plainPassword;
 

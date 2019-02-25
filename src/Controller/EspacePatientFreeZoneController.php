@@ -39,7 +39,7 @@ class EspacePatientFreeZoneController extends AbstractController
     ){
         $user = new User();
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user, [ 'validation_groups' => ['registration']]);
 
         $form->handleRequest($request);
 

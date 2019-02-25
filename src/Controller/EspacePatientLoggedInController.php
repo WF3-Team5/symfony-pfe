@@ -4,7 +4,12 @@ namespace App\Controller;
 
 
 use App\Entity\User;
+use App\Form\SimpleUserType;
+use App\Form\UserType;
+use PhpParser\Node\Expr\Isset_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\RuntimeException;
 
@@ -27,7 +32,7 @@ class EspacePatientLoggedInController extends AbstractController
         }
 
         $user=$this->getUser();
-        return $this->render('espace_patient_logged_in/index.html.twig',
+        return $this->render('espace_patient_logged_in/donnees_perso/donneesPerso.html.twig',
         [
             "user"=>$user,
         ]);
@@ -135,6 +140,49 @@ class EspacePatientLoggedInController extends AbstractController
         $user = $this->getUser();
         return $this->render('espace_patient_logged_in/rdv_patient/index.html.twig',
             [
+                "user" => $user,
+            ]
+        );
+    }
+
+    /**
+     * @Route("/edition")
+     */
+    public function modifDonneesPerso(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        if (is_null($user)){
+            return $this->redirectToRoute('app_espacepatientfreezone_inscription');
+        }
+
+        $form = $this->createForm(SimpleUserType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+
+                $em->persist($user);
+                $em->flush();
+
+                $this->addFlash('success', 'Votre modification a bien été enregistrée');
+
+
+                return $this->redirectToRoute(
+                    'app_espacepatientloggedin_donneesperso'
+                );
+            }else{
+                $this->addFlash('error','Le formulaire contient des erreurs');
+            }
+        }
+
+        $user = $this->getUser();
+        return $this->render(
+            'espace_patient_logged_in/donnees_perso/donneesPersoEdit.html.twig',
+            [
+                'form' => $form->createView(),
                 "user" => $user,
             ]
         );
