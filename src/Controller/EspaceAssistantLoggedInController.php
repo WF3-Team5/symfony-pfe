@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class EspaceAssistantController
  * @package App\Controller
- * @Route("/espace_assistant")
+ * @Route("/espace/assistant/logged/in")
  */
 class EspaceAssistantController extends AbstractController
 {

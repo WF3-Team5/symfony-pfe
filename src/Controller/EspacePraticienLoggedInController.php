@@ -32,17 +32,14 @@ class EspacePraticienLoggedInController extends AbstractController
     }
 
 
-   /* public function listePatientPraticien()
+   public function listePatientPraticien(User $user)
     {
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository(User::class);
-        $patients = $repository->findBy([]['' => ])
+
 
         return $this->render(
             'espace_patient_logged_in/index.html.twig',
             [
-                'patients' =>$patients
-            ]
-        );
-    }*/
+                'user' => $user
+            ]);
+    }
 }
