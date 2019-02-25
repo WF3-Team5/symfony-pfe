@@ -50,7 +50,8 @@ class PraticienType extends AbstractType
                 'birth_date',
                 DateType::class,
                 [
-                    'label' => 'Date de naissance :'
+                    'label' => 'Date de naissance :',
+                    'format'=>'dd-MM-yyyy',
                 ]
             )
             ->add(
