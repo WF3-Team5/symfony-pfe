@@ -7,33 +7,37 @@
             <div class="col-lg-6">
                 <!-- Card 1 -->
                 <div class="card-body card-perso">
-                    <div class="icon_box_num">Renseignements</div><a href="">
-                    <img src="{{ asset('lib/images/consultation/consult.jpg') }}" alt="" style="width:50%;margin-left:8%">
-                    <p class="m-0 font-weight-bold text-dark text-center"></p></a>
+                    <div class="icon_box_num">Données</div><a href="{{ path('app_espaceassistantloggedin_donneespatient', {"id":user.Id} ) }}">
+                    <img src="{{ asset('lib/images/consultation/consult.jpg') }}" alt="" style="width:50%;margin-left:8%"></a>
 
                 </div>
                 <!-- Card 2 -->
                 <div class="card-body card-perso">
-                    <div class="icon_box_num">Courrier</div>
-                    <img src="{{ asset('lib/images/consultation/courrier.jpg') }}" alt="" style="width:50%;margin-left:8%">
-                    <p class="m-0 font-weight-bold text-dark text-center">nnucdyfrycedhiuezhdyzfo</p>
+                    <div class="icon_box_num">Mail/courrier</div><a href="{{ path('app_espaceassistantloggedin_courrierpatient', {"id":user.Id} ) }}">
+                        <img src="{{ asset('lib/images/consultation/courrier.jpg') }}" alt="" style="width:65%;margin-left:8%"></a>
                 </div>
             </div>
             <!-- 2ème colonne -->
             <div class="col-lg-6">
                 <!-- Card 1 -->
                 <div class="card-body card-perso">
-                    <div class="icon_box_num">Ordonnance</div>
-                    <img src="{{ asset('lib/images/consultation/ordonnance.jpg') }}" alt="" style="width:50%;margin-left:8%">
-                    <p class="m-0 font-weight-bold text-dark text-center">nnucdyfrycedhiuezhdyzfo</p>
+                    <div class="icon_box_num">RDV</div><a href="">
+                        <img src="{{ asset('lib/images/consultation/ordonnance.jpg') }}" alt="" style="width:50%;margin-left:8%"></a>
                 </div>
                 <!-- Card 2 -->
                 <div class="card-body card-perso">
-                    <div class="icon_box_num">Devis</div>
-                    <img src="{{ asset('lib/images/consultation/devis.jpg') }}" alt="" style="width:50%;margin-left:8%">
-                    <p class="m-0 font-weight-bold text-dark text-center">nnucdyfrycedhiuezhdyzfo</p>
+                    <div class="icon_box_num">Rdv Externe</div><a href="{{ path('app_espaceassistantloggedin_rdvexternepatient', {"id":user.Id} ) }}"></a>
                 </div>
             </div>
         </div>
     </div>
+
+    <div>
+        <div class="col-lg-6 offset-3">
+                <div class="card-body card-perso">
+                    <div class="icon_box_num">Devis</div><a href="{{ path('app_espaceassistantloggedin_devispatient', {"id":user.Id} ) }}">
+                        <img src="{{ asset('lib/images/consultation/devis.jpg') }}" alt="" style="width:50%;margin-left:8%"></a>
+                </div>
+    </div>
+
 {% endblock %}
