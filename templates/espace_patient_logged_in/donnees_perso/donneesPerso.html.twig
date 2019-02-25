@@ -1,0 +1,59 @@
+{% extends 'espace_patient_logged_in/index.html.twig' %}
+
+{% block title %}Données Personnelles{% endblock %}
+
+{% block body %}
+<br>
+    <h3>Vos données personnelles</h3><br><br>
+
+
+    <div class="d-flex flex-row align-items-start">
+        <p><div class="col-lg-4 label-dp infos-dp">Numéro de Sécurité S. :</div><div class="col-lg-3 infos-dp"> {{ user.NumeroSecu }}</div></p>
+    </div>
+    <div class="d-flex flex-row align-items-start">
+        <p><div class="col-lg-4 label-dp infos-dp">Civilité :</div><div class="col-lg-3 infos-dp"> {{ user.civility }}</div></p>
+    </div>
+    <div class="d-flex flex-row align-items-start">
+        <p><div class="col-lg-4 label-dp infos-dp">Nom :</div><div class="col-lg-3 infos-dp"> {{ user.LastName }}</div></p>
+    </div>
+    <div class="d-flex flex-row align-items-start">
+        <p><div class="col-lg-4 label-dp infos-dp">Prénom :</div><div class="col-lg-3 infos-dp"> {{ user.FirstName }}</div></p>
+    </div>
+    <div class="d-flex flex-row align-items-start">
+        <p><div class="col-lg-4 label-dp infos-dp">Nom de naissance :</div><div class="col-lg-3 infos-dp"> {{ user.BirthName }}</div></p>
+    </div>
+    <div class="d-flex flex-row align-items-start">
+        <p><div class="col-lg-4 label-dp infos-dp">Date de naissance:</div><div class="col-lg-3 infos-dp"></div></p>
+    </div>
+    <div class="d-flex flex-row align-items-start">
+        <p><div class="col-lg-4 label-dp infos-dp">Département de naissance :</div><div class="col-lg-3 infos-dp"> </div></p>
+    </div>
+    <div class="d-flex flex-row align-items-start">
+        <p><div class="col-lg-4 label-dp infos-dp">Lieu de naissance :</div><div class="col-lg-3 infos-dp"> {{ user.PlaceOfBirth }}</div></p>
+    </div>
+    <div class="d-flex flex-row align-items-start">
+        <p><div class="col-lg-4 label-dp infos-dp">Nationalité :</div><div class="col-lg-3 infos-dp"> {{ user.Nationality }}</div></p>
+    </div>
+    <div class="d-flex flex-row align-items-start">
+        <p><div class="col-lg-4 label-dp infos-dp">Adresse :</div><div class="col-lg-3 infos-dp"> {{ user.Address }} </div></p>
+    </div>
+    <div class="d-flex flex-row align-items-start">
+        <p><div class="col-lg-4 label-dp infos-dp">Code Postale :</div><div class="col-lg-3 infos-dp"> {{ user.PostalCode }}</div></p>
+    </div>
+    <div class="d-flex flex-row align-items-start">
+        <p><div class="col-lg-4 label-dp infos-dp">Ville :</div><div class="col-lg-3 infos-dp"> {{ user.City }}</div></p>
+    </div>
+    <div class="d-flex flex-row align-items-start">
+        <p><div class="col-lg-4 label-dp infos-dp">Téléphone :</div><div class="col-lg-3 infos-dp"> {{ user.PhoneNumber }}</div></p>
+    </div>
+    <div class="d-flex flex-row align-items-start">
+        <p><div class="col-lg-4 label-dp infos-dp">Téléphone Mobile :</div><div class="col-lg-3 infos-dp"> {{ user.MobilePhoneNumber }}</div></p>
+    </div>
+    <div class="d-flex flex-row align-items-start">
+        <p><div class="col-lg-4 label-dp infos-dp">E-mail :</div><div class="col-lg-3 infos-dp"> {{ user.Email }}</div></p>
+    </div><br><br>
+    <a href="{{ path('app_espacepatientloggedin_modifdonneesperso') }}">Modifier mes données personnelles</a><br><br><br><br>
+
+
+
+{% endblock body %}
