@@ -10,10 +10,25 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * Class EspacePraticienFreeZoneController
+ * @package App\Controller
+ * @Route("/espace/praticien/free/zone")
+ */
 class EspacePraticienFreeZoneController extends AbstractController
 {
     /**
-     * @Route("/espace/praticien/free/zone")
+     * @Route("/")
+     */
+    public function accueil()
+    {
+        return $this->render('espace_praticien_free_zone/index.html.twig', [
+
+        ]);
+    }
+
+    /**
+     * @Route("/connexion")
      * @param Request $request
      * @param AuthenticationUtils $authenticationUtils
      * @return \Symfony\Component\HttpFoundation\Response
@@ -31,7 +46,7 @@ class EspacePraticienFreeZoneController extends AbstractController
             ]);
         }
 
-        return $this->render('espace_praticien_free_zone/index.html.twig', [
+        return $this->render('espace_praticien_free_zone/connexion/index.html.twig', [
 
         ]);
     }
@@ -78,7 +93,7 @@ class EspacePraticienFreeZoneController extends AbstractController
         }
 
         return $this->render(
-            'espace_praticien_free_zone/index.html.twig',
+            'espace_praticien_free_zone/inscription/index.html.twig',
             [
                 'form' => $form->createView()
             ]

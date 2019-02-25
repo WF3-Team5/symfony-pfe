@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Praticien{% endblock %}
+
+{% block body %}
+    <h1>Praticien</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ praticien.id }}</td>
+            </tr>
+            <tr>
+                <th>Civility</th>
+                <td>{{ praticien.civility }}</td>
+            </tr>
+            <tr>
+                <th>Last_name</th>
+                <td>{{ praticien.lastName }}</td>
+            </tr>
+            <tr>
+                <th>First_name</th>
+                <td>{{ praticien.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Birth_date</th>
+                <td>{{ praticien.birthDate ? praticien.birthDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Birth_department</th>
+                <td>{{ praticien.birthDepartment }}</td>
+            </tr>
+            <tr>
+                <th>Place_of_birth</th>
+                <td>{{ praticien.placeOfBirth }}</td>
+            </tr>
+            <tr>
+                <th>Nationality</th>
+                <td>{{ praticien.nationality }}</td>
+            </tr>
+            <tr>
+                <th>Email_pro</th>
+                <td>{{ praticien.emailPro }}</td>
+            </tr>
+            <tr>
+                <th>Email_secretariat</th>
+                <td>{{ praticien.emailSecretariat }}</td>
+            </tr>
+            <tr>
+                <th>Address_pro</th>
+                <td>{{ praticien.addressPro }}</td>
+            </tr>
+            <tr>
+                <th>Postal_code_pro</th>
+                <td>{{ praticien.postalCodePro }}</td>
+            </tr>
+            <tr>
+                <th>City_pro</th>
+                <td>{{ praticien.cityPro }}</td>
+            </tr>
+            <tr>
+                <th>Phone_number_pro</th>
+                <td>{{ praticien.phoneNumberPro }}</td>
+            </tr>
+            <tr>
+                <th>Mobile_phone_number_pro</th>
+                <td>{{ praticien.mobilePhoneNumberPro }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ praticien.password }}</td>
+            </tr>
+            <tr>
+                <th>PlainPassword</th>
+                <td>{{ praticien.plainPassword }}</td>
+            </tr>
+            <tr>
+                <th>Role</th>
+                <td>{{ praticien.role }}</td>
+            </tr>
+            <tr>
+                <th>DateInscription</th>
+                <td>{{ praticien.dateInscription ? praticien.dateInscription|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ praticien.etat }}</td>
+            </tr>
+            <tr>
+                <th>RPPS</th>
+                <td>{{ praticien.RPPS }}</td>
+            </tr>
+            <tr>
+                <th>Speciality</th>
+                <td>{{ praticien.speciality }}</td>
+            </tr>
+            <tr>
+                <th>Hash</th>
+                <td>{{ praticien.hash }}</td>
+            </tr>
+            <tr>
+                <th>HashValidity</th>
+                <td>{{ praticien.hashValidity ? praticien.hashValidity|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('praticien_index') }}">back to list</a>
+
+    <a href="{{ path('praticien_edit', {'id': praticien.id}) }}">edit</a>
+
+    {{ include('praticien/_delete_form.html.twig') }}
+{% endblock %}

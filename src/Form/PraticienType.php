@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Departement;
 use App\Entity\Praticien;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -31,17 +32,6 @@ class PraticienType extends AbstractType
                 ]
 
             )
-            /*->add(
-                'gender',
-                ChoiceType::class,
-                [
-                    'label' => 'Sexe :',
-                    'choices' => [
-                        'Homme' => 'H',
-                        'Femme' => 'F'
-                    ]
-                ]
-            )*/
             ->add(
                 'last_name',
                 TextType::class,
@@ -56,13 +46,6 @@ class PraticienType extends AbstractType
                     'label' => 'Prénom :'
                 ]
             )
-            /*->add(
-                'birth_name',
-                TextType::class,
-                [
-                    'label' => 'Nom de naissance :'
-                ]
-            )*/
             ->add(
                 'birth_date',
                 DateType::class,
@@ -102,6 +85,13 @@ class PraticienType extends AbstractType
                 ]
             )
             ->add(
+                'email_secretariat',
+                TextType::class,
+                [
+                    'label' => 'Email Secrétariat :'
+                ]
+            )
+            ->add(
                 'address_pro',
                 TextType::class,
                 [
@@ -117,7 +107,7 @@ class PraticienType extends AbstractType
 
             )
             ->add(
-                'city',
+                'city_pro',
                 TextType::class,
                 [
                     'label' => 'Ville :'
