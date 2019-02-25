@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <br><br><br><br><br><br><br>
+    {% for label, flashes in app.session.flashbag.all %}
+        {% for flash in flashes %}
+            {% if ( label == 'success' ) %}
+                <div class="alert alert-success alert-dismissible text-center fade show">
+                    {{ flash }}
+                </div>
+            {% elseif ( label == 'error' ) %}
+                <div class="alert alert-danger alert-dismissible text-center fade show">
+                    {{ flash }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+
+    <div class="col-lg-6 intro_col offset-2">
+        <div class="intro_form_container">
+            <div class="intro_form_title">Connexion Praticien</div>
+            <form class="intro_form" method="post">
+                <div class="d-flex flex-row align-items-start justify-content-between flex-wrap">
+                    <input type="email" class="intro_input" placeholder="Votre Email" required="required" name="email">
+                    <input type="password" class="intro_input" placeholder="Votre mot de passe" required="required" name="password">
+                </div>
+                <button type="submit" class="button button_1 intro_button trans_200">Connexion</button>
+                <br><br>
+            </form>
+            <a class="button button_3 intro_button trans_200" href="{{ path('app_praticieninscription_index') }}">Inscrivez-vous</a>
+            <a class="button button_1 intro_button trans_200 offset-4" href="{{ path('app_passwordmanager_resetpassword',{'userType':'praticien'}) }}">mot de passe oublié?</a>
+        </div>
+    </div>
+
+
+
+    <br><br><br>
+{% endblock %}

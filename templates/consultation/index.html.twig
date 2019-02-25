@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+    {% block body %}
+
+<div class="container-fluid">
+
+
+    <div class="row">
+        <!-- 1ère colonne -->
+        <div class="col-lg-6">
+            <!-- Card 1 -->
+            <div class="card-body card-perso">
+                <div class="icon_box_num">Consultation</div><a href="{{ path('app_consultation_sommaire') }}">
+                <img src="{{ asset('lib/images/consultation/image1.jpg') }}" alt="" style="width:85%;margin-left:8%">
+                <p class="m-0 font-weight-bold text-dark text-center">Informations patient,<br> ordonnances,<br> courriers,<br>devis...</p></a>
+            </div>
+            <!-- Card 2 -->
+            <div class="card-body card-perso">
+                <div class="icon_box_num">Mesures biométriques</div>
+                <img src="{{ asset('lib/images/consultation/image2.jpg') }}" alt="" style="width:85%;margin-left:8%">
+                <p class="m-0 font-weight-bold text-dark text-center">nnucdyfrycedhiuezhdyzfo</p>
+            </div>
+        </div>
+        <!-- 2ème colonne -->
+        <div class="col-lg-6">
+            <!-- Card 1 -->
+            <div class="card-body card-perso">
+                <div class="icon_box_num">Ordonnances</div>
+                <img src="{{ asset('lib/images/consultation/image3.jpg') }}" alt="" style="width:85%;margin-left:8%">
+                <p class="m-0 font-weight-bold text-dark text-center">nnucdyfrycedhiuezhdyzfo</p>
+            </div>
+            <!-- Card 2 -->
+            <div class="card-body card-perso">
+                <div class="icon_box_num">Résultat analyse</div>
+                <img src="{{ asset('lib/images/consultation/image4.jpg') }}" alt="" style="width:85%;margin-left:8%">
+                <p class="m-0 font-weight-bold text-dark text-center">nnucdyfrycedhiuezhdyzfo</p>
+            </div>
+        </div>
+    </div>
+</div>
+    {% endblock %}

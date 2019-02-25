@@ -53,6 +53,7 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('lib/css/about_responsive.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('lib/css/contact.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('lib/css/contact_responsive.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('lib/css/consultationIconeBox.css') }}">
   {% endblock %}
 </head>
 
@@ -77,7 +78,7 @@
           <ul class="d-flex flex-row align-items-center justify-content-start">
             <li class="active"><a href="{{ path('app_home_redirecthome') }}">Accueil</a></li>
             <li><a href="{{ path('app_grouppage_index') }}">Le groupe</a></li>
-            <li><a href="{{ path('app_espacepraticienfreezone_index') }}">Espace praticien</a></li>
+            <li><a href="{{ path('app_espacepraticienfreezone_accueil') }}">Espace praticien</a></li>
             <li><a href="{{ path('app_contact_index') }}">Contact</a></li>
           </ul>
         </nav>
@@ -117,9 +118,9 @@
       </div>
       <nav class="menu_nav">
         <ul>
-          <li><a href="{{ path('app_home_redirecthome') }}">Acceuil</a></li>
+          <li><a href="{{ path('app_home_redirecthome') }}">Accueil</a></li>
           <li><a href="{{ path('app_grouppage_index') }}">Le groupe</a></li>
-          <li><a href="{{ path('app_espacepraticienfreezone_index') }}">Espace praticien</a></li>
+          <li><a href="{{ path('app_espacepraticienfreezone_accueil') }}">Espace praticien</a></li>
           <li><a href="{{ path('app_espacepatientfreezone_index') }}">Espace patient</a></li>
           <li><a href="{{ path('app_contact_index') }}">Contact</a></li>
         </ul>

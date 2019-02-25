@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Praticien index{% endblock %}
+
+{% block body %}
+    <h1>Praticien index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Civility</th>
+                <th>Last_name</th>
+                <th>First_name</th>
+                <th>Birth_date</th>
+                <th>Birth_department</th>
+                <th>Place_of_birth</th>
+                <th>Nationality</th>
+                <th>Email_pro</th>
+                <th>Email_secretariat</th>
+                <th>Address_pro</th>
+                <th>Postal_code_pro</th>
+                <th>City_pro</th>
+                <th>Phone_number_pro</th>
+                <th>Mobile_phone_number_pro</th>
+                <th>Password</th>
+                <th>PlainPassword</th>
+                <th>Role</th>
+                <th>DateInscription</th>
+                <th>Etat</th>
+                <th>RPPS</th>
+                <th>Speciality</th>
+                <th>Hash</th>
+                <th>HashValidity</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for praticien in praticiens %}
+            <tr>
+                <td>{{ praticien.id }}</td>
+                <td>{{ praticien.civility }}</td>
+                <td>{{ praticien.lastName }}</td>
+                <td>{{ praticien.firstName }}</td>
+                <td>{{ praticien.birthDate ? praticien.birthDate|date('Y-m-d') : '' }}</td>
+                <td>{{ praticien.birthDepartment }}</td>
+                <td>{{ praticien.placeOfBirth }}</td>
+                <td>{{ praticien.nationality }}</td>
+                <td>{{ praticien.emailPro }}</td>
+                <td>{{ praticien.emailSecretariat }}</td>
+                <td>{{ praticien.addressPro }}</td>
+                <td>{{ praticien.postalCodePro }}</td>
+                <td>{{ praticien.cityPro }}</td>
+                <td>{{ praticien.phoneNumberPro }}</td>
+                <td>{{ praticien.mobilePhoneNumberPro }}</td>
+                <td>{{ praticien.password }}</td>
+                <td>{{ praticien.plainPassword }}</td>
+                <td>{{ praticien.role }}</td>
+                <td>{{ praticien.dateInscription ? praticien.dateInscription|date('Y-m-d') : '' }}</td>
+                <td>{{ praticien.etat }}</td>
+                <td>{{ praticien.RPPS }}</td>
+                <td>{{ praticien.speciality }}</td>
+                <td>{{ praticien.hash }}</td>
+                <td>{{ praticien.hashValidity ? praticien.hashValidity|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('praticien_show', {'id': praticien.id}) }}">show</a>
+                    <a href="{{ path('praticien_edit', {'id': praticien.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="25">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('praticien_new') }}">Create new</a>
+{% endblock %}

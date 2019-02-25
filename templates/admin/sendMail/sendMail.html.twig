@@ -1,0 +1,85 @@
+{% extends 'base.backoffice.html.twig' %}
+
+{% block title %}Admin | Details{% endblock %}
+
+{% block body %}
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Dashboard</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page"><a href="{{ path('app_admin_dboard_list') }}">Utilisateurs</a></li>
+                            <li class="breadcrumb-item active" aria-current="page" ><a href="{% if destinataire.Role=='ROLE_USER' or destinataire.Role=='ROLE_ADMIN' %}{{ path('app_admin_dboard_showuser',{"id":destinataire.Id}) }}{% elseif destinataire.Role=='ROLE_MEDIC' %}{{ path('app_admin_dboard_detailpraticien',{"id":destinataire.Id}) }}{% elseif destinataire.Role=='ROLE_ASST' %}{{ path('app_admin_dboard_detailpraticien',{"id":destinataire.Id}) }}{% endif %}">Détails</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Mail</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Sales Cards  -->
+        <!-- ============================================================== -->
+        <section class="container mb-4">
+            <h2>Envoyer<span class="text-warning" style="text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);">un Email</span><small> à {{ destinataire.civility }} {{ destinataire }}</small></h2>
+        </section>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 m-auto">
+                    {% for label, flashes in app.session.flashbag.all %}
+                        {% for flash in flashes %}
+                            {% if ( label == 'success' ) %}
+                                <div class="alert alert-success alert-dismissible text-center fade show">
+                                    {{ flash }}
+                                </div>
+                            {% elseif ( label == 'error' ) %}
+                                <div class="alert alert-danger alert-dismissible text-center fade show">
+                                    {{ flash }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8 m-auto">
+                    <form method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control text-primary" maxlength="255" name="primemail" id="addrprim" aria-describedby="emailHelp" placeholder="Destinataire" required value="{{ email }}">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control text-primary" maxlength="255" name="cc" id="addrcc" aria-describedby="emailHelp" placeholder="CC" value="{{ cc }}">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control text-primary" maxlength="150" name="subject" id="subject" aria-describedby="emailHelp" placeholder="Sujet" value="{{ subject }}">
+                        </div>
+
+                        <div class="form-group">
+                            <textarea class="form-control" id="bdy" rows="15" name="msgbody" placeholder="Votre message...">{{ msgbody }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-outline-dark">Envoyer</button>
+                    </form>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

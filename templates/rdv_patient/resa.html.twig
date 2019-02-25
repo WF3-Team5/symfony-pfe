@@ -1,0 +1,113 @@
+{% extends 'basePatient.html.twig' %}
+
+{% block title %}Prendre un Rendez-vous{% endblock %}
+
+{% block body %}
+    <div class="intro" style="padding-top: 200px!important;margin-bottom: 100px!important;">
+        <div class="container">
+            <h4>Disponibilités pour, <span class="text-primary shadow">Dr. {{ praticien }}</span></h4>
+            <div class="row mb-2">
+                {% for label, flashes in app.session.flashbag.all %}
+                    {% for flash in flashes %}
+                        {% if ( label == 'success' ) %}
+                            <div class="alert alert-success alert-dismissible text-center fade show">
+                                {{ flash }}
+                            </div>
+                        {% elseif ( label == 'error' ) %}
+                            <div class="alert alert-danger alert-dismissible text-center fade show">
+                                {{ flash }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            <div class="row mb-5">
+
+                <div class="col-sm-6 m-auto">
+                    <p class="text-secondary">
+                        <b>Note: </b>Utilisez le formulaire ci contyre pour planifier un rendez-vous.
+                    </p>
+                    <p class="text-danger">
+                        Cliquez sur l'un de vos rendez vous pour le SUPPRIMER.
+                    </p>
+                </div>
+
+                <div class="col-sm-6 m-auto">
+                    {{ include('booking/_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row mt-5">
+                {% include '@FullCalendar/Calendar/calendar.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {#<link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css') }}" />#}
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('lib/plugins/bs4-date-time-picker/css/bootstrap-datetimepicker.min.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {#<script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>#}
+    {#<script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/moment.min.js') }}"></script>#}
+    {#<script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js') }}"></script>#}
+    {# <script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/locale-all.js') }}"></script> #}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://momentjs.com/downloads/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/locale-all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
+    <script src="{{ asset('lib/plugins/bs4-date-time-picker/js/bootstrap-datetimepicker.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('.datetimepicker').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm',
+                locale: 'fr',
+
+            });
+
+            $('#calendar-holder').fullCalendar({
+                locale: 'fr',
+                header: {
+                    left: 'prev, next, today',
+                    center: 'title',
+                    right: 'month, agendaWeek, agendaDay'
+                },
+                businessHours: {
+                    start: '09:00',
+                    end: '18:00',
+                    dow: [1, 2, 3, 4, 5]
+                },
+                defaultView: 'agendaWeek',
+                lazyFetching: true,
+                navLinks: true,
+                selectable: true,
+                editable: true,
+                eventDurationEditable: true,
+                eventSources: [
+                    {
+                        url: '{{ path('fullcalendar_load_events') }}',
+                        type: 'POST',
+                        data: {
+                            filters: {'praticien':'{{ praticien.id }}',
+                                      'userId':'{{ user.Id }}',
+                                      'userRole':'{{ user.Role }}',
+                                },
+                        },
+                        error: function () {
+                             //alert('There was an error while fetching FullCalendar!');
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+{% endblock %}

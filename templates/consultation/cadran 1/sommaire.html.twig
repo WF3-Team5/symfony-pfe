@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 1ère colonne -->
+            <div class="col-lg-6">
+                <!-- Card 1 -->
+                <div class="card-body card-perso">
+                    <div class="icon_box_num">Renseignements</div><a href="{{ path("app_espaceassistant_index['id' => '$search->getId()]'") }}">
+                    <img src="{{ asset('lib/images/consultation/consult.jpg') }}" alt="" style="width:50%;margin-left:8%">
+                    <p class="m-0 font-weight-bold text-dark text-center"></p></a>
+
+                </div>
+                <!-- Card 2 -->
+                <div class="card-body card-perso">
+                    <div class="icon_box_num">Courrier</div>
+                    <img src="{{ asset('lib/images/consultation/courrier.jpg') }}" alt="" style="width:50%;margin-left:8%">
+                    <p class="m-0 font-weight-bold text-dark text-center">nnucdyfrycedhiuezhdyzfo</p>
+                </div>
+            </div>
+            <!-- 2ème colonne -->
+            <div class="col-lg-6">
+                <!-- Card 1 -->
+                <div class="card-body card-perso">
+                    <div class="icon_box_num">Ordonnance</div>
+                    <img src="{{ asset('lib/images/consultation/ordonnance.jpg') }}" alt="" style="width:50%;margin-left:8%">
+                    <p class="m-0 font-weight-bold text-dark text-center">nnucdyfrycedhiuezhdyzfo</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="card-body card-perso">
+                    <div class="icon_box_num">Devis</div>
+                    <img src="{{ asset('lib/images/consultation/devis.jpg') }}" alt="" style="width:50%;margin-left:8%">
+                    <p class="m-0 font-weight-bold text-dark text-center">nnucdyfrycedhiuezhdyzfo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

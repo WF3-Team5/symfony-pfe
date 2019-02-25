@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -21,14 +23,9 @@ class Praticien implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, columnDefinition="ENUM('M','Mme')")
      */
     private $civility;
-
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $gender;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -39,11 +36,6 @@ class Praticien implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=50)
      */
     private $first_name;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $birth_name;
 
     /**
      * @ORM\Column(type="date")
@@ -71,6 +63,13 @@ class Praticien implements UserInterface, \Serializable
      * @Assert\Email(message="Email non valide")
      */
     private $email_pro;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="L'email est obligatoire")
+     * @Assert\Email(message="Email non valide")
+     */
+    private $email_secretariat;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -103,11 +102,6 @@ class Praticien implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $status;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $plainPassword;
@@ -125,7 +119,7 @@ class Praticien implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=20)
      */
-    private $etat;
+    private $etat = 'actif';
 
     /**
      * @ORM\Column(type="integer")
@@ -133,6 +127,8 @@ class Praticien implements UserInterface, \Serializable
     private $RPPS;
 
     /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\Specialite", mappedBy="praticien")
      * @ORM\Column(type="string", length=50)
      */
     private $speciality;
@@ -148,8 +144,78 @@ class Praticien implements UserInterface, \Serializable
      */
     private $hashValidity;
 
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="id")
+     */
+    private $booking;
+
+    public function __construct()
+    {
+        $this->speciality=new ArrayCollection();
+        $this->booking=new ArrayCollection();
+    }
 
 
+    /**
+     * @return mixed
+     */
+    public function getEmailSecretariat()
+    {
+        return $this->email_secretariat;
+    }
+
+    /**
+     * @param mixed $email_secretariat
+     * @return Praticien
+     */
+    public function setEmailSecretariat($email_secretariat)
+    {
+        $this->email_secretariat = $email_secretariat;
+        return $this;
+    }
+
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getBooking(): Collection
+    {
+        return $this->booking;
+    }
+
+    /**
+     * @param Booking $booking
+     * @return Praticien
+     */
+    public function addBooking(Booking $booking): self
+    {
+        if (!$this->booking->contains($booking)) {
+            $this->booking[] = $booking;
+            $booking->setPraticien($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Booking $booking
+     * @return Praticien
+     */
+    public function removeBooking(Booking $booking): self
+    {
+        if ($this->booking->contains($booking)) {
+            $this->booking->removeElement($booking);
+            if ($booking->getPraticien() === $this) {
+                $booking->setPraticien(null);
+            }
+        }
+
+        return $this;
+    }
+    
+    
+    
     /**
      * @return mixed
      */
@@ -195,17 +261,6 @@ class Praticien implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getGender(): ?string
-    {
-        return $this->gender;
-    }
-
-    public function setGender(string $gender): self
-    {
-        $this->gender = $gender;
-
-        return $this;
-    }
 
     public function getLastName(): ?string
     {
@@ -231,17 +286,6 @@ class Praticien implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getBirthName(): ?string
-    {
-        return $this->birth_name;
-    }
-
-    public function setBirthName(string $birth_name): self
-    {
-        $this->birth_name = $birth_name;
-
-        return $this;
-    }
 
     public function getBirthDate(): ?\DateTimeInterface
     {
@@ -375,18 +419,6 @@ class Praticien implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
     public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
@@ -447,14 +479,32 @@ class Praticien implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getSpeciality(): ?string
+    /**
+     * @return Collection|Specialite[]
+     */
+    public function getSpeciality(): Collection
     {
         return $this->speciality;
     }
 
-    public function setSpeciality(string $speciality): self
+    public function addSpecialite(Specialite $specialite): self
     {
-        $this->speciality = $speciality;
+        if (!$this->speciality->contains($specialite)) {
+            $this->speciality[] = $specialite;
+            $specialite->setPraticien($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpecialite(Specialite $specialite): self
+    {
+        if ($this->speciality->contains($specialite)) {
+            $this->speciality->removeElement($specialite);
+            if ($specialite->getPraticien() === $this) {
+                $specialite->setPraticien(null);
+            }
+        }
 
         return $this;
     }
@@ -472,8 +522,6 @@ class Praticien implements UserInterface, \Serializable
             $this->last_name,
             $this->first_name,
             $this->civility,
-            $this->gender,
-            $this->birth_name,
             $this->birth_date,
             $this->birth_department,
             $this->place_of_birth,
@@ -485,7 +533,6 @@ class Praticien implements UserInterface, \Serializable
             $this->city_pro,
             $this->phone_number_pro,
             $this->mobile_phone_number_pro,
-            $this->status,
             $this->role,
         ]);
     }
@@ -506,8 +553,6 @@ class Praticien implements UserInterface, \Serializable
             $this->last_name,
             $this->first_name,
             $this->civility,
-            $this->gender,
-            $this->birth_name,
             $this->birth_date,
             $this->birth_department,
             $this->place_of_birth,
@@ -519,7 +564,6 @@ class Praticien implements UserInterface, \Serializable
             $this->city_pro,
             $this->phone_number_pro,
             $this->mobile_phone_number_pro,
-            $this->status,
             $this->role,
             )= unserialize($serialized);
     }
@@ -575,4 +619,11 @@ class Praticien implements UserInterface, \Serializable
     {
         // TODO: Implement getSalt() method.
     }
+
+    public function __toString()
+    {
+        return $this->first_name." ".$this->last_name;
+    }
+
+
 }
