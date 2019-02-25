@@ -1,13 +1,15 @@
-{% extends 'basePatient.html.twig' %}
+{% extends 'espace_patient_logged_in/index.html.twig' %}
 
 {% block title %}Prendre un Rendez-vous{% endblock %}
 
 {% block body %}
+
 <div class="intro" style="padding-top: 200px!important;margin-bottom: 100px!important;">
     <div class="container">
         <div class="row">
             <div class="patient_container">
                 <h1>Prendre un Rendez-Vous</h1>
+
 
                 <form method="post">
                     <div >
@@ -17,7 +19,7 @@
                         {#{{ dump(specialites) }}#}
                         <div class="etape">
                             <h3>Rechercher une spécialisation :</h3>
-                            {% if specialites is empty %}
+                            {% if specialites is not defined or specialites is empty %}
                             <p>Acune spécialité trouvée...</p>
                             {% else %}
                             <select id="spec" name="choixspecialite">
@@ -157,8 +159,6 @@
                     });
                 }
             });
-
-
         });
     </script>
 
