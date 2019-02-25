@@ -74,8 +74,8 @@ class EspacePraticienFreeZoneController extends AbstractController
                 );
 
                 $praticien->setPassword($password);
-                $praticien ->setDateInscription(date("Y-m-d"));
-                $praticien->setStatus("praticien");
+                $praticien ->setDateInscription(new \DateTime());
+                $praticien->setEtat("praticien");
 
 
 

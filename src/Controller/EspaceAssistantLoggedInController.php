@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package App\Controller
  * @Route("/espace/assistant/logged/in")
  */
-class EspaceAssistantController extends AbstractController
+class EspaceAssistantLoggedInController extends AbstractController
 {
 
     /**

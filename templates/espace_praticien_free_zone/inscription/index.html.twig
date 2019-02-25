@@ -19,8 +19,7 @@
     <div class="col-lg-10 intro_col offset-1">
         <div class="intro_form_container">
             <div class="intro_form_title">Inscription Praticien</div>
-            <form action="" class="intro_form" id="intro_form" method="post">
-                {{ form_start(form) }}
+                {{ form_start(form, {"class": "intro_input"}) }}
 
                 <div class="d-flex flex-row align-items-start justify-content-between flex-wrap">
                     <div class="col-lg-6">
@@ -43,8 +42,6 @@
 
                     </div>
                 </div>
-                {{ form_end(form) }}<br>
-            </form>
             <button type="submit" class="button button_1 intro_button trans_200 button-rdv" href="{{ path('app_espacepraticienloggedin_logout') }}">S'inscrire</button>
             {{ form_end(form) }}<br>
         </div>
