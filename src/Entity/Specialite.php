@@ -38,7 +38,7 @@ class Specialite
         return $this->praticien;
     }
 
-    public function setPraticien(int $praticien): self
+    public function setPraticien($praticien): self
     {
         $this->praticien = $praticien;
 

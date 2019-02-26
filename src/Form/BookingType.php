@@ -5,8 +5,6 @@ namespace App\Form;
 use App\Entity\Booking;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,7 +21,7 @@ class BookingType extends AbstractType
                 'html5'=>false,
 
                 // adds a class that can be selected in JavaScript
-                'attr' => ['class' => 'datetimepicker', 'id'=>'stdatetimepicker']])
+                'attr' => ['class' => 'datetimepicker intro_input']])
 
             ->add('endAt', DateTimeType::class, [
                 'label'=>'fin',
@@ -33,7 +31,7 @@ class BookingType extends AbstractType
                 'html5'=>false,
 
                 // adds a class that can be selected in JavaScript
-                'attr' => ['class' => 'datetimepicker', 'id'=>'enddatetimepicker']])
+                'attr' => ['class' => 'datetimepicker intro_input']])
             //->add('title')
         ;
     }

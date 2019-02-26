@@ -32,14 +32,14 @@ class FullCalendarListener
         $startDate = $calendar->getStart();
         $endDate = $calendar->getEnd();
         $filters = $calendar->getFilters();
-        $praticien=$filters["praticien"];
         $userRole=$filters["userRole"];
-        $userId=$filters["userId"];
 
         // Modify the query to fit to your entity and needs
         // Change b.beginAt by your start date in your custom entity
 
         if($userRole=="ROLE_USER" || $userRole=="ROLE_ADMIN"){
+            $praticien=$filters["praticien"];
+            $userId=$filters["userId"];
 
             $bookings = $this->em->getRepository(Booking::class)
                 ->createQueryBuilder('b')
@@ -87,14 +87,57 @@ class FullCalendarListener
                     $bookingEvent->setBackgroundColor('blue');
                 }
 
-                // a supprimer
-                if ($userRole == "ROLE_ASST" || $userRole == "ROLE_MEDIC") {
-                    $bookingEvent->setUrl(
-                        $this->router->generate('booking_show', array(
-                            'id' => $booking->getId(),
-                        ))
-                    );
-                }
+                $calendar->addEvent($bookingEvent);
+            }
+        }
+
+
+
+        if($userRole=="ROLE_MEDIC"){
+            $praticien=$filters["praticien"];
+
+            $bookings = $this->em->getRepository(Booking::class)
+                ->createQueryBuilder('b')
+                ->andWhere('b.beginAt BETWEEN :startDate and :endDate')
+                ->andWhere('b.praticien=:pid')
+                ->setParameter('pid',$praticien)
+                ->setParameter('startDate', $startDate->format('Y-m-d H:i:s'))
+                ->setParameter('endDate', $endDate->format('Y-m-d H:i:s'))
+                ->getQuery()->getResult();
+
+            foreach($bookings as $booking) {
+
+                // this create the events with your own entity (here booking entity) to populate calendar
+                $bookingEvent = new Event(
+                    $booking->getTitle(),
+                    $booking->getBeginAt(),
+                    $booking->getEndAt(), // If the end date is null or not defined, it creates a all day event
+                    $booking->getPraticien(),
+                    $booking->getUser()
+                );
+
+                /*
+                 * Optional calendar event settings
+                 *
+                 * For more information see : Toiba\FullCalendarBundle\Entity\Event
+                 * and : https://fullcalendar.io/docs/event-object
+                 */
+                // $bookingEvent->setUrl('http://www.google.com');
+                // $bookingEvent->setBackgroundColor($booking->getColor());
+                // $bookingEvent->setCustomField('borderColor', $booking->getColor());
+
+
+                //les event appartement a l'user sont affiché en rose et en cliquant dessus on les supprime
+
+                $bookingEvent->setUrl(
+                    $this->router->generate('app_espacepraticienloggedin_sendmailpatient', array(
+                        'id' => $booking->getUser()->getId(),
+                    )));
+
+                $bookingEvent->setBackgroundColor('blue');
+                $bookingEvent->setTextColor('white');
+                $bookingEvent->setTitle(''.$booking->getUser().'  TEL:'.$booking->getUser()->getMobilePhoneNumber());
+
                 $calendar->addEvent($bookingEvent);
             }
         }

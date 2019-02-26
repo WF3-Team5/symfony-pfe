@@ -12,3 +12,5 @@ app_admlogin_logout:
 app_espacepraticienloggedin_logout:
   path:                            /espace/praticien/logged/in/logout
 
+app_espaceassistantloggedin_logout:
+  path:                            /espace/assistant/logged/in/logout

@@ -150,12 +150,57 @@ class Praticien implements UserInterface, \Serializable
      */
     private $booking;
 
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\DossierPatient", mappedBy="praticien")
+     */
+    private $dossierPatient;
+
+
     public function __construct()
     {
         $this->speciality=new ArrayCollection();
         $this->booking=new ArrayCollection();
+        $this->dossierPatient=new ArrayCollection();
     }
 
+    /**
+     * @return Collection
+     */
+    public function getDossierPatient(): Collection
+    {
+        return $this->dossierPatient;
+    }
+
+    /**
+     * @param DossierPatient $dossierPatient
+     * @return Praticien
+     */
+    public function addDossierPatient(DossierPatient $dossierPatient): self
+    {
+        if (!$this->$dossierPatient->contains($dossierPatient)) {
+            $this->$dossierPatient[] = $dossierPatient;
+            $dossierPatient->setPraticien($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param DossierPatient $dossierPatient
+     * @return Praticien
+     */
+    public function removeDossierPatient(DossierPatient $dossierPatient): self
+    {
+        if ($this->$dossierPatient->contains($dossierPatient)) {
+            $this->$dossierPatient->removeElement($dossierPatient);
+            if ($dossierPatient->getPraticien() === $this) {
+                $dossierPatient->setPraticien(null);
+            }
+        }
+
+        return $this;
+    }
 
     /**
      * @return mixed

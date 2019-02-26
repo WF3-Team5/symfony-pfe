@@ -271,7 +271,14 @@ class DboardController extends AbstractController
     /**
      * @Route("/send/mail/{userType}/{id}")
      */
-    public function sendMail($userType, $id, Request $request)
+    /**
+     * @param $userType
+     * @param $id
+     * @param Request $request
+     * @param \Swift_Mailer $mailer
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function sendMail($userType, $id, Request $request,\Swift_Mailer $mailer)
     {
         $em=$this->getDoctrine()->getManager();
         switch($userType)
@@ -302,7 +309,7 @@ class DboardController extends AbstractController
         $mail=$request->request->get("primemail");
         $cc=$request->request->get("cc");
         $subject=$request->request->get("subject");
-        $msgbody=$request->request->get("subject");
+        $msgbody=$request->request->get("msgbody");
 
         $err="";
 
@@ -319,7 +326,22 @@ class DboardController extends AbstractController
             $this->addFlash('error',$err);
         }
         else{
-            //envoyer le mail
+            $msgbody=nl2br($msgbody);
+
+            $message = (new Swift_Message())
+                ->setSubject($subject)
+                ->setFrom(['wf3.team5@gmail.com' => 'Mediglob support']);
+            if(isset($mail)&& !empty($mail)) {
+                $message->setTo([$mail]);
+            }
+
+            if(isset($cc)&& !empty($cc)){
+                $message->setCc($cc);
+            }
+            $message->setBody('<html><head></head><body><p>'.$msgbody.'</p></body></html>','text/html');
+
+            $mailer->send($message);
+            $this->addFlash('success', 'email correctement envoyé');
         }
 
         return $this->render('admin/sendMail/sendMail.html.twig',[
