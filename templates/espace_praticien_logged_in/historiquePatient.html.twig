@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-sm-4 offset-5">
+                <a href="{{ path('app_espacepraticienloggedin_mesrendezvous') }}"><div class="intro_form_title">Mes Rendez vous</div></a>
+            </div>
+            <div class="col-sm-4 offset-8">
+                <a href="{{ path('app_espacepraticienloggedin_inscriptionassistant') }}"><div class="intro_form_title">Nouvel Assistant</div></a>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid intro">
+        <div class="row">
+            <!-- 1ère colonne -->
+            <p>Historique patient</p>
+        </div>
+    </div>
+
+
+{% endblock %}

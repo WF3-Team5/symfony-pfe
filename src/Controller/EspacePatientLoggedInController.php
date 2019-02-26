@@ -49,7 +49,7 @@ class EspacePatientLoggedInController extends AbstractController
 
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @Route("/appointment")
+     * @Route("/prendre-rdv")
      */
     public function appointment()
     {
@@ -61,9 +61,10 @@ class EspacePatientLoggedInController extends AbstractController
         $em=$this->getDoctrine()->getManager();
         $repo=$em->getRepository(Specialite::class);
         $specialites=$repo->selectDistinctSpecialite();
-
-        return $this->render('rdv_patient/index.html.twig', [
-            'specialites'=>$specialites
+        $user=$this->getUser();
+        return $this->render('espace_patient_logged_in/rdv_patient/index.html.twig', [
+            'specialites'=>$specialites,
+            'user'=>$user,
         ]);
     }
 
@@ -102,13 +103,13 @@ class EspacePatientLoggedInController extends AbstractController
     {
         $praticienId=$request->request->get("praticienId");
         $data["status"]="ok";
-        $data["payload"]="<a class=\"btn btn-outline-danger ml-5 text-orange\" href=\"/espace/patient/logged/in/appointment/reservation/creneau/".$praticienId."\">Vérifier les disponibilités</a>";
+        $data["payload"]="<a class=\"btn btn-outline-danger ml-5 text-orange\" href=\"/espace/patient/logged/in/reservation/creneau/".$praticienId."\">Vérifier les disponibilités</a>";
         return new JsonResponse(json_encode($data));
     }
 
 
     /**
-     * @Route("/appointment/reservation/creneau/{id}")
+     * @Route("/reservation/creneau/{id}")
      * @param Praticien $praticien
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -125,15 +126,22 @@ class EspacePatientLoggedInController extends AbstractController
             $repo=$em->getRepository(Booking::class);
             $events=$repo->findBy(["praticien"=>$praticien]);
             $overlap=false;
+            $overtime=false;
 
             foreach($events as $event){
                 $deb=$event->getBeginAt();
                 $fin=$event->getEndAt();
-                if($booking->getBeginAt()>=$deb && $booking->getBeginAt()<=$fin){
-                    $overlap=true;
+                if($booking->getBeginAt()>=$deb && $booking->getBeginAt()<$fin) {
+                    $overlap = true;
                 }
             }
-            if(!$overlap){
+            $startTime=date("Y-m-d",$booking->getBeginAt()->getTimestamp());
+            $s= strtotime($startTime."09:00");
+            $e= strtotime($startTime."18:00");
+            if($booking->getBeginAt()->getTimestamp()<$s || $booking->getEndAt()->getTimestamp()>$e){
+                $overtime=true;
+            }
+            if(!$overlap && !$overtime){
                 $booking->setPraticien($praticien);
                 $booking->setUser($user);
                 $entityManager = $this->getDoctrine()->getManager();
@@ -141,16 +149,19 @@ class EspacePatientLoggedInController extends AbstractController
                 $entityManager->flush();
             }
             else{
-                $this->addFlash("error","Le rendez-vous désiré empiète sur un autre. Veuillez rectifier.");
+                if($overlap){
+                    $this->addFlash("error","Le rendez-vous désiré empiète sur un autre. Veuillez rectifier.");
+                }
+                if($overtime){
+                    $this->addFlash("error","Le rendez-vous excede les horaires d'ouverture. Veuillez rectifier.");
+                }
                 $booking=null;
                 $booking=new Booking();
             }
 
         }
 
-
-
-        return $this->render('rdv_patient/resa.html.twig', [
+        return $this->render('espace_patient_logged_in/rdv_patient/resa.html.twig', [
             'praticien'=>$praticien,
             'user'=>$user,
             'booking' => $booking,
@@ -202,20 +213,6 @@ class EspacePatientLoggedInController extends AbstractController
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route ("/prendre_rdv")
-     */
-    public function rendezVous()
-    {
-        $user=$this->getUser();
-        return $this->render('rdv_patient/index.html.twig',
-            [
-                "user" => $user,
-            ]
-        );
-    }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
      * @Route ("/contacter_praticien")
      */
     public function contacter(){
@@ -254,19 +251,6 @@ class EspacePatientLoggedInController extends AbstractController
                 "user" => $user,
             ]
 
-        );
-    }
-
-    /**
-     * @Route("/prendre-rdv")
-     */
-    public function rdv()
-    {
-        $user = $this->getUser();
-        return $this->render('espace_patient_logged_in/rdv_patient/index.html.twig',
-            [
-                "user" => $user,
-            ]
         );
     }
 

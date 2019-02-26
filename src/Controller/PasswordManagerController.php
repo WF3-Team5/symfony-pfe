@@ -38,7 +38,7 @@ class PasswordManagerController extends AbstractController
      * @param Request $request
      * @param $userType
      * @param \Swift_Mailer $mailer
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
 
     public function resetPassword(Request $request, $userType, \Swift_Mailer $mailer)

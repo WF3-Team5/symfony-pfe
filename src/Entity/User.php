@@ -186,14 +186,58 @@ class User implements UserInterface, \Serializable
      */
     private $booking;
 
-
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\DossierPatient", mappedBy="user")
+     */
+    private $dossierPatient;
 
 
     public function __construct()
     {
         $this->booking=new ArrayCollection();
+        $this->dossierPatient = new ArrayCollection();
     }
 
+    /**
+     * @return Collection
+     */
+    public function getDossierPatient(): Collection
+    {
+        return $this->dossierPatient;
+    }
+
+
+    /**
+     * @param DossierPatient $dossierPatient
+     * @return User
+     */
+    public function addDossierPatient(DossierPatient $dossierPatient): self
+    {
+        if (!$this->$dossierPatient->contains($dossierPatient)) {
+            $this->$dossierPatient[] = $dossierPatient;
+            $dossierPatient->setUser($this);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * @param DossierPatient $dossierPatient
+     * @return User
+     */
+    public function removeDossierPatient(DossierPatient $dossierPatient): self
+    {
+        if ($this->$dossierPatient->contains($dossierPatient)) {
+            $this->$dossierPatient->removeElement($dossierPatient);
+            if ($dossierPatient->getUser() === $this) {
+                $dossierPatient->setUser(null);
+            }
+        }
+
+        return $this;
+    }
 
     /**
      * @return Collection

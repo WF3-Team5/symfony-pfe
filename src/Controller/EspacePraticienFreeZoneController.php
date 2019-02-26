@@ -54,6 +54,7 @@ class EspacePraticienFreeZoneController extends AbstractController
          * @param Request $request
          * @param UserPasswordEncoderInterface $passwordEncoder
          * @return \Symfony\Component\HttpFoundation\Response
+         * @throws \Exception
          * @Route("/espace/praticien/free/zone/inscription")
          */
         public function inscription(

@@ -6,7 +6,8 @@ security:
             algorithm:                plaintext
         App\Entity\Praticien:
             algorithm:                plaintext
-
+        App\Entity\Assistant:
+            algorithm:                plaintext
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     role_hierarchy:
@@ -25,7 +26,10 @@ security:
             entity:
                 class:     App\Entity\Praticien
                 property: 'email_pro'
-
+        ast:
+            entity:
+                class:     App\Entity\Assistant
+                property: 'email'
     firewalls:
         dev:
             pattern:                  ^/(_(profiler|wdt)|css|images|js)/
@@ -59,6 +63,20 @@ security:
                 path:                 app_espacepraticienloggedin_logout
                 target:               app_espacepraticienfreezone_index
 
+        assistant:
+            anonymous:                true
+            pattern:                  ^/espace/ass
+            provider:                 ast
+            form_login:
+                login_path:           app_espaceassistantfreezone_connexion
+                check_path:           app_espaceassistantfreezone_connexion
+                default_target_path:  app_espaceassistantloggedin_recherchepatient
+                username_parameter:   "mail"
+                password_parameter:   "password"
+            logout:
+                path:                 app_espaceassistantloggedin_logout
+                target:               app_espaceassistantfreezone_connexion
+
         main:
             anonymous:                true
             pattern:                  ^/
@@ -86,3 +104,5 @@ security:
         - { path: ^/espace/patient/logged/in, roles: ROLE_USER } # il faut au minimum le role de ROLE_USER pour y accéder
 
         - { path: ^/espace/praticien/logged/in, roles: ROLE_MEDIC }
+
+        - { path: ^/espace/assistant/logged/in, roles: ROLE_ASST }

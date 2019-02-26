@@ -6,26 +6,12 @@
     <div class="intro" style="padding-top: 200px!important;margin-bottom: 100px!important;">
         <div class="container">
             <h4>Disponibilités pour, <span class="text-primary shadow">Dr. {{ praticien }}</span></h4>
-            <div class="row mb-2">
-                {% for label, flashes in app.session.flashbag.all %}
-                    {% for flash in flashes %}
-                        {% if ( label == 'success' ) %}
-                            <div class="alert alert-success alert-dismissible text-center fade show">
-                                {{ flash }}
-                            </div>
-                        {% elseif ( label == 'error' ) %}
-                            <div class="alert alert-danger alert-dismissible text-center fade show">
-                                {{ flash }}
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                {% endfor %}
-            </div>
+
             <div class="row mb-5">
 
                 <div class="col-sm-6 m-auto">
                     <p class="text-secondary">
-                        <b>Note: </b>Utilisez le formulaire ci contyre pour planifier un rendez-vous.
+                        <b>Note: </b>Utilisez le formulaire ci contre pour planifier un rendez-vous.
                     </p>
                     <p class="text-danger">
                         Cliquez sur l'un de vos rendez vous pour le SUPPRIMER.
@@ -33,11 +19,27 @@
                 </div>
 
                 <div class="col-sm-6 m-auto">
+                    <div>
+                        {% for label, flashes in app.session.flashbag.all %}
+                            {% for flash in flashes %}
+                                {% if ( label == 'success' ) %}
+                                    <div class="alert alert-success alert-dismissible text-center fade show">
+                                        {{ flash }}
+                                    </div>
+                                {% elseif ( label == 'error' ) %}
+                                    <div class="alert alert-danger alert-dismissible text-center fade show">
+                                        {{ flash }}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
                     {{ include('booking/_form.html.twig') }}
                 </div>
             </div>
         </div>
         <div class="container">
+
             <div class="row mt-5">
                 {% include '@FullCalendar/Calendar/calendar.html.twig' %}
             </div>
@@ -70,9 +72,26 @@
         $(function () {
             $('.datetimepicker').datetimepicker({
                 format: 'YYYY-MM-DD HH:mm',
-                locale: 'fr',
+                locale: moment.locale('fr'),
 
             });
+
+            $('#booking_beginAt').on('blur',function(){
+                let timedeb=$(this).val();
+                let dt= new Date(timedeb);
+                let m=dt.getMinutes();
+                let coeff = 1000 * 60 * 30;
+                let date = new Date();  //or use any other date
+                let rounded = new Date(Math.round(dt.getTime() / coeff) * coeff);
+                rounded=moment(rounded);
+                let end = rounded;
+                let  momend=moment(rounded).add(moment.duration(30,'minutes'));
+                let rr=rounded.format("YYYY-MM-DD HH:mm");
+                let re=momend.format("YYYY-MM-DD HH:mm");
+                $("#booking_beginAt").val(rr);
+                $("#booking_endAt").val(re);
+            });
+
 
             $('#calendar-holder').fullCalendar({
                 locale: 'fr',

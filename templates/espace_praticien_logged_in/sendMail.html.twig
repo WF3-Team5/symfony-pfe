@@ -1,0 +1,58 @@
+{% extends 'basePatient.html.twig' %}
+
+{% block title %}Espace Patient - Se Connecter{% endblock %}
+
+{% block body %}
+
+    <div class="intro" style="padding-top: 200px!important;margin-bottom: 100px!important;">
+        <section class="container mb-4">
+            <h2>Envoyer<span class="text-warning" style="text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);">un Email</span><small> à {{ destinataire.civility }} {{ destinataire }}</small></h2>
+        </section>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 m-auto">
+                    {% for label, flashes in app.session.flashbag.all %}
+                        {% for flash in flashes %}
+                            {% if ( label == 'success' ) %}
+                                <div class="alert alert-success alert-dismissible text-center fade show">
+                                    {{ flash }}
+                                </div>
+                            {% elseif ( label == 'error' ) %}
+                                <div class="alert alert-danger alert-dismissible text-center fade show">
+                                    {{ flash }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8 m-auto">
+                    <form method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control text-primary" maxlength="255" name="primemail" id="addrprim" aria-describedby="emailHelp" placeholder="Destinataire" required value="{% if email is defined %}{{ email }}{% endif %}">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control text-primary" maxlength="255" name="cc" id="addrcc" aria-describedby="emailHelp" placeholder="CC" value="{% if cc is defined %}{{ cc }}{% endif %}">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control text-primary" maxlength="150" name="subject" id="subject" aria-describedby="emailHelp" placeholder="Sujet" value="{% if subject is defined %}{{ subject }}{% endif %}">
+                        </div>
+
+                        <div class="form-group">
+                            <textarea class="form-control" id="bdy" rows="15" name="msgbody" placeholder="Votre message...">{% if subject is defined %}{{ msgbody }}{% endif %}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-outline-dark">Envoyer</button>
+                    </form>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

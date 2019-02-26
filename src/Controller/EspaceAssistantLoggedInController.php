@@ -43,35 +43,45 @@ class EspaceAssistantLoggedInController extends AbstractController
 
     /**
      * @Route("/questionnaire_medical/{id}")
+     * @param Request $request
+     * @param User $user
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function index(Request $request, User $user)
     {
         $praticien=$this->getUser()->getId();
         $mgr=$this->getDoctrine()->getManager();
         $repo=$mgr->getRepository(DossierPatient::class);
-        $exist=$repo->findOneBy(["praticien"=>$praticien]);
+        $dsUser=$repo->findOneBy(["praticien"=>$praticien, "patient"=>$user->getId()]);
 
-        if(!empty($exist)){
+        if(!is_null($dsUser)){
             return $this->redirectToRoute('app_espaceassistantloggedin_dashboard',['id'=>$user->getId()]);
         }
-        $antecedants = new Antecedents();
+        $antecedents = new Antecedents();
 
-        $form = $this->createForm(AntecedentsType::class, $antecedants);
+        $form = $this->createForm(AntecedentsType::class, $antecedents);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted()){
-            $em = $this->getDoctrine()->getManager();
-            $ds= new DossierPatient();
-            $ds->setPatient($user->getId());
-            $ds->setAntecedents($antecedants->getId());
-            $ds->setPraticien($praticien);
-            $em->persist($antecedants);
-            $em->flush();
+            $dsUser= new DossierPatient();
+
+            $mgr->persist($antecedents);
+            $mgr->flush();
+
+            $numdossier=$praticien."-".$user->getId()."-".uniqid()."-".time();
+            $dsUser->setNumDossier($numdossier);
+            $dsUser->setPatient($user->getId());
+            $dsUser->setAntecedents($antecedents->getId());
+            $dsUser->setPraticien($praticien);
+            $mgr->persist($dsUser);
+            $mgr->flush();
+
+
 
             $this->addFlash('success','Les données ont bien été enregistrées !');
 
-            return $this->redirectToRoute('app_espaceassistantloggedin_dashboard');
+            return $this->redirectToRoute('app_espaceassistantloggedin_dashboard',["id"=>$user->getId()]);
         }
 
         return $this->render(
@@ -160,7 +170,14 @@ class EspaceAssistantLoggedInController extends AbstractController
                 'user'=>$user
             ]);
     }
-    
+
+    /**
+     * @Route("/logout")
+     */
+    public function logout()
+    {
+        throw new RuntimeException('activez le firewall MAIN');
+    }
 
 }
 

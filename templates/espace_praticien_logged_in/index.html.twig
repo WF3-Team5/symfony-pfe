@@ -2,7 +2,18 @@
 
 
 {% block body %}
-<div class="container-fluid">
+
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col-sm-4 offset-5">
+            <a href="{{ path('app_espacepraticienloggedin_mesrendezvous') }}"><div class="intro_form_title">Mes Rendez vous</div></a>
+        </div>
+        <div class="col-sm-4 offset-8">
+            <a href="{{ path('app_espacepraticienloggedin_inscriptionassistant') }}"><div class="intro_form_title">Nouvel Assistant</div></a>
+        </div>
+    </div>
+</div>
+<div class="container-fluid intro">
     <div class="row">
         <!-- 1ère colonne -->
         <div class="col-lg-6">
@@ -16,15 +27,21 @@
                         <thead class="thead-light text-dark">
                         <tr>
                             <th>Numéro dossier</th>
-                            <th>Civilité</th>
                             <th>Nom</th>
                             <th>Prénom</th>
+                            <th>Email</th>
                         </tr>
                         </thead>
                         <tbody>
+
+                        {% for d in dossiers %}
                         <tr>
-                            <td></td>
+                            <td><a class="btn btn-outline-primary choosePatient" href="#" data-userid="{{ d.user.Id }}" data-username="{{ d.user.firstName ~ " " ~ d.user.lastName }}">{{ d.numDossier }}</a></td>
+                            <td>{{ d.user.firstName }}</td>
+                            <td>{{ d.user.lastName }}</td>
+                            <td>{{ d.user.email }}</td>
                         </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -32,18 +49,22 @@
 
         </div>
         <!-- 2ème colonne -->
-        <div class="col-lg-6">
+        <div class="col-sm-6">
             <!-- Card 1 -->
-            <div class="card shadow mb-4 display-none">
+            <div class="card shadow mb-4 display-none second-panel">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-info text-center">Historique des Consultations</h6>
+                    <h6 class="m-0 font-weight-bold text-info text-center">Patient: <span class="text-danger usrName"></span> </h6>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped">
-                        <tr>
-                            <td></td>
-                        </tr>
-                    </table>
+                    <div class="w-75 m-auto border border-light rounded shadow-lg p-5 text-center text-warning newconsult" style="margin-bottom: 2rem!important;">
+                        <a href="#"><h3>Démarrer une consultation</h3></a>
+                    </div>
+                    <div class="w-75 m-auto border border-light rounded shadow-lg p-5 text-center text-warning historic" style="margin-bottom: 2rem!important;">
+                        <a href="#"><h3>Consulter l'historique Patient</h3></a>
+                    </div>
+                    <div class="w-75 m-auto border border-light rounded shadow-lg p-5 text-center text-warning sendMail" style="margin-bottom: 2rem!important;">
+                        <a href="#"><h3>@</h3></a>
+                    </div>
                 </div>
             </div>
         <!--fin card-->
@@ -51,7 +72,36 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="application/javascript">
+
+        $(function (){
+            let userid;
+            $(".choosePatient").on("click",function(){
+                $(".second-panel").fadeIn(1000);
+                userid=$(this).attr("data-userid");
+                let username=$(this).attr("data-userName");
 
 
+                $(".usrName").html(username);
+            });
 
+            $(".newconsult").on("click",function(){
+                window.location.assign("http://localhost:8000/espace/praticien/logged/in/consultation/"+userid);
+            });
+
+            $(".historic").on("click",function(){
+                window.location.assign("http://localhost:8000/espace/praticien/logged/in/historique/"+userid);
+            });
+
+            $(".sendMail").on("click",function(){
+                window.location.assign("http://localhost:8000/espace/praticien/logged/in/send/mail/"+userid);
+            });
+
+
+    });
+    </script>
 {% endblock %}

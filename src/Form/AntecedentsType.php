@@ -39,7 +39,8 @@ class AntecedentsType extends AbstractType
             ->add('traitement_homeopathique',
                     TextareaType::class,
                 [
-                    'label' => 'Si oui, lesquels ?'
+                    'label' => 'Si oui, lesquels ?',
+                    'required' => false,
                 ])
 
             ->add('pillules_contraceptives',
@@ -318,7 +319,8 @@ class AntecedentsType extends AbstractType
             ->add('nombre_cigrettes_par_jour',
                 TextareaType::class,
                 [
-                    'label' => 'Si oui, combien de cigarettes par jour ?'
+                    'label' => 'Si oui, combien de cigarettes par jour ?',
+                    'required' => false,
                 ])
             ->add('radiotherapie',
                 ChoiceType::class, ['choices'=> [
@@ -475,7 +477,8 @@ class AntecedentsType extends AbstractType
             ->add('quantite_par_jour_d_alcool',
                 TextareaType::class,
                 [
-                    'label' => 'Si oui, quelle quantité par jour ?'
+                    'label' => 'Si oui, quelle quantité par jour ?',
+                    'required' => false,
                 ])
             ->add('hospitalisation',
                 ChoiceType::class, ['choices'=> [
@@ -488,7 +491,8 @@ class AntecedentsType extends AbstractType
             ->add('quand_quel_operations',
                 TextareaType::class,
                 [
-                    'label' => 'Si oui, lesquelles et quand ?'
+                    'label' => 'Si oui, lesquelles et quand ?',
+                    'required' => false,
                 ])
             ->add('traitements_gencives',
                 ChoiceType::class, ['choices'=> [
@@ -551,22 +555,26 @@ class AntecedentsType extends AbstractType
             ->add('autres_problemes_oculaires',
                 TextareaType::class,
                 [
-                    'label' => "Avez-vous d'autres problèmes occulaires ?"
+                    'label' => "Avez-vous d'autres problèmes occulaires ?",
+                    'required' => false,
                 ])
             ->add('autres_problemes_dentaires',
                 TextareaType::class,
                 [
-                    'label' => "Avez-vous d'autres problèmes dentaires ?"
+                    'label' => "Avez-vous d'autres problèmes dentaires ?",
+                    'required' => false,
                 ])
             ->add('eventuels_precautions_a_prendre',
                 TextareaType::class,
                 [
-                    'label' => "Avez-vous d'éventuelles précautions à prendre, à nous signaler ?"
+                    'label' => "Avez-vous d'éventuelles précautions à prendre, à nous signaler ?",
+                    'required' => false,
                 ])
             ->add('eventuels_indications_praticien',
                 TextareaType::class,
                 [
-                    'label' => "Avez-vous d'éventuelles indications particulières à nous signaler ?"
+                    'label' => "Avez-vous d'éventuelles indications particulières à nous signaler ?",
+                    'required' => false,
                 ])
         ;
     }
